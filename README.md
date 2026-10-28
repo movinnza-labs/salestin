@@ -19,7 +19,7 @@ enquiries are validated on the server and emailed to the company.
 
 ## 1. Local development
 
-**Requirements:** Node.js 22.23+ or 24.22+, pnpm 9+ (`corepack enable`).
+**Requirements:** Node.js 20.9+ (22 or 24 recommended), pnpm 9+ (`corepack enable`).
 
 ```bash
 pnpm install
