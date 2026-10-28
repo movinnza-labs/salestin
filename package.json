@@ -1,0 +1,43 @@
+{
+  "name": "selestin-website",
+  "version": "1.0.0",
+  "description": "SELESTIN Professional website — Next.js",
+  "type": "module",
+  "scripts": {
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build --webpack",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --webpack",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "lucide-react": "^1.61.0",
+    "next": "16.3.3",
+    "nodemailer": "^7.0.13",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "server-only": "^0.0.1",
+    "sharp": "0.35.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "22.19.9",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "16.3.3",
+    "postcss": "^8.5.31",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": "^22.23.4 || >=24.22.1",
+    "pnpm": "^9 || ^10 || ^11"
+  },
+  "private": true
+}

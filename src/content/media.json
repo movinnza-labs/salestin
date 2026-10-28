@@ -1,0 +1,642 @@
+{
+  "hero-models.jpg": {
+    "id": 1,
+    "alt": "Three models with straight, curly and wavy hair against a warm beige background",
+    "width": 1238,
+    "height": 755,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "hero-models-400x244.jpg",
+        "width": 400,
+        "height": 244
+      },
+      "card": {
+        "filename": "hero-models-900x549.jpg",
+        "width": 900,
+        "height": 549
+      },
+      "og": {
+        "filename": "hero-models-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "luxury-strands.jpg": {
+    "id": 2,
+    "alt": "Model with long, glossy brown straight hair",
+    "width": 1078,
+    "height": 471,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "luxury-strands-400x175.jpg",
+        "width": 400,
+        "height": 175
+      },
+      "card": {
+        "filename": "luxury-strands-900x393.jpg",
+        "width": 900,
+        "height": 393
+      }
+    }
+  },
+  "brand-portrait.jpg": {
+    "id": 3,
+    "alt": "Black and white portrait of a model with long flowing hair",
+    "width": 1349,
+    "height": 759,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brand-portrait-400x225.jpg",
+        "width": 400,
+        "height": 225
+      },
+      "card": {
+        "filename": "brand-portrait-900x506.jpg",
+        "width": 900,
+        "height": 506
+      },
+      "og": {
+        "filename": "brand-portrait-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "range-nano-silk.jpg": {
+    "id": 4,
+    "alt": "SELESTIN Professional Nano-Silk Arginina salon range with Morocco Argan Serum",
+    "width": 568,
+    "height": 809,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "range-nano-silk-400x570.jpg",
+        "width": 400,
+        "height": 570
+      },
+      "og": {
+        "filename": "range-nano-silk-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "nano-silk-treatment.jpg": {
+    "id": 5,
+    "alt": "Nano-Silk Arginia Protein Hair Treatment bottle on a marble stand",
+    "width": 461,
+    "height": 747,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "nano-silk-treatment-400x648.jpg",
+        "width": 400,
+        "height": 648
+      },
+      "og": {
+        "filename": "nano-silk-treatment-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "smoothing-mask-model.jpg": {
+    "id": 6,
+    "alt": "Model with voluminous curly hair holding the Nano-Silk Arginina Smoothing Mask",
+    "width": 762,
+    "height": 1122,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "smoothing-mask-model-400x589.jpg",
+        "width": 400,
+        "height": 589
+      },
+      "og": {
+        "filename": "smoothing-mask-model-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "best-care-trio.jpg": {
+    "id": 7,
+    "alt": "Smoothing Prolonger Shampoo, Smoothing Mask and Moroccan Argan Serum",
+    "width": 648,
+    "height": 425,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "best-care-trio-400x262.jpg",
+        "width": 400,
+        "height": 262
+      }
+    }
+  },
+  "keratin-shine-bond.jpg": {
+    "id": 8,
+    "alt": "Keratin Shine Bond Shampoo and Keratin Shine Bond Hair Mask",
+    "width": 543,
+    "height": 479,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "keratin-shine-bond-400x353.jpg",
+        "width": 400,
+        "height": 353
+      }
+    }
+  },
+  "argan-serum.jpg": {
+    "id": 9,
+    "alt": "Morocco Argan Serum bottle with argan nuts and flowing hair",
+    "width": 701,
+    "height": 1057,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "argan-serum-400x603.jpg",
+        "width": 400,
+        "height": 603
+      },
+      "og": {
+        "filename": "argan-serum-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "skincare.jpg": {
+    "id": 10,
+    "alt": "Woman relaxing on white bedding holding a glass",
+    "width": 734,
+    "height": 714,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "skincare-400x389.jpg",
+        "width": 400,
+        "height": 389
+      },
+      "og": {
+        "filename": "skincare-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "wax-white-chocolate.jpg": {
+    "id": 11,
+    "alt": "Model with a tin of White Chocolate Liposoluable Wax",
+    "width": 660,
+    "height": 1165,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "wax-white-chocolate-400x706.jpg",
+        "width": 400,
+        "height": 706
+      },
+      "og": {
+        "filename": "wax-white-chocolate-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "wax-korean-glass.jpg": {
+    "id": 12,
+    "alt": "Model with a tin of Korean Glass Blueberry Liposoluable Gel Wax",
+    "width": 732,
+    "height": 1214,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "wax-korean-glass-400x663.jpg",
+        "width": 400,
+        "height": 663
+      },
+      "og": {
+        "filename": "wax-korean-glass-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-pre-clarifying-shampoo.jpg": {
+    "id": 13,
+    "alt": "Nano-Silk Arginina Pre Clarifying Shampoo bottle",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-pre-clarifying-shampoo-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-pre-clarifying-shampoo-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-pre-clarifying-shampoo-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-protein-treatment.jpg": {
+    "id": 14,
+    "alt": "Nano-Silk Arginia Protein Hair Treatment bottle",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-protein-treatment-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-protein-treatment-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-protein-treatment-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-prolonger-shampoo.jpg": {
+    "id": 15,
+    "alt": "Nano-Silk Arginina Prolonger Shampoo bottle",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-prolonger-shampoo-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-prolonger-shampoo-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-prolonger-shampoo-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-prolonger-mask.jpg": {
+    "id": 16,
+    "alt": "Nano-Silk Arginina Prolonger Mask jar",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-prolonger-mask-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-prolonger-mask-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-prolonger-mask-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-smoothing-prolonger-shampoo.jpg": {
+    "id": 17,
+    "alt": "Nano-Silk Arginina Smoothing Prolonger Shampoo pump bottle",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-smoothing-prolonger-shampoo-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-smoothing-prolonger-shampoo-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-smoothing-prolonger-shampoo-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-smoothing-mask.jpg": {
+    "id": 18,
+    "alt": "Nano-Silk & Arginine Smoothing Mask jar",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-smoothing-mask-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-smoothing-mask-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-smoothing-mask-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-keratin-shampoo.jpg": {
+    "id": 19,
+    "alt": "Keratin Shine Bond Shampoo pump bottle",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-keratin-shampoo-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-keratin-shampoo-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-keratin-shampoo-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "shot-keratin-mask.jpg": {
+    "id": 20,
+    "alt": "Keratin Shine Bond Hair Mask jar",
+    "width": 900,
+    "height": 1125,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "shot-keratin-mask-400x500.jpg",
+        "width": 400,
+        "height": 500
+      },
+      "card": {
+        "filename": "shot-keratin-mask-900x1125.jpg",
+        "width": 900,
+        "height": 1125
+      },
+      "og": {
+        "filename": "shot-keratin-mask-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p03.jpg": {
+    "id": 21,
+    "alt": "Brochure page: the Nano-Silk Arginina range, steps 01 to 05",
+    "width": 1491,
+    "height": 1055,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p03-400x283.jpg",
+        "width": 400,
+        "height": 283
+      },
+      "card": {
+        "filename": "brochure-p03-900x637.jpg",
+        "width": 900,
+        "height": 637
+      },
+      "og": {
+        "filename": "brochure-p03-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p04.jpg": {
+    "id": 22,
+    "alt": "Brochure page: Nano Silk Arginia Treatment, exclusively for professional salons",
+    "width": 1152,
+    "height": 922,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p04-400x320.jpg",
+        "width": 400,
+        "height": 320
+      },
+      "card": {
+        "filename": "brochure-p04-900x720.jpg",
+        "width": 900,
+        "height": 720
+      },
+      "og": {
+        "filename": "brochure-p04-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p05.jpg": {
+    "id": 23,
+    "alt": "Brochure page: Nano-Silk Arginina Smoothing Mask — Smooth & Shiny Hair, Every Day",
+    "width": 1402,
+    "height": 1122,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p05-400x320.jpg",
+        "width": 400,
+        "height": 320
+      },
+      "card": {
+        "filename": "brochure-p05-900x720.jpg",
+        "width": 900,
+        "height": 720
+      },
+      "og": {
+        "filename": "brochure-p05-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p06.jpg": {
+    "id": 24,
+    "alt": "Brochure page: Best Care for Beautiful Hair — shampoo, mask and Morocco Argan Serum",
+    "width": 1402,
+    "height": 1122,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p06-400x320.jpg",
+        "width": 400,
+        "height": 320
+      },
+      "card": {
+        "filename": "brochure-p06-900x720.jpg",
+        "width": 900,
+        "height": 720
+      },
+      "og": {
+        "filename": "brochure-p06-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p07.jpg": {
+    "id": 25,
+    "alt": "Brochure page: Best Care for Beautiful Hair — Keratin Shine Bond shampoo and mask",
+    "width": 1401,
+    "height": 1122,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p07-400x320.jpg",
+        "width": 400,
+        "height": 320
+      },
+      "card": {
+        "filename": "brochure-p07-900x721.jpg",
+        "width": 900,
+        "height": 721
+      },
+      "og": {
+        "filename": "brochure-p07-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p08.jpg": {
+    "id": 26,
+    "alt": "Brochure page: Morocco Argan Serum, luminous smoothening oil for all hair types",
+    "width": 1402,
+    "height": 1122,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p08-400x320.jpg",
+        "width": 400,
+        "height": 320
+      },
+      "card": {
+        "filename": "brochure-p08-900x720.jpg",
+        "width": 900,
+        "height": 720
+      },
+      "og": {
+        "filename": "brochure-p08-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p10.jpg": {
+    "id": 27,
+    "alt": "Brochure page: White Chocolate Liposoluable Wax, key and full ingredients",
+    "width": 1148,
+    "height": 1317,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p10-400x459.jpg",
+        "width": 400,
+        "height": 459
+      },
+      "card": {
+        "filename": "brochure-p10-900x1032.jpg",
+        "width": 900,
+        "height": 1032
+      },
+      "og": {
+        "filename": "brochure-p10-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  },
+  "brochure-p11.jpg": {
+    "id": 28,
+    "alt": "Brochure page: Korean Glass Blueberry Liposoluable Gel Wax, key and full ingredients",
+    "width": 1085,
+    "height": 1373,
+    "focalX": 50,
+    "focalY": 50,
+    "sizes": {
+      "thumbnail": {
+        "filename": "brochure-p11-400x506.jpg",
+        "width": 400,
+        "height": 506
+      },
+      "card": {
+        "filename": "brochure-p11-900x1139.jpg",
+        "width": 900,
+        "height": 1139
+      },
+      "og": {
+        "filename": "brochure-p11-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  }
+}

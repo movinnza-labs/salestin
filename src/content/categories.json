@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "title": "Hair Care",
+    "tagline": "Professional Hair Care",
+    "description": "Best Care for Beautiful Hair. Complete Care. Visible Results.",
+    "image": "range-nano-silk.jpg",
+    "highlights": [
+      {
+        "text": "Nourished & Healthy Hair"
+      },
+      {
+        "text": "Smooth, Soft & Shiny"
+      },
+      {
+        "text": "Stronger, More Manageable"
+      }
+    ],
+    "meta": {},
+    "slug": "hair-care",
+    "sortOrder": 1,
+    "updatedAt": "2026-10-27T12:55:28.445Z"
+  },
+  {
+    "id": 2,
+    "title": "Skin Care",
+    "tagline": "Luxury Skincare for Radiant Beauty",
+    "description": "Experience the difference.",
+    "image": "skincare.jpg",
+    "highlights": [
+      {
+        "text": "Rejuvenate & Hydrate"
+      },
+      {
+        "text": "Smoother, Firmer Skin"
+      },
+      {
+        "text": "Natural Ingredients"
+      },
+      {
+        "text": "Clinically Proven Results"
+      }
+    ],
+    "meta": {},
+    "slug": "skin-care",
+    "sortOrder": 2,
+    "updatedAt": "2026-10-27T12:55:28.461Z"
+  },
+  {
+    "id": 3,
+    "title": "Waxing",
+    "tagline": "Premium Wax for Smooth Perfection",
+    "description": "Professional at Luxury Touch. Luxury Smooth — Silky • Gentle • Effective.",
+    "image": "wax-white-chocolate.jpg",
+    "highlights": [
+      {
+        "text": "For all types of skin"
+      },
+      {
+        "text": "Natural professional formulation"
+      },
+      {
+        "text": "Colophony free"
+      }
+    ],
+    "meta": {},
+    "slug": "waxing",
+    "sortOrder": 3,
+    "updatedAt": "2026-10-27T12:55:28.470Z"
+  }
+]

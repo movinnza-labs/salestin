@@ -1,0 +1,1377 @@
+[
+  {
+    "id": 1,
+    "title": "Pre Clarifying Shampoo",
+    "line": "Nano-Silk Arginina",
+    "size": "1000 ml",
+    "summary": "Deeply cleanses the hair and scalp by removing buildup, excess oil, and impurities to prepare hair for treatment.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Infused with deep cleansing proteins & extracts amino acid complex.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "Professional Use"
+      }
+    ],
+    "image": "shot-pre-clarifying-shampoo.jpg",
+    "gallery": [
+      {
+        "image": "range-nano-silk.jpg",
+        "caption": "The Nano-Silk Arginina range"
+      },
+      {
+        "image": "brochure-p03.jpg",
+        "caption": "Nano-Silk Arginina — steps 01 to 05"
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [],
+    "meta": {},
+    "slug": "pre-clarifying-shampoo",
+    "category": "hair-care",
+    "featured": false,
+    "sortOrder": 1,
+    "updatedAt": "2026-10-27T12:55:28.499Z"
+  },
+  {
+    "id": 2,
+    "title": "Nano Silk Arginia Protein Treatment",
+    "line": "Nano-Silk Arginina",
+    "size": "1000 ml",
+    "tagline": "Professional Salon Solution. Trusted by Experts.",
+    "summary": "Advanced treatment enriched with Nano Silk and Arginia Protein to repair, strengthen, and nourish the hair from within.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Exclusively for professional salons. B2B product | Not for retail sale.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Partner with us to deliver expert hair transformations.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Infused with Hydrolyzed Keratin & Arginina Spinosa Kernel Oil.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "Formaldehyde Free"
+      },
+      {
+        "text": "Sulfate Free"
+      },
+      {
+        "text": "Paraben Free"
+      },
+      {
+        "text": "Professional Only"
+      }
+    ],
+    "image": "shot-protein-treatment.jpg",
+    "gallery": [
+      {
+        "image": "nano-silk-treatment.jpg",
+        "caption": "Nano Silk Arginia Treatment"
+      },
+      {
+        "image": "brochure-p04.jpg",
+        "caption": "Exclusively for professional salons"
+      },
+      {
+        "image": "range-nano-silk.jpg",
+        "caption": "The Nano-Silk Arginina range"
+      },
+      {
+        "image": "brochure-p03.jpg",
+        "caption": "Nano-Silk Arginina — steps 01 to 05"
+      }
+    ],
+    "highlightsHeading": "Why salons choose it",
+    "highlights": [
+      {
+        "icon": "atom",
+        "title": "Nano Silk Technology"
+      },
+      {
+        "icon": "droplet",
+        "title": "Argania Oil Infusion"
+      },
+      {
+        "icon": "heart",
+        "title": "Intense Nourishment"
+      },
+      {
+        "icon": "sparkles",
+        "title": "Ultra Smooth & Shiny Hair"
+      },
+      {
+        "icon": "waves",
+        "title": "Frizz Control & Straightening"
+      },
+      {
+        "icon": "check",
+        "title": "Professional Results"
+      },
+      {
+        "icon": "user",
+        "title": "Salon Trusted"
+      },
+      {
+        "icon": "star",
+        "title": "Client Satisfaction"
+      }
+    ],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [],
+    "meta": {},
+    "slug": "nano-silk-arginia-protein-treatment",
+    "category": "hair-care",
+    "featured": false,
+    "sortOrder": 2,
+    "updatedAt": "2026-10-27T12:55:28.540Z"
+  },
+  {
+    "id": 3,
+    "title": "Prolonger Shampoo",
+    "line": "Nano-Silk Arginina",
+    "size": "1000 ml",
+    "summary": "Maintains and extends the results of the treatment by gently cleansing while preserving smoothness, softness, and shine.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Infused amino fusion technology.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "Sodium & Paraben Free"
+      },
+      {
+        "text": "Professional Use"
+      }
+    ],
+    "image": "shot-prolonger-shampoo.jpg",
+    "gallery": [
+      {
+        "image": "range-nano-silk.jpg",
+        "caption": "The Nano-Silk Arginina range"
+      },
+      {
+        "image": "brochure-p03.jpg",
+        "caption": "Nano-Silk Arginina — steps 01 to 05"
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [],
+    "meta": {},
+    "slug": "prolonger-shampoo",
+    "category": "hair-care",
+    "featured": false,
+    "sortOrder": 3,
+    "updatedAt": "2026-10-27T12:55:28.569Z"
+  },
+  {
+    "id": 4,
+    "title": "Prolonger Mask",
+    "line": "Nano-Silk Arginina",
+    "size": "500 ml",
+    "summary": "Deeply nourishes and strengthens the hair from the inside for softness, smoothness, and long-lasting shine.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Deep nourishing mask.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [],
+    "image": "shot-prolonger-mask.jpg",
+    "gallery": [
+      {
+        "image": "range-nano-silk.jpg",
+        "caption": "The Nano-Silk Arginina range"
+      },
+      {
+        "image": "brochure-p03.jpg",
+        "caption": "Nano-Silk Arginina — steps 01 to 05"
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [],
+    "meta": {},
+    "slug": "prolonger-mask",
+    "category": "hair-care",
+    "featured": false,
+    "sortOrder": 4,
+    "updatedAt": "2026-10-27T12:55:28.596Z"
+  },
+  {
+    "id": 5,
+    "title": "Morocco Argan Serum",
+    "line": "Professional Hair Care",
+    "size": "50 ml",
+    "tagline": "Luminous Smoothening Oil — For All Hair Types",
+    "summary": "Enriched with Moroccan Argan Oil to deeply hydrate, reduce frizz, protect from heat, and add brilliant shine.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Enriched with Moroccan Argan Oil",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Controls frizz",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 3,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Adds shine & silkiness",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 4,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Protects & enhances hair beauty",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Nourish • Smooth • Shine",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [],
+    "image": "argan-serum.jpg",
+    "gallery": [
+      {
+        "image": "brochure-p08.jpg",
+        "caption": "Morocco Argan Serum"
+      },
+      {
+        "image": "best-care-trio.jpg",
+        "caption": "Best Care for Beautiful Hair"
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [
+      {
+        "icon": "droplet",
+        "title": "Infused with Argan Oil",
+        "text": "Deep nourishment and intense shine"
+      },
+      {
+        "icon": "waves",
+        "title": "Smoothes & Controls Frizz",
+        "text": "Silky, soft and manageable hair"
+      },
+      {
+        "icon": "sparkles",
+        "title": "Enhances Shine & Radiance",
+        "text": "Healthy, luminous hair every day"
+      }
+    ],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [],
+    "meta": {},
+    "slug": "morocco-argan-serum",
+    "category": "hair-care",
+    "featured": false,
+    "sortOrder": 5,
+    "updatedAt": "2026-10-27T12:55:28.621Z"
+  },
+  {
+    "id": 6,
+    "title": "Smoothing Prolonger Shampoo",
+    "line": "Nano-Silk Arginina",
+    "size": "300 ml",
+    "tagline": "With Nano-Silk & Arginine",
+    "summary": "Deeply cleanses the scalp & hair, removes buildup and leaves hair fresh, soft & manageable.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Deeply cleanses the scalp & hair",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Removes buildup",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 3,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Leaves hair fresh, soft & manageable",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "Sulfate & Paraben Free"
+      }
+    ],
+    "image": "shot-smoothing-prolonger-shampoo.jpg",
+    "gallery": [
+      {
+        "image": "best-care-trio.jpg",
+        "caption": "Best Care for Beautiful Hair"
+      },
+      {
+        "image": "brochure-p06.jpg",
+        "caption": "Complete Care. Visible Results."
+      }
+    ],
+    "highlightsHeading": "Complete Care. Visible Results.",
+    "highlights": [
+      {
+        "icon": "droplet",
+        "title": "Nourished & Healthy Hair"
+      },
+      {
+        "icon": "waves",
+        "title": "Smooth, Soft & Shiny"
+      },
+      {
+        "icon": "shield",
+        "title": "Stronger, More Manageable"
+      }
+    ],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [],
+    "meta": {},
+    "slug": "smoothing-prolonger-shampoo",
+    "category": "hair-care",
+    "featured": true,
+    "sortOrder": 6,
+    "updatedAt": "2026-10-27T12:55:28.647Z"
+  },
+  {
+    "id": 7,
+    "title": "Smoothing Mask",
+    "line": "Nano-Silk Arginina",
+    "size": "250 ml",
+    "tagline": "Smooth & Shiny Hair, Every Day",
+    "summary": "Intense nourishment & hydration. Repairs & strengthens. Restores softness, smoothness & shine.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Intense nourishment & hydration",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Repairs & strengthens",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 3,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Restores softness, smoothness & shine",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          },
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Smoother. Shinier. Stronger.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [],
+    "image": "shot-smoothing-mask.jpg",
+    "gallery": [
+      {
+        "image": "smoothing-mask-model.jpg",
+        "caption": "Smooth & Shiny Hair, Every Day"
+      },
+      {
+        "image": "brochure-p05.jpg",
+        "caption": "Nano-Silk Arginina Smoothing Mask"
+      },
+      {
+        "image": "brochure-p06.jpg",
+        "caption": "Complete Care. Visible Results."
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [
+      {
+        "icon": "waves",
+        "title": "Smooth and Shine"
+      },
+      {
+        "icon": "sparkles",
+        "title": "Anti Frizz"
+      },
+      {
+        "icon": "shield",
+        "title": "Control Hair Breakage"
+      }
+    ],
+    "ingredientsHeading": "The goodness of",
+    "keyIngredients": [
+      {
+        "name": "Macadamia",
+        "text": "Deeply nourishes, locks in moisture and adds intense shine to dull, dry hair."
+      },
+      {
+        "name": "Morocco Argan",
+        "text": "Rich in antioxidants and vitamin E, it tames frizz, repairs damage and leaves hair silky smooth."
+      }
+    ],
+    "meta": {},
+    "slug": "smoothing-mask",
+    "category": "hair-care",
+    "featured": true,
+    "sortOrder": 7,
+    "updatedAt": "2026-10-27T12:55:28.672Z"
+  },
+  {
+    "id": 8,
+    "title": "Keratin Shine Bond Shampoo",
+    "line": "Keratin Shine Bond",
+    "size": "300 ml",
+    "tagline": "Infused with Hydrolyzed Keratin",
+    "summary": "Deeply cleanses the scalp & hair, strengthens hair bonds, reduces breakage and enhances shine.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Deeply cleanses the scalp & hair",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Strengthens hair bonds",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 3,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Reduces breakage",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 4,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Enhances shine",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "Sulphate & Paraben Free"
+      }
+    ],
+    "image": "shot-keratin-shampoo.jpg",
+    "gallery": [
+      {
+        "image": "keratin-shine-bond.jpg",
+        "caption": "Keratin Shine Bond Shampoo and Hair Mask"
+      },
+      {
+        "image": "brochure-p07.jpg",
+        "caption": "Best Care for Beautiful Hair"
+      }
+    ],
+    "highlightsHeading": "Complete Care. Visible Results.",
+    "highlights": [
+      {
+        "icon": "droplet",
+        "title": "Nourished & Healthy Hair"
+      },
+      {
+        "icon": "waves",
+        "title": "Smooth, Soft & Shiny"
+      },
+      {
+        "icon": "shield",
+        "title": "Stronger, More Manageable"
+      }
+    ],
+    "ingredientsHeading": "Goodness of keratin",
+    "keyIngredients": [
+      {
+        "name": "Hydrolyzed Keratin",
+        "text": "Restores elasticity • Smooths frizz • Strengthens strands • Healthy, shiny hair"
+      }
+    ],
+    "meta": {},
+    "slug": "keratin-shine-bond-shampoo",
+    "category": "hair-care",
+    "featured": true,
+    "sortOrder": 8,
+    "updatedAt": "2026-10-27T12:55:28.698Z"
+  },
+  {
+    "id": 9,
+    "title": "Keratin Shine Bond Hair Mask",
+    "line": "Keratin Shine Bond",
+    "size": "250 ml",
+    "tagline": "Intense Smoothness & Repair with Hydrolyzed Keratin",
+    "summary": "Intense nourishment & repair. Hydrolyzed Keratin repairs & strengthens for smoothness & shine.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Intense nourishment & repair",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Hydrolyzed Keratin repairs & strengthens",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 3,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Smoothness & shine",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [],
+    "image": "shot-keratin-mask.jpg",
+    "gallery": [
+      {
+        "image": "keratin-shine-bond.jpg",
+        "caption": "Keratin Shine Bond Shampoo and Hair Mask"
+      },
+      {
+        "image": "brochure-p07.jpg",
+        "caption": "Best Care for Beautiful Hair"
+      }
+    ],
+    "highlightsHeading": "Complete Care. Visible Results.",
+    "highlights": [
+      {
+        "icon": "droplet",
+        "title": "Nourished & Healthy Hair"
+      },
+      {
+        "icon": "waves",
+        "title": "Smooth, Soft & Shiny"
+      },
+      {
+        "icon": "shield",
+        "title": "Stronger, More Manageable"
+      }
+    ],
+    "ingredientsHeading": "Goodness of keratin",
+    "keyIngredients": [
+      {
+        "name": "Hydrolyzed Keratin",
+        "text": "Restores elasticity • Smooths frizz • Strengthens strands • Healthy, shiny hair"
+      }
+    ],
+    "meta": {},
+    "slug": "keratin-shine-bond-hair-mask",
+    "category": "hair-care",
+    "featured": true,
+    "sortOrder": 9,
+    "updatedAt": "2026-10-27T12:55:28.724Z"
+  },
+  {
+    "id": 10,
+    "title": "White Chocolate Liposoluable Wax",
+    "line": "Luxury Smooth",
+    "size": "800 gms / 28.2 oz",
+    "tagline": "Premium Wax for Smooth Perfection",
+    "summary": "Especially developed for gentle & effective hair removal with minimal irritation.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Professional at Luxury Touch. Luxury Smooth — Silky • Gentle • Effective.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          },
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Enriched with nourishing ingredients for softer, smoother & brighter skin.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Provides a luxurious experience with a delightful white chocolate fragrance.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "For All Types of Skin"
+      },
+      {
+        "text": "Natural Professional Formulation"
+      },
+      {
+        "text": "Colophony Free"
+      }
+    ],
+    "image": "wax-white-chocolate.jpg",
+    "gallery": [
+      {
+        "image": "brochure-p10.jpg",
+        "caption": "White Chocolate Liposoluable Wax"
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [
+      {
+        "icon": "leaf",
+        "title": "Gentle on Skin"
+      },
+      {
+        "icon": "flower",
+        "title": "Nourishing Ingredients"
+      },
+      {
+        "icon": "droplet",
+        "title": "Smooth & Moisturized Skin"
+      },
+      {
+        "icon": "sparkles",
+        "title": "Brightens & Radiance"
+      },
+      {
+        "icon": "gem",
+        "title": "Delightful White Chocolate Fragrance"
+      }
+    ],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [
+      {
+        "name": "White Chocolate",
+        "text": "Soothe and nourish the skin while providing an indulgent waxing experience."
+      },
+      {
+        "name": "Vegetables Oil",
+        "text": "Provide a smooth glide, reduce discomfort and contribute to moisturization."
+      },
+      {
+        "name": "Natural Beeswax",
+        "text": "An emollient, it offers a gentle waxing experience."
+      },
+      {
+        "name": "Titanium Dioxide",
+        "text": "Fights aging and dullness by boosting collagen, hydration, and skin radiance."
+      }
+    ],
+    "fullIngredients": "Hydrogenated Polycyclopentadiene, Ethylene/VA Copolymer, Paraffinum Liquidum (Mineral Oil), Cera Alba (Beeswax), Titanium Dioxide, Glyceryl Rosinate, Parfum (Fragrance)",
+    "meta": {},
+    "slug": "white-chocolate-liposoluable-wax",
+    "category": "waxing",
+    "featured": false,
+    "sortOrder": 10,
+    "updatedAt": "2026-10-27T12:55:28.751Z"
+  },
+  {
+    "id": 11,
+    "title": "Korean Glass Blueberry Liposoluable Gel Wax",
+    "line": "Luxury Smooth",
+    "size": "800 gms / 28.2 oz",
+    "tagline": "Premium Wax for Smooth Perfection",
+    "summary": "Removes unwanted hair efficiently from the root for a cleaner and longer-lasting smoothness.",
+    "description": {
+      "root": {
+        "type": "root",
+        "format": "",
+        "indent": 0,
+        "version": 1,
+        "children": [
+          {
+            "type": "paragraph",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "mode": "normal",
+                "text": "Professional at Luxury Touch. Luxury Smooth — Silky • Gentle • Effective.",
+                "type": "text",
+                "style": "",
+                "detail": 0,
+                "format": 0,
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "textFormat": 0
+          },
+          {
+            "tag": "ul",
+            "type": "list",
+            "start": 1,
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "listitem",
+                "value": 1,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Leaves the skin feeling touchably soft, refreshed & salon-smooth after every use.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              },
+              {
+                "type": "listitem",
+                "value": 2,
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Helps enhance the skin's appearance with a polished, fresh & radiant look perfect for all occasions.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr"
+              }
+            ],
+            "listType": "bullet",
+            "direction": "ltr"
+          }
+        ],
+        "direction": "ltr"
+      }
+    },
+    "badges": [
+      {
+        "text": "For All Types of Skin"
+      },
+      {
+        "text": "Natural Professional Formulation"
+      },
+      {
+        "text": "Colophony Free"
+      }
+    ],
+    "image": "wax-korean-glass.jpg",
+    "gallery": [
+      {
+        "image": "brochure-p11.jpg",
+        "caption": "Korean Glass Blueberry Liposoluable Gel Wax"
+      }
+    ],
+    "highlightsHeading": "Benefits",
+    "highlights": [
+      {
+        "icon": "hair",
+        "title": "Effective Hair Removal"
+      },
+      {
+        "icon": "flower",
+        "title": "Nourishing Ingredients"
+      },
+      {
+        "icon": "droplet",
+        "title": "Smooth & Moisturized Skin"
+      },
+      {
+        "icon": "sparkles",
+        "title": "Brightens & Radiance"
+      },
+      {
+        "icon": "gem",
+        "title": "Delightful Blueberry Fragrance"
+      }
+    ],
+    "ingredientsHeading": "Key ingredients",
+    "keyIngredients": [
+      {
+        "name": "Blueberry Extract",
+        "text": "Rich in antioxidants, helps protect the skin from environmental stressors and keeps it fresh and healthy."
+      },
+      {
+        "name": "Mineral Oil",
+        "text": "Provides a smooth glide, reduces discomfort, and helps retain skin moisture."
+      },
+      {
+        "name": "Natural Beeswax",
+        "text": "An emollient that ensures gentle waxing with better grip and easy removal."
+      },
+      {
+        "name": "Titanium Dioxide",
+        "text": "Helps soothe the skin and gives the wax a smooth, creamy texture."
+      }
+    ],
+    "fullIngredients": "Hydrogenated Polycyclopentadiene, Ethylene/VA Copolymer, Paraffinum Liquidum (Mineral Oil), Cera Alba (Beeswax), Titanium Dioxide, Glyceryl Rosinate, Parfum (Fragrance), CI 60725.",
+    "meta": {},
+    "slug": "korean-glass-blueberry-liposoluable-gel-wax",
+    "category": "waxing",
+    "featured": false,
+    "sortOrder": 11,
+    "updatedAt": "2026-10-27T12:55:28.777Z"
+  }
+]

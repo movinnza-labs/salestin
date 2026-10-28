@@ -1,0 +1,82 @@
+{
+  "about": "Luxury in Every Strand. Inspiration in Every Innovation. SELESTIN Professional – Where Luxury Meets Science. Where Beauty Begins.",
+  "columns": [
+    {
+      "heading": "Explore",
+      "links": [
+        {
+          "link": {
+            "type": "internal",
+            "reference": {
+              "relationTo": "pages",
+              "value": "home"
+            },
+            "label": "Home"
+          }
+        },
+        {
+          "link": {
+            "type": "internal",
+            "reference": {
+              "relationTo": "pages",
+              "value": "about-us"
+            },
+            "label": "About Us"
+          }
+        },
+        {
+          "link": {
+            "type": "custom",
+            "url": "/products",
+            "label": "All Products"
+          }
+        },
+        {
+          "link": {
+            "type": "internal",
+            "reference": {
+              "relationTo": "pages",
+              "value": "contact"
+            },
+            "label": "Contact Us"
+          }
+        }
+      ]
+    },
+    {
+      "heading": "Our Range",
+      "links": [
+        {
+          "link": {
+            "type": "internal",
+            "reference": {
+              "relationTo": "product-categories",
+              "value": "hair-care"
+            },
+            "label": "Hair Care"
+          }
+        },
+        {
+          "link": {
+            "type": "internal",
+            "reference": {
+              "relationTo": "product-categories",
+              "value": "skin-care"
+            },
+            "label": "Skin Care"
+          }
+        },
+        {
+          "link": {
+            "type": "internal",
+            "reference": {
+              "relationTo": "product-categories",
+              "value": "waxing"
+            },
+            "label": "Waxing"
+          }
+        }
+      ]
+    }
+  ]
+}

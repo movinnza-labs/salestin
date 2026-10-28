@@ -1,0 +1,641 @@
+[
+  {
+    "id": 1,
+    "title": "Contact Us",
+    "layout": [
+      {
+        "eyebrow": "Contact us",
+        "heading": "Partner with us",
+        "headingAccent": "to deliver expert hair transformations.",
+        "intro": "Exclusively for professional salons.",
+        "blockType": "pageHero"
+      },
+      {
+        "eyebrow": "Get in touch",
+        "heading": "SELESTIN Professional",
+        "formHeading": "Send us an enquiry",
+        "showForm": true,
+        "blockType": "contactSection"
+      }
+    ],
+    "meta": {
+      "title": "Contact Us | SELESTIN Professional",
+      "description": "Get in touch with Xplore Beauty Wellness LLP, Pune — partner with SELESTIN Professional."
+    },
+    "slug": "contact",
+    "updatedAt": "2026-10-27T12:55:28.866Z"
+  },
+  {
+    "id": 2,
+    "title": "About Us",
+    "layout": [
+      {
+        "eyebrow": "About us",
+        "heading": "Where Luxury Meets Science.",
+        "headingAccent": "Where Beauty Begins.",
+        "image": "brand-portrait.jpg",
+        "blockType": "pageHero"
+      },
+      {
+        "eyebrow": "Our R&D",
+        "heading": "SELESTIN Professional",
+        "body": {
+          "root": {
+            "type": "root",
+            "format": "",
+            "indent": 0,
+            "version": 1,
+            "children": [
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "Our Research & Development is at the heart of everything we do. We combine advanced science with the finest ingredients to create high-performance haircare solutions.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr",
+                "textFormat": 0
+              },
+              {
+                "type": "paragraph",
+                "format": "",
+                "indent": 0,
+                "version": 1,
+                "children": [
+                  {
+                    "mode": "normal",
+                    "text": "To be a global leader in professional haircare, setting new standards of quality, sustainability, and innovation—while empowering beauty professionals worldwide.",
+                    "type": "text",
+                    "style": "",
+                    "detail": 0,
+                    "format": 0,
+                    "version": 1
+                  }
+                ],
+                "direction": "ltr",
+                "textFormat": 0
+              }
+            ],
+            "direction": "ltr"
+          }
+        },
+        "image": "hero-models.jpg",
+        "imagePosition": "left",
+        "background": "white",
+        "footnote": "Luxury in Every Strand.",
+        "bullets": [],
+        "blockType": "splitContent",
+        "cta": {
+          "type": "internal"
+        }
+      },
+      {
+        "eyebrow": "SELESTIN Professional",
+        "heading": "Luxury in Every Strand.",
+        "headingAccent": "Inspiration in Every Innovation.",
+        "footnote": "SELESTIN Professional – Where Luxury Meets Science. Where Beauty Begins.",
+        "background": "cream",
+        "items": [
+          {
+            "icon": "leaf",
+            "title": "Luxury",
+            "text": "We believe true luxury lies in the details. SELESTIN Professional delivers exceptional care with refined textures, exquisite fragrances, and visible results."
+          },
+          {
+            "icon": "star",
+            "title": "Inspire",
+            "text": "We are inspired by beauty in all its forms—natural, modern, bold, timeless. We create to inspire confidence, creativity, and self-expression."
+          },
+          {
+            "icon": "flask",
+            "title": "Our R&D",
+            "text": "Our Research & Development is at the heart of everything we do. We combine advanced science with the finest ingredients to create high-performance haircare solutions."
+          },
+          {
+            "icon": "eye",
+            "title": "Our Vision",
+            "text": "To be a global leader in professional haircare, setting new standards of quality, sustainability, and innovation—while empowering beauty professionals worldwide."
+          },
+          {
+            "icon": "heart",
+            "title": "Our Believe",
+            "text": "We believe in the power of care, the beauty of integrity, and the impact of innovation. We believe in you—and in the beauty you create every day."
+          }
+        ],
+        "blockType": "pillars"
+      },
+      {
+        "eyebrow": "Explore",
+        "heading": "Our Range",
+        "style": "cards",
+        "background": "white",
+        "blockType": "categoryGrid",
+        "categories": []
+      },
+      {
+        "eyebrow": "Exclusively for professional salons",
+        "heading": "Partner with us",
+        "headingAccent": "to deliver expert hair transformations.",
+        "image": "smoothing-mask-model.jpg",
+        "background": "dark",
+        "points": [],
+        "blockType": "ctaBanner",
+        "primaryCta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "pages",
+            "value": "contact"
+          },
+          "label": "Contact us"
+        },
+        "secondaryCta": {
+          "type": "internal"
+        }
+      }
+    ],
+    "meta": {
+      "title": "About Us | SELESTIN Professional",
+      "description": "Luxury in Every Strand. Inspiration in Every Innovation. Our R&D, our vision and what we believe in at SELESTIN Professional."
+    },
+    "slug": "about-us",
+    "updatedAt": "2026-10-27T12:55:28.985Z"
+  },
+  {
+    "id": 3,
+    "title": "Home",
+    "layout": [
+      {
+        "slides": [
+          {
+            "image": "hero-models.jpg",
+            "imagePosition": "top",
+            "eyebrow": "SELESTIN Professional",
+            "heading": "Where Luxury Meets Science.",
+            "headingAccent": "Where Beauty Begins.",
+            "text": "Luxury in Every Strand. Inspiration in Every Innovation.",
+            "primaryCta": {
+              "type": "custom",
+              "url": "/products",
+              "label": "Explore products"
+            },
+            "secondaryCta": {
+              "type": "internal",
+              "reference": {
+                "relationTo": "pages",
+                "value": "contact"
+              },
+              "label": "Partner with us"
+            }
+          },
+          {
+            "image": "smoothing-mask-model.jpg",
+            "imagePosition": "top",
+            "eyebrow": "Nano-Silk Arginina Smoothing Mask",
+            "heading": "Smooth & Shiny",
+            "headingAccent": "Hair, Every Day",
+            "text": "Smoother. Shinier. Stronger.",
+            "primaryCta": {
+              "type": "internal",
+              "reference": {
+                "relationTo": "products",
+                "value": "smoothing-mask"
+              },
+              "label": "Discover the mask"
+            },
+            "secondaryCta": {
+              "type": "internal"
+            }
+          },
+          {
+            "image": "argan-serum.jpg",
+            "imagePosition": "center",
+            "eyebrow": "Luminous smoothening oil",
+            "heading": "Morocco Argan Serum",
+            "text": "For all hair types.",
+            "primaryCta": {
+              "type": "internal",
+              "reference": {
+                "relationTo": "products",
+                "value": "morocco-argan-serum"
+              },
+              "label": "Discover the serum"
+            },
+            "secondaryCta": {
+              "type": "internal"
+            }
+          },
+          {
+            "image": "wax-korean-glass.jpg",
+            "imagePosition": "top",
+            "eyebrow": "Professional at Luxury Touch",
+            "heading": "Premium Wax",
+            "headingAccent": "For Smooth Perfection",
+            "text": "Luxury Smooth — Silky • Gentle • Effective.",
+            "primaryCta": {
+              "type": "internal",
+              "reference": {
+                "relationTo": "product-categories",
+                "value": "waxing"
+              },
+              "label": "Explore waxing"
+            },
+            "secondaryCta": {
+              "type": "internal"
+            }
+          }
+        ],
+        "blockType": "heroSlider"
+      },
+      {
+        "items": [
+          {
+            "icon": "droplet",
+            "title": "Nourished & Healthy Hair"
+          },
+          {
+            "icon": "waves",
+            "title": "Smooth, Soft & Shiny"
+          },
+          {
+            "icon": "shield",
+            "title": "Stronger, More Manageable"
+          },
+          {
+            "icon": "user",
+            "title": "Professional Hair Care"
+          }
+        ],
+        "blockType": "featureStrip"
+      },
+      {
+        "eyebrow": "SELESTIN Professional",
+        "heading": "Luxury in Every Strand.",
+        "headingAccent": "Inspiration in Every Innovation.",
+        "footnote": "SELESTIN Professional – Where Luxury Meets Science. Where Beauty Begins.",
+        "background": "cream",
+        "items": [
+          {
+            "icon": "leaf",
+            "title": "Luxury",
+            "text": "We believe true luxury lies in the details. SELESTIN Professional delivers exceptional care with refined textures, exquisite fragrances, and visible results."
+          },
+          {
+            "icon": "star",
+            "title": "Inspire",
+            "text": "We are inspired by beauty in all its forms—natural, modern, bold, timeless. We create to inspire confidence, creativity, and self-expression."
+          },
+          {
+            "icon": "flask",
+            "title": "Our R&D",
+            "text": "Our Research & Development is at the heart of everything we do. We combine advanced science with the finest ingredients to create high-performance haircare solutions."
+          },
+          {
+            "icon": "eye",
+            "title": "Our Vision",
+            "text": "To be a global leader in professional haircare, setting new standards of quality, sustainability, and innovation—while empowering beauty professionals worldwide."
+          },
+          {
+            "icon": "heart",
+            "title": "Our Believe",
+            "text": "We believe in the power of care, the beauty of integrity, and the impact of innovation. We believe in you—and in the beauty you create every day."
+          }
+        ],
+        "blockType": "pillars"
+      },
+      {
+        "eyebrow": "Professional hair care",
+        "heading": "Nano-Silk Arginina",
+        "image": "range-nano-silk.jpg",
+        "background": "white",
+        "blockType": "productSteps",
+        "products": [
+          "pre-clarifying-shampoo",
+          "nano-silk-arginia-protein-treatment",
+          "prolonger-shampoo",
+          "prolonger-mask",
+          "morocco-argan-serum"
+        ]
+      },
+      {
+        "eyebrow": "Exclusively for professional salons",
+        "heading": "Nano Silk Arginia Treatment",
+        "headingAccent": "Professional Salon Solution. Trusted by Experts.",
+        "intro": "B2B product | Not for retail sale. Partner with us to deliver expert hair transformations.",
+        "image": "nano-silk-treatment.jpg",
+        "background": "dark",
+        "points": [
+          {
+            "icon": "ban",
+            "text": "Formaldehyde Free"
+          },
+          {
+            "icon": "ban",
+            "text": "Sulfate Free"
+          },
+          {
+            "icon": "ban",
+            "text": "Paraben Free"
+          },
+          {
+            "icon": "user",
+            "text": "Professional Only"
+          }
+        ],
+        "blockType": "ctaBanner",
+        "primaryCta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "pages",
+            "value": "contact"
+          },
+          "label": "Partner with us"
+        },
+        "secondaryCta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "products",
+            "value": "nano-silk-arginia-protein-treatment"
+          },
+          "label": "View the treatment"
+        }
+      },
+      {
+        "eyebrow": "Complete Care. Visible Results.",
+        "heading": "Best Care for",
+        "headingAccent": "Beautiful Hair",
+        "source": "featured",
+        "limit": 4,
+        "background": "lavender",
+        "blockType": "productGrid",
+        "products": [],
+        "cta": {
+          "type": "custom",
+          "url": "/products",
+          "label": "View all products"
+        }
+      },
+      {
+        "eyebrow": "Explore",
+        "heading": "Our Range",
+        "style": "cards",
+        "background": "white",
+        "blockType": "categoryGrid",
+        "categories": []
+      },
+      {
+        "eyebrow": "Skin care",
+        "heading": "Luxury Skincare",
+        "headingAccent": "for Radiant Beauty",
+        "image": "skincare.jpg",
+        "imagePosition": "right",
+        "background": "cream",
+        "footnote": "Experience the difference.",
+        "bullets": [
+          {
+            "text": "Rejuvenate & Hydrate"
+          },
+          {
+            "text": "Smoother, Firmer Skin"
+          },
+          {
+            "text": "Natural Ingredients"
+          },
+          {
+            "text": "Clinically Proven Results"
+          }
+        ],
+        "blockType": "splitContent",
+        "cta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "product-categories",
+            "value": "skin-care"
+          },
+          "label": "Explore skin care"
+        }
+      }
+    ],
+    "meta": {
+      "title": "SELESTIN Professional – Where Luxury Meets Science. Where Beauty Begins.",
+      "description": "SELESTIN Professional – Luxury in Every Strand. Inspiration in Every Innovation. Professional hair care, skin care and premium wax.",
+      "image": "hero-models.jpg"
+    },
+    "slug": "home",
+    "updatedAt": "2026-10-27T12:55:29.083Z"
+  },
+  {
+    "id": 4,
+    "title": "Home (version 2)",
+    "layout": [
+      {
+        "eyebrow": "SELESTIN Professional",
+        "heading": "Luxury in Every Strand.",
+        "headingAccent": "Inspiration in Every Innovation.",
+        "text": "Where Luxury Meets Science. Where Beauty Begins.",
+        "image": "smoothing-mask-model.jpg",
+        "detailImage": "argan-serum.jpg",
+        "detailCaption": "Morocco Argan Serum",
+        "sideLabel": "Professional Hair Care",
+        "blockType": "editorialHero",
+        "primaryCta": {
+          "type": "custom",
+          "url": "/products",
+          "label": "Explore products"
+        },
+        "secondaryCta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "pages",
+            "value": "contact"
+          },
+          "label": "Partner with us"
+        }
+      },
+      {
+        "background": "dark",
+        "items": [
+          {
+            "text": "Smoother. Shinier. Stronger."
+          },
+          {
+            "text": "Nourish • Smooth • Shine"
+          },
+          {
+            "text": "Complete Care. Visible Results."
+          },
+          {
+            "text": "Silky • Gentle • Effective"
+          }
+        ],
+        "blockType": "marquee"
+      },
+      {
+        "eyebrow": "Luxury",
+        "footnote": "Experience the difference",
+        "background": "white",
+        "lines": [
+          {
+            "text": "We believe true luxury lies in the details.",
+            "image": "luxury-strands.jpg"
+          },
+          {
+            "text": "SELESTIN Professional delivers exceptional care with refined textures,",
+            "image": "best-care-trio.jpg"
+          },
+          {
+            "text": "exquisite fragrances, and visible results.",
+            "image": "wax-white-chocolate.jpg"
+          }
+        ],
+        "blockType": "manifesto"
+      },
+      {
+        "eyebrow": "SELESTIN Professional",
+        "heading": "Where Luxury",
+        "headingAccent": "Meets Science.",
+        "image": "brand-portrait.jpg",
+        "background": "cream",
+        "items": [
+          {
+            "icon": "star",
+            "title": "Inspire",
+            "text": "We are inspired by beauty in all its forms—natural, modern, bold, timeless. We create to inspire confidence, creativity, and self-expression."
+          },
+          {
+            "icon": "flask",
+            "title": "Our R&D",
+            "text": "Our Research & Development is at the heart of everything we do. We combine advanced science with the finest ingredients to create high-performance haircare solutions."
+          },
+          {
+            "icon": "eye",
+            "title": "Our Vision",
+            "text": "To be a global leader in professional haircare, setting new standards of quality, sustainability, and innovation—while empowering beauty professionals worldwide."
+          },
+          {
+            "icon": "heart",
+            "title": "Our Believe",
+            "text": "We believe in the power of care, the beauty of integrity, and the impact of innovation. We believe in you—and in the beauty you create every day."
+          }
+        ],
+        "blockType": "pillarIndex"
+      },
+      {
+        "eyebrow": "Professional hair care",
+        "heading": "Nano-Silk Arginina",
+        "image": "range-nano-silk.jpg",
+        "background": "dark",
+        "blockType": "productSteps",
+        "products": [
+          "pre-clarifying-shampoo",
+          "nano-silk-arginia-protein-treatment",
+          "prolonger-shampoo",
+          "prolonger-mask",
+          "morocco-argan-serum"
+        ]
+      },
+      {
+        "eyebrow": "Complete Care. Visible Results.",
+        "heading": "Best Care for",
+        "headingAccent": "Beautiful Hair",
+        "source": "all",
+        "limit": 12,
+        "background": "white",
+        "blockType": "productCarousel",
+        "products": [],
+        "cta": {
+          "type": "custom",
+          "url": "/products",
+          "label": "View all products"
+        }
+      },
+      {
+        "eyebrow": "The goodness of",
+        "heading": "Key Ingredients",
+        "image": "argan-serum.jpg",
+        "background": "lavender",
+        "items": [
+          {
+            "name": "Macadamia",
+            "foundIn": "Smoothing Mask",
+            "text": "Deeply nourishes, locks in moisture and adds intense shine to dull, dry hair."
+          },
+          {
+            "name": "Morocco Argan",
+            "foundIn": "Smoothing Mask",
+            "text": "Rich in antioxidants and vitamin E, it tames frizz, repairs damage and leaves hair silky smooth."
+          },
+          {
+            "name": "Hydrolyzed Keratin",
+            "foundIn": "Keratin Shine Bond Shampoo",
+            "text": "Restores elasticity • Smooths frizz • Strengthens strands • Healthy, shiny hair"
+          },
+          {
+            "name": "White Chocolate",
+            "foundIn": "White Chocolate Liposoluable Wax",
+            "text": "Soothe and nourish the skin while providing an indulgent waxing experience."
+          },
+          {
+            "name": "Blueberry Extract",
+            "foundIn": "Korean Glass Blueberry Liposoluable Gel Wax",
+            "text": "Rich in antioxidants, helps protect the skin from environmental stressors and keeps it fresh and healthy."
+          },
+          {
+            "name": "Natural Beeswax",
+            "foundIn": "Korean Glass Blueberry Liposoluable Gel Wax",
+            "text": "An emollient that ensures gentle waxing with better grip and easy removal."
+          }
+        ],
+        "blockType": "ingredientSpotlight"
+      },
+      {
+        "eyebrow": "Explore",
+        "heading": "Our Range",
+        "style": "arches",
+        "background": "white",
+        "blockType": "categoryGrid",
+        "categories": []
+      },
+      {
+        "eyebrow": "Exclusively for professional salons",
+        "heading": "Partner with us",
+        "headingAccent": "to deliver expert hair transformations.",
+        "intro": "Nano Silk Arginia Treatment — Professional Salon Solution. Trusted by Experts.",
+        "image": "hero-models.jpg",
+        "blockType": "statementCta",
+        "primaryCta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "pages",
+            "value": "contact"
+          },
+          "label": "Partner with us"
+        },
+        "secondaryCta": {
+          "type": "internal",
+          "reference": {
+            "relationTo": "products",
+            "value": "nano-silk-arginia-protein-treatment"
+          },
+          "label": "View the treatment"
+        }
+      }
+    ],
+    "meta": {
+      "title": "SELESTIN Professional – Where Luxury Meets Science. Where Beauty Begins.",
+      "description": "SELESTIN Professional – Luxury in Every Strand. Inspiration in Every Innovation. Professional hair care, skin care and premium wax.",
+      "image": "hero-models.jpg"
+    },
+    "slug": "home-v2",
+    "hideFromSearch": true,
+    "updatedAt": "2026-10-27T12:55:29.172Z"
+  }
+]

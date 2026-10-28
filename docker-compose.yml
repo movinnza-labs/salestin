@@ -1,0 +1,17 @@
+# Local dev: runs the website in dev mode with hot reload.
+#   docker compose up
+services:
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "corepack enable && pnpm install && pnpm dev"
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    env_file:
+      - .env
+
+volumes:
+  node_modules:

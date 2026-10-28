@@ -1,0 +1,150 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Brand palette — logo rich black + the brochure's plum/lavender and gold */
+  --color-ink: #141414;
+  --color-ink-soft: #3d3a40;
+  --color-muted: #6b6670;
+  --color-line: #e9e3da;
+
+  --color-plum-950: #1c1230;
+  --color-plum-900: #2a1b47;
+  --color-plum-800: #3b2763;
+  --color-plum-700: #4a3078;
+  --color-plum-600: #5b3f8f;
+  --color-plum-500: #7457a8;
+  --color-lavender-300: #c9bce6;
+  --color-lavender-200: #ddd3f0;
+  --color-lavender-100: #ece6f6;
+  --color-lavender-50: #f6f3fb;
+
+  --color-gold-700: #7d5f30;
+  --color-gold-600: #8a6a36;
+  --color-gold-500: #b08a4e;
+  --color-gold-300: #d9c29a;
+  --color-gold-100: #f3ead9;
+
+  --color-cream: #f8f4ee;
+  --color-cream-200: #efe6da;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  /* editorial display face (homepage v2) */
+  --font-display: var(--font-cormorant), var(--font-playfair), ui-serif, Georgia, serif;
+
+  --shadow-card: 0 1px 2px rgb(20 20 20 / 0.04), 0 8px 24px -12px rgb(20 20 20 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(20 20 20 / 0.05), 0 18px 40px -16px rgb(42 27 71 / 0.28);
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7rem;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-plum-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-lavender-200);
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.22em] text-gold-600 uppercase;
+  }
+
+  .on-dark .eyebrow {
+    @apply text-gold-300;
+  }
+
+  .prose-brand {
+    @apply space-y-4 text-base leading-relaxed text-ink-soft;
+  }
+
+  .prose-brand h2 {
+    @apply pt-4 text-2xl text-ink;
+  }
+
+  .prose-brand h3 {
+    @apply pt-2 text-xl text-ink;
+  }
+
+  .prose-brand ul {
+    @apply list-disc space-y-1 pl-5;
+  }
+
+  .prose-brand ol {
+    @apply list-decimal space-y-1 pl-5;
+  }
+
+  .prose-brand a {
+    @apply text-plum-600 underline underline-offset-4;
+  }
+
+  .on-dark .prose-brand {
+    @apply text-white/80;
+  }
+}
+
+/* Scroll-linked reveal, progressive enhancement: no JS, ignored where unsupported. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
