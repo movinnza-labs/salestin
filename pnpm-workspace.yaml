@@ -1,3 +1,7 @@
+# Flat, npm-style node_modules without symlinks. Hosts that copy the app folder
+# (e.g. Hostinger) break pnpm's default symlinked layout.
+nodeLinker: hoisted
+
 allowBuilds:
   sharp: true
   esbuild: true
