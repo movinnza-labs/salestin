@@ -44,6 +44,8 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
+    // browser extensions (e.g. QuillBot) add attributes to <html> before React hydrates
+    suppressHydrationWarning: true,
     meta: {
       titleSuffix: ` — ${siteName}`,
       icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/brand/icon.svg' }],
