@@ -1,7 +1,9 @@
 import { JsonLd } from '@/components/JsonLd'
 import { pageMetadata, PageView } from '@/components/PageView'
-import { getGlobal } from '@/lib/content'
+import { getGlobal } from '@/lib/payload'
 import { siteUrl } from '@/lib/seo'
+
+export const revalidate = 3600
 
 export const generateMetadata = () => pageMetadata('home')
 

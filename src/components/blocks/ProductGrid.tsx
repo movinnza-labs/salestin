@@ -6,7 +6,7 @@ import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { loadBlockProducts } from '@/lib/blockProducts'
 import { resolveHref } from '@/lib/links'
-import type { ProductGridBlock } from '@/content/types'
+import type { ProductGridBlock } from '@/payload-types'
 
 export async function ProductGrid(block: ProductGridBlock) {
   const { eyebrow, heading, headingAccent, intro, cta, background } = block

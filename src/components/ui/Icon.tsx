@@ -18,7 +18,9 @@ import {
   Wind,
 } from 'lucide-react'
 
-const icons = {
+import type { IconName } from '@/fields/icon'
+
+const icons: Record<IconName, LucideIcon> = {
   leaf: Leaf,
   star: Star,
   flask: FlaskConical,
@@ -35,10 +37,7 @@ const icons = {
   hair: Wind,
   gem: Gem,
   ban: Ban,
-} satisfies Record<string, LucideIcon>
-
-/** Valid values for the `icon` fields in src/content/*.json */
-export type IconName = keyof typeof icons
+}
 
 export function Icon({ name, className }: { name?: string | null; className?: string }) {
   const Component = icons[(name as IconName) ?? 'sparkles'] ?? Sparkles

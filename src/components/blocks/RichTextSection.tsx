@@ -1,5 +1,5 @@
 import { RichText } from '@/components/ui/RichText'
-import type { RichTextBlock } from '@/content/types'
+import type { RichTextBlock } from '@/payload-types'
 
 export function RichTextSection({ content }: RichTextBlock) {
   return (

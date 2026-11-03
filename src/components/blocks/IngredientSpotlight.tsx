@@ -1,7 +1,7 @@
 import { CMSImage } from '@/components/ui/CMSImage'
 import { Section } from '@/components/ui/Section'
 import { cn } from '@/lib/cn'
-import type { IngredientSpotlightBlock } from '@/content/types'
+import type { IngredientSpotlightBlock } from '@/payload-types'
 
 export function IngredientSpotlight({ eyebrow, heading, headingAccent, intro, items, image, background }: IngredientSpotlightBlock) {
   return (

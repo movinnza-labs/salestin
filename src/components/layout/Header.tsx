@@ -4,17 +4,24 @@ import Link from 'next/link'
 import { CMSLink } from '@/components/ui/CMSLink'
 import { Logo } from '@/components/ui/Logo'
 import { resolveHref } from '@/lib/links'
-import { getGlobal } from '@/lib/content'
+import { getGlobal } from '@/lib/payload'
 
 import { MobileNav } from './MobileNav'
-import { NavLinks } from './NavLinks'
+import { type NavItem, type NavLeaf, NavLinks } from './NavLinks'
 
 export async function Header() {
   const [header, settings] = await Promise.all([getGlobal('header'), getGlobal('site-settings')])
 
-  const items = (header?.navItems ?? [])
-    .map(({ link, id }) => ({ id: id ?? link.label, label: link.label, href: resolveHref(link) }))
-    .filter((i): i is { id: string; label: string; href: string } => Boolean(i.href && i.label))
+  const toLeaf = (link: Parameters<typeof resolveHref>[0] & { label?: string | null }, id?: string | null) => {
+    const href = resolveHref(link)
+    return href && link?.label ? { id: id ?? link.label, label: link.label, href } : null
+  }
+  const items: NavItem[] = (header?.navItems ?? []).flatMap(({ link, id, subLinks }) => {
+    const leaf = toLeaf(link, id)
+    if (!leaf) return []
+    const children = (subLinks ?? []).map((s) => toLeaf(s.link, s.id)).filter((c): c is NavLeaf => Boolean(c))
+    return [{ ...leaf, children }]
+  })
 
   const phone = settings?.phone
 

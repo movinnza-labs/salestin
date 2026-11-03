@@ -1,7 +1,7 @@
 import { Icon } from '@/components/ui/Icon'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import type { PillarsBlock } from '@/content/types'
+import type { PillarsBlock } from '@/payload-types'
 
 export function Pillars({ eyebrow, heading, headingAccent, intro, items, footnote, background }: PillarsBlock) {
   if (!items?.length) return null

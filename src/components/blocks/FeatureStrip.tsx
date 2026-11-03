@@ -1,5 +1,5 @@
 import { Icon } from '@/components/ui/Icon'
-import type { FeatureStripBlock } from '@/content/types'
+import type { FeatureStripBlock } from '@/payload-types'
 
 export function FeatureStrip({ items }: FeatureStripBlock) {
   if (!items?.length) return null

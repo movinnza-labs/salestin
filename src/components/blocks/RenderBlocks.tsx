@@ -1,6 +1,8 @@
-import type { Page } from '@/content/types'
+import type { Page } from '@/payload-types'
 
+import { Banners } from './Banners'
 import { CategoryGrid } from './CategoryGrid'
+import { CompanyDetails } from './CompanyDetails'
 import { ContactSection } from './ContactSection'
 import { CtaBanner } from './CtaBanner'
 import { EditorialHero } from './EditorialHero'
@@ -15,6 +17,7 @@ import { Pillars } from './Pillars'
 import { ProductCarousel } from './ProductCarousel'
 import { ProductGrid } from './ProductGrid'
 import { ProductSteps } from './ProductSteps'
+import { RangeGrid } from './RangeGrid'
 import { RichTextSection } from './RichTextSection'
 import { SplitContent } from './SplitContent'
 import { StatementCta } from './StatementCta'
@@ -22,9 +25,11 @@ import { StatementCta } from './StatementCta'
 type Block = Page['layout'][number]
 
 const components: { [K in Block['blockType']]: React.ComponentType<Extract<Block, { blockType: K }>> } = {
+  banners: Banners,
   heroSlider: HeroSlider,
   pageHero: PageHero,
   featureStrip: FeatureStrip,
+  rangeGrid: RangeGrid,
   categoryGrid: CategoryGrid,
   splitContent: SplitContent,
   pillars: Pillars,
@@ -33,6 +38,7 @@ const components: { [K in Block['blockType']]: React.ComponentType<Extract<Block
   ctaBanner: CtaBanner,
   contactSection: ContactSection,
   richText: RichTextSection,
+  companyDetails: CompanyDetails,
   editorialHero: EditorialHero,
   marquee: Marquee,
   manifesto: Manifesto,

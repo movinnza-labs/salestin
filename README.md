@@ -1,135 +1,192 @@
 # SELESTIN Professional — website
 
 Marketing and catalogue website for **SELESTIN Professional** (Xplore Beauty Wellness LLP), built with
-**Next.js 16 (App Router)**. There is no CMS and no database: all page content, products, navigation, footer and
-company details live in JSON files in `src/content/`, and every page is pre-rendered at build time. Website
-enquiries are validated on the server and emailed to the company.
+**Next.js 16 (App Router) + Payload CMS 3 + PostgreSQL**, hosted on **Railway**. Pages, products, ranges, banners,
+blog posts, navigation, footer and company details are managed in the Payload admin at `/admin`. Customer and
+salon/distributor enquiries are validated on the server, stored in the admin and emailed to the company.
 
 | | |
 |---|---|
 | Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS 4, Lucide icons |
-| Content | JSON files in `src/content/`, images in `public/media/` |
-| Forms | Server action + Zod validation, honeypot / time-trap / rate-limit spam protection, email via nodemailer |
-| SEO | Per-page meta + Open Graph, canonical URLs, `sitemap.xml`, `robots.txt`, Organization & Breadcrumb JSON-LD |
-
-> Until October 2026 the site used Payload CMS + PostgreSQL. That setup was removed; a full backup of the old code
-> and a database dump are in `D:\salestin-payload-backup-2026-10-28`.
+| CMS | Payload 3.92 (admin at `/admin`, REST at `/api`, GraphQL at `/api/graphql`) |
+| Database | PostgreSQL 16 via `@payloadcms/db-postgres` (schema changes via migrations) |
+| Forms | Server actions + Zod validation, honeypot / time-trap / rate-limit spam protection, email alerts |
+| SEO | Per-page meta + Open Graph (Payload SEO plugin), canonical URLs, `sitemap.xml`, `robots.txt`, Organization / Breadcrumb / Product / BlogPosting JSON-LD |
+| Analytics | Google Analytics 4 and Search Console verification, both set in **Site settings → Analytics** |
 
 ---
 
 ## 1. Local development
 
-**Requirements:** Node.js 20.9+ (22 or 24 recommended), pnpm 9+ (`corepack enable`).
+**Requirements:** Node.js 20.9+ (22 or 24 recommended), pnpm 9+ (`corepack enable`), PostgreSQL 14+.
 
 ```bash
 pnpm install
 cp .env.example .env          # then fill in the values (see below)
-pnpm dev                      # http://localhost:3000
+pnpm migrate                  # create / update the database tables
+pnpm seed                     # load the brochure content (optional but recommended)
+pnpm dev                      # http://localhost:3000  ·  admin: http://localhost:3000/admin
 ```
 
 ### Environment variables (`.env`)
 
 | Variable | Required | Purpose |
 |---|---|---|
+| `DATABASE_URL` | yes | `postgres://USER:PASSWORD@HOST:5432/DBNAME` |
+| `PAYLOAD_SECRET` | yes | Long random string for signing auth tokens. Generate: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 | `NEXT_PUBLIC_SERVER_URL` | yes | Public site URL, no trailing slash. Used for canonical URLs, sitemap, Open Graph images. |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM_ADDRESS`, `SMTP_FROM_NAME` | in production | Delivers enquiry emails (see §4). |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM_ADDRESS`, `SMTP_FROM_NAME` | for email alerts | Without them enquiries are still stored in the admin, but no alert email is sent. |
 
 `.env` is git-ignored. Never commit real credentials; `.env.example` holds placeholders only.
 
+**This machine:** a project-local PostgreSQL cluster lives in `.pgdata/` (port **5433**, git-ignored) and `.env`
+points at it. Start it after a reboot, before `pnpm dev`:
+
+```bash
+pnpm db:start
+pnpm db:stop
+```
+
+### Creating admin users
+
+1. Open **`/admin`**. When no users exist, Payload shows **“Create your first user”** — enter email + password.
+2. Further logins for the client's team are added under **Admin → Users** (only logged-in admins can do this).
+
+Logins lock for 15 minutes after 5 failed attempts.
+
 ---
 
-## 2. Editing content
+## 2. Database migrations
 
-Edit the files below, then rebuild/redeploy (`pnpm dev` picks up changes immediately).
+The Postgres adapter runs with `push: false`, so **the schema only changes through migration files** in
+`src/migrations/` (committed to git).
 
-| File | What it controls |
+| Task | Command |
 |---|---|
-| `src/content/pages.json` | Home (`slug: home`), About Us, Contact, Home v2 — each a list of blocks in `layout`. |
-| `src/content/products.json` | Products: images & gallery, line, size, summary, description, badges, benefits, ingredients, SEO (`meta`). `featured: true` includes a product in “featured” grids; `sortOrder` sets the order. |
-| `src/content/categories.json` | Hair Care, Skin Care, Waxing (`/collections/<slug>`). |
-| `src/content/site-settings.json` | Company name, address, phone, email, website, SEO defaults, enquiry email address. |
-| `src/content/header.json`, `footer.json` | Announcement bar, navigation links, header button, footer columns. |
-| `src/content/media.json` | Alt text, dimensions and focal point for each image in `public/media/`. |
-| `src/content/types.ts` | TypeScript types describing all of the above. |
+| Apply pending migrations | `pnpm migrate` |
+| Check status | `pnpm migrate:status` |
+| After changing a collection / global / block | `pnpm migrate:create <name>` → review the file → `pnpm migrate` → commit it |
+| Regenerate TypeScript types after schema changes | `pnpm generate:types` |
+| Regenerate admin import map after adding admin components | `pnpm generate:importmap` |
 
-References between files use readable keys, resolved by `src/lib/content.ts`:
+Tip: when a change both removes and adds a column on the same table, `migrate:create` asks whether it is a rename.
+Split such changes into an "add" migration and a later "drop" migration to avoid the prompt.
 
-- **Images** by file name: `"image": "argan-serum.jpg"`. To add an image, put it in `public/media/` and add an
-  entry (at least `id`, `alt`, `width`, `height`, `sizes: {}`) to `media.json`. Alt text is required.
-- **Products / categories** by slug: `"category": "hair-care"`, `"products": ["prolonger-shampoo", …]`.
-- **Links:** `{ "type": "internal", "reference": { "relationTo": "pages", "value": "contact" }, "label": "…" }`
-  (`relationTo` is `pages`, `products` or `product-categories`), or `{ "type": "custom", "url": "/products" }`.
+---
 
-An unknown image or slug fails the build with a message naming it.
+## 3. Content management (Payload admin)
 
-**Page blocks** (`blockType`): `heroSlider` · `pageHero` · `featureStrip` · `categoryGrid` · `splitContent` ·
-`pillars` · `productSteps` · `productGrid` · `ctaBanner` · `contactSection` · `richText` — plus the editorial
-blocks used by homepage v2: `editorialHero` · `marquee` · `manifesto` · `pillarIndex` · `productCarousel` ·
-`ingredientSpotlight` · `statementCta`. Each has a component in `src/components/blocks/`; see `types.ts` for fields.
-Rich-text fields (`description`, `body`, `content`) use Lexical JSON, rendered by `src/components/ui/RichText.tsx`.
+| Admin section | What it controls |
+|---|---|
+| **Content → Pages** | Home (`slug: home`), About Us, Salon Partner, Contact Us, Privacy Policy, Terms and Conditions — each built from blocks. Draft/publish with version history. |
+| **Content → Banners** | Home hero slides (**placement: Home hero slider**) and offers (**placement: Offers strip**). Untick *Active* or set start/end dates to schedule them. |
+| **Content → Blog posts** | Blog at `/blog`: title, excerpt, cover image, rich-text content (with images), publish date, SEO tab (meta title, description, OG image). |
+| **Catalogue → Products** | Images & gallery, before & after image pairs, size, summary, description, badges, free-from (sulfate / paraben / formaldehyde / colophony), *Professional only*, range, category, audience (salon / home care), concerns, benefits, key / full ingredients, SEO. Tick **Best seller** to include in best-seller grids. Unpublish to hide a product. |
+| **Catalogue → Ranges** | Nano Silk Arginina, Keratin Shine Bond, Morocco Argan Serum, Skincare, Premium Wax — each with a story and its own page at `/ranges/<slug>`. *Sort order* arranges them. |
+| **Catalogue → Product categories** | Hair Care, Skin Care, Waxing (shop filter and `/collections/<slug>`). |
+| **Content → Media** | Image library. **Alt text is required.** Set a focal point to control cropping. |
+| **Enquiries** | Website form submissions — admin-only. *Kind* is **Customer** (Contact page) or **Salon / distributor partner** (Salon Partner page); status New / Contacted / Closed. |
+| **Settings → Site settings** | Company name, address, phone, email, **WhatsApp number**, Google Maps embed, SEO defaults, **Analytics** (GA4 ID, Search Console code), enquiry notification email. |
+| **Settings → Header / Footer** | Announcement bar, navigation (items can have **dropdown links**, e.g. Ranges), header button, footer columns. |
+
+**Page blocks:** Banners · Hero slider · Page header · Feature strip · Range grid · Category grid · Image + text ·
+Icon columns · Numbered product system · Product grid (best sellers / range / category / hand-picked / all) ·
+Call to action · Contact details + form (customer or partner form, optional map) · Text · Company details — plus the
+editorial blocks used by homepage v2.
+
+**Shop** (`/shop`) is built from the products: search, and filters by range, category, concern and audience.
+Concern options are defined in code (`src/fields/productOptions.ts`) — ask a developer to add one.
+
+**WhatsApp:** once **Site settings → WhatsApp number** is filled in, every product page gets a *WhatsApp enquiry*
+button with the product name pre-filled, and the contact block and footer show the number.
+
+**Policy pages** were created as **drafts** with placeholder text. Paste the client's text into
+**Pages → Privacy Policy / Terms and Conditions** and publish; the footer “Legal” links appear automatically once
+the pages are published.
 
 ### Homepage version 2
 
-An alternative, editorial homepage design lives at **`/home-v2`** (page “Home (version 2)”). It has
-`"hideFromSearch": true` (noindex, not in the sitemap) and is not linked in the navigation.
+An alternative, editorial homepage design lives at **`/home-v2`** (noindex, not linked). To make it the live
+homepage: change **Home**'s slug to `home-v1` and tick *Hide from search engines*; change **Home (version 2)**'s
+slug to `home` and untick it. Publish both.
 
-To make it the live homepage, in `pages.json` change the current home page's slug to `home-v1` and set its
-`hideFromSearch` to `true`, then change `home-v2`'s slug to `home` and remove its `hideFromSearch`.
+**Publishing:** saving or publishing in the admin refreshes the affected pages immediately. Pages also refresh
+hourly as a safety net.
+
+**Re-running the seed** (`pnpm seed`) restores the brochure content and **overwrites edits** to seeded pages,
+products, ranges, categories, banners and globals (policy pages are only created, never overwritten) — only use it
+on a fresh database or to reset.
 
 ---
 
-## 3. Production deployment
+## 4. Deployment on Railway
 
-The site is a standard Node.js Next.js app. Any host that runs `next start` works (VPS, Render, Railway, Fly.io,
-DigitalOcean App Platform, Vercel, Docker).
+The repo includes `railway.json` (build: `pnpm migrate && pnpm build`, start: `pnpm start`).
 
-```bash
-pnpm install --frozen-lockfile
-pnpm build              # pre-renders every page
-pnpm start              # PORT defaults to 3000
-```
+1. Create a Railway project with a **PostgreSQL** service and a service from this GitHub repo.
+2. On the web service set the variables:
+   - `DATABASE_URL` = `${{Postgres.DATABASE_PUBLIC_URL}}` — the **public** URL, because Railway's private network
+     is not available during builds and the build pre-renders pages from the database.
+   - `PAYLOAD_SECRET` = a new random string (never reuse the local one).
+   - `NEXT_PUBLIC_SERVER_URL` = `https://selestinprofessional.com` (or the Railway URL until the domain is connected).
+   - `SMTP_*` for enquiry alerts.
+3. **Add a volume mounted at `/app/media`.** Uploaded images are stored on disk; without a volume they are lost on
+   every redeploy.
+4. Deploy. Migrations run in the build step (and again, harmlessly, when the server starts).
+5. Load the brochure content once, **inside the Railway service** so the images land on the volume:
+   `railway ssh` → `pnpm seed`.
+6. Open `/admin`, create the first user, add the team's logins, fill in WhatsApp / GA4 / Search Console in
+   **Site settings**, and publish the policy pages.
+7. Connect `selestinprofessional.com` under the service's **Networking → Custom domain** (Railway issues SSL).
+   Then submit `https://selestinprofessional.com/sitemap.xml` in Search Console.
 
-Checklist:
-
-- Set `NEXT_PUBLIC_SERVER_URL=https://your-domain` (used in canonical URLs and the sitemap) and the `SMTP_*`
-  variables.
-- Put HTTPS and a CDN/WAF in front. The form's rate limiter is in-memory per server instance; with several
-  instances, add rate limiting at the proxy/WAF.
-- **Docker:** `docker build --build-arg NEXT_PUBLIC_SERVER_URL=… -t selestin .` then run with the `SMTP_*` env vars.
+Keeping it light for the $5 plan: one web service + one Postgres; pages are pre-rendered and cached for an hour;
+images are resized by Next.js on demand.
 
 > The build and dev scripts use webpack (`--webpack`) because Next 16's Turbopack currently fails to resolve
-> `next/font/google` in this project.
+> `next/font/google` in this project. pnpm uses a flat (`nodeLinker: hoisted`) `node_modules`, and
+> `pnpm-workspace.yaml` overrides a few vulnerable transitive dependencies; `pnpm audit` should show no high or
+> critical issues.
 
 ---
 
-## 4. Enquiry form & email
+## 5. Enquiry forms & email
 
-- Fields: name*, email*, phone, salon/business, city, enquiry type*, product, message*. Opening
+- **Customer form** (Contact page): name*, email*, phone, salon/business, city, enquiry type*, product, message*.
   `/contact?product=<slug>` preselects a product (used by every “Enquire” button).
+- **Salon / distributor form** (Salon Partner page): salon or distributor*, name*, business name*, phone/WhatsApp*,
+  email*, city*, message.
 - Validation runs on the server (Zod, `src/lib/validation/inquiry.ts`); errors are shown per field.
 - Spam protection: hidden honeypot field, minimum fill time, 5 submissions / 10 min per IP.
-- Each enquiry is **emailed** to `enquiryNotificationEmail` in `site-settings.json` (falls back to `email`), with
-  the sender as reply-to. **Enquiries are not stored anywhere else**, so a success message is only shown after the
-  email was accepted by the SMTP server.
-- Without `SMTP_HOST`: in development the enquiry is printed to the server console; in production the form shows
-  an error asking visitors to phone or email instead.
+- Both are saved to **Enquiries** (the public API cannot read or create them) and a success message is only shown
+  after the enquiry is stored.
+- **Email alert:** set the `SMTP_*` variables and **Site settings → Notifications → Enquiry notification email**
+  (seeded as `info@xplorebeauty.com`). Email failures are logged and never lose the enquiry.
 
 ---
 
-## 5. Project structure
+## 6. Project structure
 
 ```
 src/
   app/
-    (frontend)/            public site: layout, home, [slug] pages, products, collections, actions.ts (form)
+    (frontend)/            public site: home, [slug] pages, shop, ranges, products, collections, blog, actions.ts
+    (payload)/             Payload admin + REST/GraphQL routes (generated) and admin styles
     sitemap.ts robots.ts icon.svg
-  content/                 site content (JSON) + types.ts
+  access/                  access-control helpers
+  blocks/                  Payload block configs (page builder)
+  collections/             Pages, Posts, Banners, Products, Ranges, ProductCategories, Media, Inquiries, Users
+  globals/                 Site settings, Header, Footer
+  fields/                  shared fields: slug, link, icon, product options (audience, concerns, free-from)
+  hooks/                   on-demand revalidation
   components/
     blocks/                one React component per block + RenderBlocks
-    layout/ product/ forms/ ui/   header, footer, product card/gallery, enquiry form, primitives
-  lib/                     content loading (content.ts), SEO, links, media, validation
+    layout/ product/ forms/ ui/   header, footer, product card/gallery/before-after/shop filters, forms, primitives
+  lib/                     data access (payload.ts), SEO, links, media, WhatsApp, validation
+  migrations/              database migrations (commit these)
+  seed/                    brochure content + images, `pnpm seed`
+  payload.config.ts  payload-types.ts (generated)
 public/brand/              logo SVGs (traced from the official logo) and favicon
-public/media/              content images (with pre-made 400/900/1200 px sizes)
 ```
 
 Quality checks: `pnpm typecheck`, `pnpm lint`, `pnpm build`.
@@ -138,30 +195,29 @@ Quality checks: `pnpm typecheck`, `pnpm lint`, `pnpm build`.
 
 ## 7. Content notes — please review with the client
 
-Source material: `salestin final.pdf` (12 image-based brochure pages) and `logo.cdr.zip` (CorelDRAW logo).
+Source material: `salestin final.pdf` (12 image-based brochure pages), `logo.cdr.zip` (CorelDRAW logo) and the
+client brief (Nov 2026).
 
-1. **Brand spelling.** The logo and brochure spell the brand **SELĒSTIN / SELESTIN Professional**; the project
-   brief said “Salestin”. The site uses the logo spelling. The back page of the brochure misspells it
-   “SELESTN” — not used.
+1. **Brand spelling.** The logo and brochure spell the brand **SELĒSTIN / SELESTIN Professional**; the site uses the
+   logo spelling. The back page of the brochure misspells it “SELESTN” — not used.
 2. **Logo.** The CDR file only contained a 256 px preview, so the logo was vector-traced from the brochure.
-   Please replace `public/brand/logo*.svg` and `src/components/ui/logoPath.ts` with an official SVG export when
-   available (the ® mark was too small to trace).
-3. **Address kept verbatim:** “E-602, Green Zone Sr. No. 57+58, Banner Pune Maharashta-411038”. “Maharashta”
-   (Maharashtra?) and “Banner” (Baner?) look like typos — confirm and fix in `src/content/site-settings.json`.
-4. **Corrected typo:** brochure page 9 “REJJENATE & HYDRATE” is shown as “Rejuvenate & Hydrate”.
-5. **Kept as written:** “Our Believe”, “Vegetables Oil”, “Liposoluable”, and the product-name variants
-   “Arginia / Arginina / Arginine”, “Sulfate / Sulphate”, “Sodium & Paraben Free” (Prolonger Shampoo label).
-6. **Product structure is an interpretation.** The brochure shows a 1000 ml salon line (Pre Clarifying Shampoo,
-   Protein Treatment, Prolonger Shampoo, Prolonger Mask, Argan Serum) and smaller home-care items (300 ml
-   Smoothing Prolonger Shampoo, 250 ml Smoothing Mask). These are modelled as separate products. Confirm whether
-   e.g. *Prolonger Mask* and *Smoothing Mask* are the same product.
-7. **Sizes read from packaging photos:** Prolonger Mask “500 ml” is partly blurred on the label — please confirm.
-8. **“Exclusively for professional salons · B2B · Not for retail sale”** appears in the brochure only for the
-   Nano Silk Arginia Treatment, so it is only used there and on the Contact page — not site-wide.
-9. **Skin Care** (brochure page 9) has no specific products, so the category page shows the brochure claims and an
-   enquiry prompt. “Clinically proven results” is the brochure's claim — confirm it can be substantiated.
-10. **Not created** (no source content): Privacy Policy, Terms, testimonials, prices, social media links,
-    statistics. The site collects personal data through the enquiry form — a **privacy policy is recommended**
-    before launch (add it to `pages.json` with a `richText` block and link it in `footer.json`).
-11. Product photos and model imagery are cropped from the brochure. For sharper product pages, add original product
-    photography to `public/media/` + `media.json` and assign it to each product.
+   Please replace `public/brand/logo*.svg` and `src/components/ui/logoPath.ts` with an official SVG export.
+3. **Address:** the brochure read “Banner Pune Maharashta”; following the brief (“Baner office”) it is now
+   “E-602, Green Zone, Sr. No. 57+58, Baner, Pune, Maharashtra 411038”. Please confirm.
+4. **Products vs. the brief.** The brief lists Nano Silk Arginina as five products (incl. Smoothing Mask). The site
+   also has **Smoothing Prolonger Shampoo (300 ml)** from the brochure, placed in Nano Silk Arginina. The brochure
+   shows Smoothing Mask (250 ml) and Smoothing Prolonger Shampoo (300 ml) as smaller, home-care sizes, but the brief
+   says the range is for salons, so both are set to *Salon*. Confirm whether to keep, move or hide them.
+5. **Shop filters to confirm:** each product's audience and concerns were assigned from the brochure wording
+   (`src/seed/content.ts` → `catalogue`). *Professional only* is set on the products labelled “Professional Use /
+   Only” in the brochure (Pre Clarifying Shampoo, Protein Hair Treatment, Prolonger Shampoo).
+6. **Salon Partner benefits** are written neutrally from the brochure; commercial terms (margins, minimum order,
+   training) are for the client to add.
+7. **Skincare** has no specific products yet, so its range page shows an enquiry prompt. “Clinically proven results”
+   is the brochure's claim — confirm it can be substantiated.
+8. **Corrected typo:** brochure page 9 “REJJENATE & HYDRATE” is shown as “Rejuvenate & Hydrate”.
+9. **Kept as written:** “Our Believe”, “Vegetables Oil”, “Liposoluable”, “Arginia / Arginina / Arginine”,
+   “Sulfate / Sulphate”, “Sodium & Paraben Free” (Prolonger Shampoo label).
+10. **Waiting for the client:** WhatsApp number, GA4 measurement ID, Search Console code, policy texts, blog posts,
+    before & after photos, offers for the home page, domain access.
+11. Product photos are cropped from the brochure. For sharper pages, upload original photography in **Media**.

@@ -27,3 +27,32 @@ export type InquiryState =
       fieldErrors?: Partial<Record<InquiryField, string>>
       values?: Partial<Record<InquiryField, string>>
     }
+
+export const partnerSchema = z.object({
+  name: z.string().trim().min(2, 'Please enter your name.').max(120, 'Name is too long.'),
+  email: z.email('Please enter a valid email address.').trim().max(200),
+  phone: z
+    .string()
+    .trim()
+    .max(30, 'Phone number is too long.')
+    .refine((v) => /^[+()\d\s-]{7,}$/.test(v), 'Please enter a valid phone number.'),
+  businessName: z.string().trim().min(2, 'Please enter your salon or business name.').max(160, 'Name is too long.'),
+  city: z.string().trim().min(2, 'Please enter your city.').max(80, 'City is too long.'),
+  partnerType: z.enum(['salon', 'distributor'], 'Please choose salon or distributor.'),
+  message: z.string().trim().max(3000, 'Message is too long.'),
+})
+
+export type PartnerInput = z.infer<typeof partnerSchema>
+export type PartnerField = keyof PartnerInput
+
+export type FormState<F extends string> =
+  | { status: 'idle' }
+  | { status: 'success'; message: string }
+  | {
+      status: 'error'
+      message: string
+      fieldErrors?: Partial<Record<F, string>>
+      values?: Partial<Record<F, string>>
+    }
+
+export type PartnerState = FormState<PartnerField>

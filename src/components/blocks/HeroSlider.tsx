@@ -1,6 +1,6 @@
 import { CMSImage } from '@/components/ui/CMSImage'
 import { resolveHref } from '@/lib/links'
-import type { HeroSliderBlock } from '@/content/types'
+import type { HeroSliderBlock } from '@/payload-types'
 
 import { HeroCarousel, type Slide } from './HeroCarousel'
 

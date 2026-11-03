@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { CMSImage } from '@/components/ui/CMSImage'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { getCategories } from '@/lib/content'
-import type { CategoryGridBlock, ProductCategory } from '@/content/types'
+import { getCategories } from '@/lib/payload'
+import type { CategoryGridBlock, ProductCategory } from '@/payload-types'
 
 export async function CategoryGrid({ eyebrow, heading, headingAccent, intro, categories, style, background }: CategoryGridBlock) {
   const selected = (categories ?? []).filter((c): c is ProductCategory => typeof c === 'object')

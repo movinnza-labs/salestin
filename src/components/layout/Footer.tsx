@@ -1,9 +1,10 @@
-import { Globe, Mail, MapPin, Phone } from 'lucide-react'
+import { Globe, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
 import Link from 'next/link'
 
 import { Logo } from '@/components/ui/Logo'
 import { isExternal, resolveHref } from '@/lib/links'
-import { getGlobal } from '@/lib/content'
+import { getGlobal } from '@/lib/payload'
+import { whatsappHref } from '@/lib/whatsapp'
 
 export async function Footer() {
   const [footer, settings] = await Promise.all([getGlobal('footer'), getGlobal('site-settings')])
@@ -12,7 +13,17 @@ export async function Footer() {
 
   const contact = [
     settings?.address && { icon: MapPin, text: settings.address, href: null },
-    settings?.phone && { icon: Phone, text: settings.phone, href: `tel:${settings.phone.replace(/\s+/g, '')}` },
+    settings?.phone && {
+      icon: Phone,
+      text: settings.phone,
+      href: `tel:${settings.phone.replace(/\s+/g, '')}`,
+    },
+    settings?.whatsapp &&
+      whatsappHref(settings.whatsapp) && {
+        icon: MessageCircle,
+        text: `WhatsApp ${settings.whatsapp}`,
+        href: whatsappHref(settings.whatsapp),
+      },
     settings?.email && { icon: Mail, text: settings.email, href: `mailto:${settings.email}` },
     settings?.website && {
       icon: Globe,
@@ -28,38 +39,54 @@ export async function Footer() {
           <Link href="/" aria-label={`${siteName} — home`} className="inline-block text-white">
             <Logo className="h-12 w-auto" />
           </Link>
-          {footer?.about && <p className="mt-6 text-sm leading-relaxed text-white/70">{footer.about}</p>}
+          {footer?.about && (
+            <p className="mt-6 text-sm leading-relaxed text-white/70">{footer.about}</p>
+          )}
         </div>
 
-        {footer?.columns?.map((col) => (
-          <div key={col.id ?? col.heading}>
-            <h2 className="font-sans text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">{col.heading}</h2>
-            <ul className="mt-5 space-y-3 text-sm">
-              {col.links?.map(({ link, id }) => {
-                const href = resolveHref(link)
-                if (!href) return null
-                return (
-                  <li key={id ?? link.label}>
-                    {isExternal(href) ? (
-                      <a href={href} target="_blank" rel="noopener noreferrer" className="text-white/75 hover:text-white">
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link href={href} className="text-white/75 hover:text-white">
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        ))}
+        {/* a column whose links all point at unpublished pages is left out */}
+        {footer?.columns
+          ?.filter((col) => col.links?.some(({ link }) => resolveHref(link)))
+          .map((col) => (
+            <div key={col.id ?? col.heading}>
+              <h2 className="font-sans text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">
+                {col.heading}
+              </h2>
+              <ul className="mt-5 space-y-3 text-sm">
+                {col.links?.map(({ link, id }) => {
+                  const href = resolveHref(link)
+                  if (!href) return null
+                  return (
+                    <li key={id ?? link.label}>
+                      {isExternal(href) ? (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white/75 hover:text-white"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={href} className="text-white/75 hover:text-white">
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          ))}
 
         {contact.length > 0 && (
           <div>
-            <h2 className="font-sans text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Contact</h2>
-            {settings?.companyName && <p className="mt-5 text-sm font-medium">{settings.companyName}</p>}
+            <h2 className="font-sans text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">
+              Contact
+            </h2>
+            {settings?.companyName && (
+              <p className="mt-5 text-sm font-medium">{settings.companyName}</p>
+            )}
             <ul className="mt-3 space-y-3 text-sm">
               {contact.map(({ icon: IconC, text, href }) => (
                 <li key={text} className="flex gap-3 text-white/75">

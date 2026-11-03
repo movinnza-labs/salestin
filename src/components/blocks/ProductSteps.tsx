@@ -4,18 +4,12 @@ import { CMSImage } from '@/components/ui/CMSImage'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { cn } from '@/lib/cn'
-import type { Product, ProductStepsBlock } from '@/content/types'
+import type { Product, ProductStepsBlock } from '@/payload-types'
 
-export function ProductSteps({
-  eyebrow,
-  heading,
-  headingAccent,
-  intro,
-  products,
-  image,
-  background,
-}: ProductStepsBlock) {
-  const list = products.filter((p): p is Product => typeof p === 'object')
+export function ProductSteps({ eyebrow, heading, headingAccent, intro, products, image, background }: ProductStepsBlock) {
+  const list = products.filter(
+    (p): p is Product => typeof p === 'object' && (p as Product)._status !== 'draft',
+  )
   if (!list.length) return null
 
   return (
@@ -31,16 +25,11 @@ export function ProductSteps({
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="mt-3 text-xl font-semibold uppercase">
-                  <Link
-                    href={`/products/${product.slug}`}
-                    className="after:absolute after:inset-0 after:content-[''] hover:text-plum-600"
-                  >
+                  <Link href={`/products/${product.slug}`} className="after:absolute after:inset-0 after:content-[''] hover:text-plum-600">
                     {product.title}
                   </Link>
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted in-[.on-dark]:text-white/70">
-                  {product.summary}
-                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted in-[.on-dark]:text-white/70">{product.summary}</p>
               </li>
             ))}
           </ol>

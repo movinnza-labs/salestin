@@ -6,7 +6,7 @@ import { RichText } from '@/components/ui/RichText'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { cn } from '@/lib/cn'
-import type { SplitContentBlock } from '@/content/types'
+import type { SplitContentBlock } from '@/payload-types'
 
 export function SplitContent(block: SplitContentBlock) {
   const { eyebrow, heading, headingAccent, body, bullets, image, imagePosition, background, cta, footnote } = block

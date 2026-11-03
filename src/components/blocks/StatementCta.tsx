@@ -1,7 +1,7 @@
 import { BrandSeal } from '@/components/ui/BrandSeal'
 import { CMSImage } from '@/components/ui/CMSImage'
 import { CMSLink } from '@/components/ui/CMSLink'
-import type { StatementCtaBlock } from '@/content/types'
+import type { StatementCtaBlock } from '@/payload-types'
 
 export function StatementCta({ eyebrow, heading, headingAccent, intro, image, primaryCta, secondaryCta }: StatementCtaBlock) {
   return (

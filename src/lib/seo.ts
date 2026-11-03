@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { getGlobal } from './content'
+import { getGlobal } from './payload'
 import { asMedia, type MediaRef } from './media'
 
 export const siteUrl = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/$/, '')
@@ -19,7 +19,7 @@ type Args = {
   path: string
 }
 
-const ogImageUrl = (ref: MediaRef) => {
+export const ogImageUrl = (ref: MediaRef) => {
   const media = asMedia(ref)
   if (!media) return undefined
   const url = media.sizes?.og?.url || media.url

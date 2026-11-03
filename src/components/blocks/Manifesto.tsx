@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 
 import { CMSImage } from '@/components/ui/CMSImage'
 import { Section } from '@/components/ui/Section'
-import type { ManifestoBlock } from '@/content/types'
+import type { ManifestoBlock } from '@/payload-types'
 
 /** A large editorial statement with small pill-shaped images set inline in the text. */
 export function Manifesto({ eyebrow, lines, footnote, background }: ManifestoBlock) {

@@ -1,22 +1,28 @@
-import { MessageSquare, Phone } from 'lucide-react'
+import { Ban, MessageCircle, MessageSquare, Phone, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { JsonLd } from '@/components/JsonLd'
+import { BeforeAfter } from '@/components/product/BeforeAfter'
 import { ProductCard } from '@/components/product/ProductCard'
 import { type GalleryItem, ProductGallery } from '@/components/product/ProductGallery'
 import { CMSImage } from '@/components/ui/CMSImage'
 import { buttonClass } from '@/components/ui/CMSLink'
 import { Icon } from '@/components/ui/Icon'
 import { RichText } from '@/components/ui/RichText'
+import { audienceLabel, freeFromLabel } from '@/fields/productOptions'
 import { asMedia } from '@/lib/media'
-import { getGlobal, getProductBySlug, getProducts } from '@/lib/content'
-import { buildMetadata } from '@/lib/seo'
-import type { ProductCategory } from '@/content/types'
+import { getGlobal, getProductBySlug, getProducts, safeParams } from '@/lib/payload'
+import { buildMetadata, ogImageUrl, siteUrl } from '@/lib/seo'
+import { productEnquiryMessage, whatsappHref } from '@/lib/whatsapp'
+import type { ProductCategory, Range } from '@/payload-types'
+
+export const revalidate = 3600
 
 type Props = { params: Promise<{ slug: string }> }
 
-export const generateStaticParams = () => getProducts().map((p) => ({ slug: p.slug }))
+export const generateStaticParams = () => safeParams(async () => (await getProducts()).map((p) => ({ slug: p.slug })))
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
@@ -37,10 +43,18 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound()
 
   const category = typeof product.category === 'object' ? (product.category as ProductCategory) : null
+  const range = typeof product.range === 'object' ? (product.range as Range) : null
   const [settings, related] = await Promise.all([
     getGlobal('site-settings'),
-    category ? getProducts({ categoryId: category.id, excludeId: product.id, limit: 4 }) : [],
+    range
+      ? getProducts({ rangeId: range.id, excludeId: product.id, limit: 4 })
+      : category
+        ? getProducts({ categoryId: category.id, excludeId: product.id, limit: 4 })
+        : [],
   ])
+  const whatsapp = whatsappHref(settings?.whatsapp, productEnquiryMessage(product.title))
+  const beforeAfter = (product.beforeAfter ?? []).filter((p) => asMedia(p.before) && asMedia(p.after))
+  const image = ogImageUrl(product.image)
 
   const gallery: GalleryItem[] = [
     { media: product.image, caption: product.title, id: 'main' },
@@ -65,12 +79,25 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.title,
+          description: product.summary,
+          url: `${siteUrl}/products/${product.slug}`,
+          ...(image && { image }),
+          brand: { '@type': 'Brand', name: settings?.siteName || 'SELESTIN Professional' },
+          ...(range && { category: range.title }),
+          ...(product.size && { size: product.size }),
+        }}
+      />
       <section className="pt-8 pb-16 sm:pb-20">
         <div className="container-x">
           <Breadcrumbs
             items={[
-              { label: 'Products', href: '/products' },
-              ...(category ? [{ label: category.title, href: `/collections/${category.slug}` }] : []),
+              { label: 'Shop', href: '/shop' },
+              ...(range ? [{ label: range.title, href: `/ranges/${range.slug}` }] : []),
               { label: product.title },
             ]}
           />
@@ -79,7 +106,11 @@ export default async function ProductPage({ params }: Props) {
             <ProductGallery items={gallery} />
 
             <div className="lg:py-6">
-              {product.line && <p className="eyebrow">{product.line}</p>}
+              {range && (
+                <Link href={`/ranges/${range.slug}`} className="eyebrow hover:underline">
+                  {range.title}
+                </Link>
+              )}
               <h1 className="mt-3 text-4xl leading-tight font-semibold sm:text-5xl">{product.title}</h1>
               {product.tagline && <p className="mt-3 font-serif text-xl text-plum-600 italic">{product.tagline}</p>}
               {product.size && (
@@ -87,9 +118,34 @@ export default async function ProductPage({ params }: Props) {
               )}
               <p className="mt-6 text-lg leading-relaxed text-ink-soft">{product.summary}</p>
 
-              {!!product.badges?.length && (
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {product.badges.map((b) => (
+              {(product.professionalOnly || !!product.audience?.length) && (
+                <ul className="mt-6 flex flex-wrap gap-2" aria-label="Who it is for">
+                  {product.professionalOnly && (
+                    <li className="inline-flex items-center gap-1.5 rounded-full bg-gold-500 px-3.5 py-1.5 text-xs font-semibold text-ink">
+                      <ShieldCheck className="size-3.5" aria-hidden />
+                      Professional only
+                    </li>
+                  )}
+                  {product.audience?.map((a) => (
+                    <li key={a} className="rounded-full bg-ink px-3.5 py-1.5 text-xs font-medium text-white">
+                      {audienceLabel(a)}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {(!!product.freeFrom?.length || !!product.badges?.length) && (
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {product.freeFrom?.map((f) => (
+                    <li
+                      key={f}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-lavender-300 bg-lavender-50 px-3.5 py-1.5 text-xs font-medium text-plum-700"
+                    >
+                      <Ban className="size-3.5" aria-hidden />
+                      {freeFromLabel(f)}
+                    </li>
+                  ))}
+                  {product.badges?.map((b) => (
                     <li key={b.id ?? b.text} className="rounded-full border border-lavender-300 bg-lavender-50 px-3.5 py-1.5 text-xs font-medium text-plum-700">
                       {b.text}
                     </li>
@@ -102,6 +158,17 @@ export default async function ProductPage({ params }: Props) {
                   <MessageSquare className="size-4" aria-hidden />
                   Enquire about this product
                 </Link>
+                {whatsapp && (
+                  <a
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonClass('outline', 'border-[#25D366] text-[#128C7E] hover:border-[#25D366] hover:bg-[#25D366] hover:text-white')}
+                  >
+                    <MessageCircle className="size-4" aria-hidden />
+                    WhatsApp enquiry
+                  </a>
+                )}
                 {settings?.phone && (
                   <a href={`tel:${settings.phone.replace(/\s+/g, '')}`} className={buttonClass('outline')}>
                     <Phone className="size-4" aria-hidden />
@@ -138,6 +205,25 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
+      {beforeAfter.length > 0 && (
+        <section className="py-16 sm:py-20">
+          <div className="container-x">
+            <h2 className="text-center text-3xl font-semibold sm:text-4xl">Before &amp; after</h2>
+            <span aria-hidden className="mx-auto mt-5 block h-px w-14 bg-gold-500" />
+            <div className={`mx-auto mt-12 grid gap-8 ${beforeAfter.length > 1 ? 'max-w-5xl md:grid-cols-2' : 'max-w-3xl'}`}>
+              {beforeAfter.map((pair, i) => (
+                <BeforeAfter
+                  key={pair.id ?? i}
+                  caption={pair.caption}
+                  before={<CMSImage media={pair.before} fill sizes="(min-width: 768px) 50vw, 100vw" />}
+                  after={<CMSImage media={pair.after} fill sizes="(min-width: 768px) 50vw, 100vw" />}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {(!!product.keyIngredients?.length || product.fullIngredients) && (
         <section className="py-16 sm:py-20">
           <div className="container-x grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
@@ -168,7 +254,7 @@ export default async function ProductPage({ params }: Props) {
       {related.length > 0 && (
         <section className="bg-lavender-50/60 py-16 sm:py-20">
           <div className="container-x">
-            <h2 className="text-3xl font-semibold sm:text-4xl">More from {category?.title}</h2>
+            <h2 className="text-3xl font-semibold sm:text-4xl">More from {range?.title ?? category?.title}</h2>
             <span aria-hidden className="mt-5 block h-px w-14 bg-gold-500" />
             <ul className="mt-10 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
               {related.map((p) => (

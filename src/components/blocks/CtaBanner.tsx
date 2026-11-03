@@ -2,7 +2,7 @@ import { CMSImage } from '@/components/ui/CMSImage'
 import { CMSLink } from '@/components/ui/CMSLink'
 import { Icon } from '@/components/ui/Icon'
 import { cn } from '@/lib/cn'
-import type { CtaBannerBlock } from '@/content/types'
+import type { CtaBannerBlock } from '@/payload-types'
 
 export function CtaBanner(block: CtaBannerBlock) {
   const { eyebrow, heading, headingAccent, intro, points, primaryCta, secondaryCta, image, background } = block

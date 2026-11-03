@@ -5,7 +5,7 @@ import { CMSImage } from '@/components/ui/CMSImage'
 import { Section } from '@/components/ui/Section'
 import { loadBlockProducts } from '@/lib/blockProducts'
 import { resolveHref } from '@/lib/links'
-import type { ProductCarouselBlock } from '@/content/types'
+import type { ProductCarouselBlock } from '@/payload-types'
 
 import { ScrollRow } from './ScrollRow'
 
@@ -55,7 +55,9 @@ export async function ProductCarousel(block: ProductCarouselBlock) {
                 </div>
                 <div className="mt-5 flex items-baseline gap-4">
                   <span className="font-display text-lg text-gold-600 italic tabular-nums">No. {String(i + 1).padStart(2, '0')}</span>
-                  {product.line && <span className="truncate text-[11px] tracking-[0.18em] text-muted uppercase">{product.line}</span>}
+                  {typeof product.range === 'object' && product.range && (
+                    <span className="truncate text-[11px] tracking-[0.18em] text-muted uppercase">{product.range.title}</span>
+                  )}
                 </div>
                 <h3 className="mt-1 font-display text-2xl leading-tight font-normal transition-colors group-hover:text-plum-600">
                   {product.title}

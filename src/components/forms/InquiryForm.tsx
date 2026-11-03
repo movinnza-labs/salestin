@@ -1,6 +1,7 @@
 'use client'
 
 import { AlertCircle, CheckCircle2, Loader2, Send } from 'lucide-react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useActionState, useEffect, useRef } from 'react'
 
@@ -11,17 +12,17 @@ import type { InquiryField, InquiryState } from '@/lib/validation/inquiry'
 
 type ProductOption = { slug: string; title: string }
 
-const inputClass =
+export const inputClass =
   'block w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-muted/70 transition-colors focus:border-plum-600 focus:ring-2 focus:ring-plum-600/20 focus:outline-none aria-invalid:border-red-600 sm:text-sm'
 
-function Field({
+export function Field({
   name,
   label,
   required,
   error,
   children,
 }: {
-  name: InquiryField
+  name: string
   label: string
   required?: boolean
   error?: string
@@ -95,6 +96,14 @@ export function InquiryForm({ products }: { products: ProductOption[] }) {
         )}
       </div>
 
+      <p className="text-sm text-muted">
+        Salon or distributor?{' '}
+        <Link href="/salon-partner" className="font-medium text-plum-600 underline underline-offset-4">
+          Use the salon partner form
+        </Link>
+        .
+      </p>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <Field name="name" label="Your name" required error={errors.name}>
           <input {...a11y('name')} autoComplete="name" required maxLength={120} defaultValue={values.name} className={inputClass} />
@@ -112,8 +121,7 @@ export function InquiryForm({ products }: { products: ProductOption[] }) {
           <input {...a11y('city')} autoComplete="address-level2" maxLength={80} defaultValue={values.city} className={inputClass} />
         </Field>
         <Field name="enquiryType" label="Enquiry type" required error={errors.enquiryType}>
-          <select {...a11y('enquiryType')} defaultValue={values.enquiryType || (preselected ? 'product' : 'partnership')} className={inputClass}>
-            <option value="partnership">Salon partnership</option>
+          <select {...a11y('enquiryType')} defaultValue={values.enquiryType || 'product'} className={inputClass}>
             <option value="product">Product information</option>
             <option value="other">Other</option>
           </select>

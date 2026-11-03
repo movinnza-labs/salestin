@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
-import { getPageBySlug } from '@/lib/content'
+import { getPageBySlug } from '@/lib/payload'
 import { buildMetadata } from '@/lib/seo'
 
 export async function pageMetadata(slug: string) {

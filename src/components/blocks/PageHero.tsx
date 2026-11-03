@@ -1,6 +1,6 @@
 import { CMSImage } from '@/components/ui/CMSImage'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import type { PageHeroBlock } from '@/content/types'
+import type { PageHeroBlock } from '@/payload-types'
 
 export function PageHero({ eyebrow, heading, headingAccent, intro, image }: PageHeroBlock) {
   if (image) {

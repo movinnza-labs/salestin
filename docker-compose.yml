@@ -1,10 +1,25 @@
-# Local dev: runs the website in dev mode with hot reload.
-#   docker compose up
+# Local/dev stack: PostgreSQL + the website in dev mode.
+#   docker compose up -d postgres   → database only (then `pnpm dev` on the host)
+#   docker compose up               → database + site
+# When the site runs inside compose, DATABASE_URL must use host "postgres", e.g.
+#   postgres://selestin:selestin@postgres:5432/selestin
 services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: selestin
+      POSTGRES_PASSWORD: selestin
+      POSTGRES_DB: selestin
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   web:
     image: node:22-alpine
     working_dir: /app
-    command: sh -c "corepack enable && pnpm install && pnpm dev"
+    command: sh -c "corepack enable && pnpm install && pnpm migrate && pnpm dev"
     ports:
       - '3000:3000'
     volumes:
@@ -12,6 +27,9 @@ services:
       - node_modules:/app/node_modules
     env_file:
       - .env
+    depends_on:
+      - postgres
 
 volumes:
+  pgdata:
   node_modules:

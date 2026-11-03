@@ -6,12 +6,13 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductCard } from '@/components/product/ProductCard'
 import { CMSImage } from '@/components/ui/CMSImage'
 import { buttonClass } from '@/components/ui/CMSLink'
-import { getCategories, getCategoryBySlug, getProducts } from '@/lib/content'
+import { getCategories, getCategoryBySlug, getProducts, safeParams } from '@/lib/payload'
 import { buildMetadata } from '@/lib/seo'
+export const revalidate = 3600
 
 type Props = { params: Promise<{ slug: string }> }
 
-export const generateStaticParams = () => getCategories().map((c) => ({ slug: c.slug }))
+export const generateStaticParams = () => safeParams(async () => (await getCategories()).map((c) => ({ slug: c.slug })))
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params

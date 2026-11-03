@@ -1,6 +1,6 @@
-import type { Header, Page, Product, ProductCategory } from '@/content/types'
+import type { Header, Page, Post, Product, ProductCategory, Range } from '@/payload-types'
 
-/** A button / nav link: either a reference to a page, product or category, or a custom URL */
+/** Shape produced by src/fields/link.ts */
 export type LinkValue = NonNullable<Header['cta']>
 
 type Reference = NonNullable<LinkValue['reference']>
@@ -8,6 +8,8 @@ type Reference = NonNullable<LinkValue['reference']>
 const docHref = (reference: Reference): string | null => {
   const { relationTo, value } = reference
   if (typeof value !== 'object' || !value) return null
+  // the Local API populates drafts too; links to unpublished documents would 404
+  if ('_status' in value && value._status === 'draft') return null
   switch (relationTo) {
     case 'pages': {
       const slug = (value as Page).slug
@@ -17,6 +19,10 @@ const docHref = (reference: Reference): string | null => {
       return `/products/${(value as Product).slug}`
     case 'product-categories':
       return `/collections/${(value as ProductCategory).slug}`
+    case 'ranges':
+      return `/ranges/${(value as Range).slug}`
+    case 'posts':
+      return `/blog/${(value as Post).slug}`
     default:
       return null
   }

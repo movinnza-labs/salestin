@@ -2,7 +2,7 @@ import { BrandSeal } from '@/components/ui/BrandSeal'
 import { CMSImage } from '@/components/ui/CMSImage'
 import { CMSLink } from '@/components/ui/CMSLink'
 import { LOGO_PATH } from '@/components/ui/logoPath'
-import type { EditorialHeroBlock } from '@/content/types'
+import type { EditorialHeroBlock } from '@/payload-types'
 
 export function EditorialHero(block: EditorialHeroBlock) {
   const { eyebrow, heading, headingAccent, text, image, detailImage, detailCaption, sideLabel, primaryCta, secondaryCta } =

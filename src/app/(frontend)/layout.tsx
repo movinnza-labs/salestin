@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, Playfair_Display, Poppins } from 'next/font/google'
+import Script from 'next/script'
 import type { ReactNode } from 'react'
 
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
-import { getGlobal } from '@/lib/content'
+import { getGlobal } from '@/lib/payload'
 import { siteUrl } from '@/lib/seo'
 
 import './globals.css'
@@ -40,14 +41,31 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: settings?.defaultMetaTitle || siteName, template: `%s | ${siteName}` },
     description: settings?.defaultMetaDescription || undefined,
     applicationName: siteName,
+    ...(settings?.searchConsoleVerification && { verification: { google: settings.searchConsoleVerification } }),
   }
+}
+
+const GA_ID = /^G-[A-Z0-9]+$/
+
+function GoogleAnalytics({ id }: { id: string }) {
+  return (
+    <>
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${id}`} strategy="afterInteractive" />
+      <Script id="ga4" strategy="afterInteractive">
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${id}');`}
+      </Script>
+    </>
+  )
 }
 
 export const viewport: Viewport = {
   themeColor: '#141414',
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const settings = await getGlobal('site-settings')
+  const gaId = settings?.googleAnalyticsId?.trim().toUpperCase()
+
   return (
     // browser extensions (e.g. QuillBot) add attributes to <html> before React hydrates
     <html
@@ -67,6 +85,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
         <Footer />
+        {gaId && GA_ID.test(gaId) && <GoogleAnalytics id={gaId} />}
       </body>
     </html>
   )

@@ -1,26 +1,24 @@
 'use server'
 
 import { headers } from 'next/headers'
-import nodemailer from 'nodemailer'
+import type { z } from 'zod'
 
-import { getGlobal, getProductBySlug } from '@/lib/content'
-import { type InquiryField, type InquiryState, inquirySchema } from '@/lib/validation/inquiry'
-
-const UNAVAILABLE =
-  'Sorry, we could not send your enquiry right now. Please try again later or contact us by phone or email.'
-
-const mailTransport = () =>
-  process.env.SMTP_HOST
-    ? nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT || 587),
-        secure: Number(process.env.SMTP_PORT) === 465,
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-      })
-    : null
+import { getPayloadClient } from '@/lib/payload'
+import {
+  type FormState,
+  type InquiryField,
+  type InquiryState,
+  inquirySchema,
+  type PartnerField,
+  type PartnerState,
+  partnerSchema,
+} from '@/lib/validation/inquiry'
+import type { Inquiry } from '@/payload-types'
 
 const MIN_FILL_MS = 3_000
 const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 }
+const FAILED =
+  'Sorry, we could not send your enquiry right now. Please try again later or contact us by phone, WhatsApp or email.'
 
 // Per-instance limiter. Good enough for a single Node server; behind several
 // instances/serverless, put a shared limiter (e.g. at the CDN/WAF) in front.
@@ -35,45 +33,30 @@ const rateLimited = (key: string) => {
   return recent.length > RATE_LIMIT.max
 }
 
-const FIELDS: InquiryField[] = [
-  'name',
-  'email',
-  'phone',
-  'businessName',
-  'city',
-  'enquiryType',
-  'product',
-  'message',
-]
+type Checked<F extends string, T> = { ok: true; data: T; referer?: string } | { ok: false; state: FormState<F> }
 
-export async function submitInquiry(
-  _prev: InquiryState,
+/** Validation and spam checks shared by both forms. */
+async function checkSubmission<F extends string, S extends z.ZodType<Record<F, unknown>>>(
   formData: FormData,
-): Promise<InquiryState> {
-  const raw = Object.fromEntries(FIELDS.map((f) => [f, String(formData.get(f) ?? '')])) as Record<
-    InquiryField,
-    string
-  >
+  fields: F[],
+  schema: S,
+): Promise<Checked<F, z.infer<S>>> {
+  const raw = Object.fromEntries(fields.map((f) => [f, String(formData.get(f) ?? '')])) as Record<F, string>
 
   // Honeypot: only bots fill the hidden field. They get a generic success so
-  // they don't adapt, but nothing is sent.
+  // they don't adapt, but nothing is stored.
   if (String(formData.get('website') ?? '') !== '') {
-    return { status: 'success', message: 'Thank you — your enquiry has been received.' }
+    return { ok: false, state: { status: 'success', message: 'Thank you — your enquiry has been received.' } }
   }
 
-  const parsed = inquirySchema.safeParse(raw)
+  const parsed = schema.safeParse(raw)
   if (!parsed.success) {
-    const fieldErrors: Partial<Record<InquiryField, string>> = {}
+    const fieldErrors: Partial<Record<F, string>> = {}
     for (const issue of parsed.error.issues) {
-      const key = issue.path[0] as InquiryField
+      const key = issue.path[0] as F
       fieldErrors[key] ??= issue.message
     }
-    return {
-      status: 'error',
-      message: 'Please check the highlighted fields.',
-      fieldErrors,
-      values: raw,
-    }
+    return { ok: false, state: { status: 'error', message: 'Please check the highlighted fields.', fieldErrors, values: raw } }
   }
 
   // Time trap: a complete form submitted within seconds of loading is almost
@@ -81,9 +64,8 @@ export async function submitInquiry(
   const startedAt = Number(formData.get('startedAt'))
   if (!startedAt || Date.now() - startedAt < MIN_FILL_MS) {
     return {
-      status: 'error',
-      message: 'That was very quick — please wait a moment and send again.',
-      values: raw,
+      ok: false,
+      state: { status: 'error', message: 'That was very quick — please wait a moment and send again.', values: raw },
     }
   }
 
@@ -91,59 +73,123 @@ export async function submitInquiry(
   const ip = h.get('x-forwarded-for')?.split(',')[0]?.trim() || h.get('x-real-ip') || 'unknown'
   if (rateLimited(ip)) {
     return {
-      status: 'error',
-      message: 'Too many submissions. Please wait a few minutes and try again.',
-      values: raw,
+      ok: false,
+      state: { status: 'error', message: 'Too many submissions. Please wait a few minutes and try again.', values: raw },
     }
   }
 
-  const data = parsed.data
-  const productTitle = data.product ? getProductBySlug(data.product)?.title : undefined
-  const settings = getGlobal('site-settings')
-  const to = settings.enquiryNotificationEmail || settings.email
+  return { ok: true, data: parsed.data, referer: h.get('referer')?.slice(0, 300) ?? undefined }
+}
 
-  const text = [
-    `Name: ${data.name}`,
-    `Email: ${data.email}`,
-    data.phone && `Phone: ${data.phone}`,
-    data.businessName && `Salon / business: ${data.businessName}`,
-    data.city && `City: ${data.city}`,
-    `Enquiry type: ${data.enquiryType}`,
-    productTitle && `Product: ${productTitle}`,
-    `Sent from: ${h.get('referer')?.slice(0, 300) ?? 'unknown page'}`,
-  ]
-    .filter(Boolean)
-    .concat(['', data.message])
-    .join('\n')
+const label = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
 
-  // Enquiries are not stored anywhere: email is the only delivery channel.
-  const transport = mailTransport()
-  if (!transport || !to) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error('[enquiry] SMTP or recipient not configured — enquiry could not be delivered')
-      return { status: 'error', message: UNAVAILABLE, values: raw }
-    }
-    console.info(`[enquiry] SMTP not configured; enquiry not emailed:\n${text}`)
-  } else {
-    try {
-      await transport.sendMail({
-        from: {
-          name: process.env.SMTP_FROM_NAME || settings.siteName,
-          address: process.env.SMTP_FROM_ADDRESS || 'no-reply@localhost',
-        },
-        to,
+/** Stores the enquiry, then emails the notification address (best-effort). */
+async function saveEnquiry(data: Omit<Inquiry, 'id' | 'createdAt' | 'updatedAt' | 'status'>, extraLines: string[]) {
+  const payload = await getPayloadClient()
+  await payload.create({ collection: 'inquiries', overrideAccess: true, data })
+
+  // Notification is best-effort: the enquiry is already safely stored.
+  try {
+    const settings = await payload.findGlobal({ slug: 'site-settings' })
+    if (settings.enquiryNotificationEmail && process.env.SMTP_HOST) {
+      const kind = data.kind === 'partner' ? 'salon/distributor partner enquiry' : 'website enquiry'
+      await payload.sendEmail({
+        to: settings.enquiryNotificationEmail,
         replyTo: data.email,
-        subject: `New website enquiry from ${data.name}`,
-        text,
+        subject: `New ${kind} from ${data.name}${data.businessName ? ` (${data.businessName})` : ''}`,
+        text: [
+          `Name: ${data.name}`,
+          `Email: ${data.email}`,
+          data.phone && `Phone: ${data.phone}`,
+          data.businessName && `Salon / business: ${data.businessName}`,
+          data.city && `City: ${data.city}`,
+          ...extraLines,
+          data.sourcePage && `Sent from: ${data.sourcePage}`,
+        ]
+          .filter(Boolean)
+          .concat(['', data.message || '(no message)'])
+          .join('\n'),
       })
-    } catch (error) {
-      console.error('[enquiry] Failed to send enquiry email:', error)
-      return { status: 'error', message: UNAVAILABLE, values: raw }
     }
+  } catch (error) {
+    payload.logger.error({ err: error, msg: 'Enquiry saved but notification email failed' })
+  }
+}
+
+const CUSTOMER_FIELDS: InquiryField[] = ['name', 'email', 'phone', 'businessName', 'city', 'enquiryType', 'product', 'message']
+
+export async function submitInquiry(_prev: InquiryState, formData: FormData): Promise<InquiryState> {
+  const checked = await checkSubmission(formData, CUSTOMER_FIELDS, inquirySchema)
+  if (!checked.ok) return checked.state
+  const { data, referer } = checked
+
+  try {
+    const payload = await getPayloadClient()
+    let product: { id: number; title: string } | undefined
+    if (data.product) {
+      const { docs } = await payload.find({
+        collection: 'products',
+        where: { and: [{ slug: { equals: data.product } }, { _status: { equals: 'published' } }] },
+        select: { title: true },
+        limit: 1,
+      })
+      product = docs[0]
+    }
+
+    await saveEnquiry(
+      {
+        kind: 'customer',
+        name: data.name,
+        email: data.email,
+        phone: data.phone || undefined,
+        businessName: data.businessName || undefined,
+        city: data.city || undefined,
+        enquiryType: data.enquiryType,
+        product: product?.id,
+        message: data.message,
+        sourcePage: referer,
+      },
+      [`Enquiry type: ${data.enquiryType}`, product && `Product: ${product.title}`].filter(Boolean) as string[],
+    )
+  } catch (error) {
+    console.error('[enquiry] Failed to save enquiry:', error)
+    return { status: 'error', message: FAILED, values: Object.fromEntries(CUSTOMER_FIELDS.map((f) => [f, data[f]])) }
+  }
+
+  return { status: 'success', message: 'Thank you — your enquiry has been received. Our team will get back to you soon.' }
+}
+
+const PARTNER_FIELDS: PartnerField[] = ['name', 'email', 'phone', 'businessName', 'city', 'partnerType', 'message']
+
+export async function submitPartnerEnquiry(_prev: PartnerState, formData: FormData): Promise<PartnerState> {
+  const checked = await checkSubmission(formData, PARTNER_FIELDS, partnerSchema)
+  if (!checked.ok) return checked.state
+  const { data, referer } = checked
+
+  try {
+    await saveEnquiry(
+      {
+        kind: 'partner',
+        partnerType: data.partnerType,
+        // customer-only field: keep its default ('product') off partner enquiries
+        enquiryType: null,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        businessName: data.businessName,
+        city: data.city,
+        message: data.message || '(no message)',
+        sourcePage: referer,
+      },
+      [`Partner type: ${label(data.partnerType)}`],
+    )
+  } catch (error) {
+    console.error('[enquiry] Failed to save partner enquiry:', error)
+    return { status: 'error', message: FAILED, values: Object.fromEntries(PARTNER_FIELDS.map((f) => [f, data[f]])) }
   }
 
   return {
     status: 'success',
-    message: 'Thank you — your enquiry has been received. Our team will get back to you soon.',
+    message: 'Thank you — your partner enquiry has been received. Our team will contact you shortly.',
   }
 }

@@ -3,7 +3,9 @@ import Link from 'next/link'
 
 import { buttonClass } from '@/components/ui/CMSLink'
 import { CMSImage } from '@/components/ui/CMSImage'
-import type { Product } from '@/content/types'
+import type { Product } from '@/payload-types'
+
+const rangeTitle = (product: Product) => (typeof product.range === 'object' ? product.range?.title : null)
 
 export function ProductCard({ product, headingLevel = 'h3' }: { product: Product; headingLevel?: 'h2' | 'h3' }) {
   const Heading = headingLevel
@@ -18,9 +20,14 @@ export function ProductCard({ product, headingLevel = 'h3' }: { product: Product
           sizes="(min-width: 1280px) 300px, (min-width: 768px) 33vw, 50vw"
           className="transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        {product.line && (
+        {rangeTitle(product) && (
           <span className="absolute top-3 left-3 rounded-full bg-ink/85 px-3 py-1 text-[10px] font-medium tracking-wider text-white uppercase backdrop-blur">
-            {product.line}
+            {rangeTitle(product)}
+          </span>
+        )}
+        {product.professionalOnly && (
+          <span className="absolute right-3 bottom-3 rounded-full bg-gold-500 px-3 py-1 text-[10px] font-semibold tracking-wider text-ink uppercase">
+            Professional only
           </span>
         )}
       </div>

@@ -1,9 +1,11 @@
 import { pageMetadata, PageView } from '@/components/PageView'
-import { getPageSlugs } from '@/lib/content'
+import { getPageSlugs, safeParams } from '@/lib/payload'
+
+export const revalidate = 3600
 
 type Props = { params: Promise<{ slug: string }> }
 
-export const generateStaticParams = () => getPageSlugs().map((slug) => ({ slug }))
+export const generateStaticParams = () => safeParams(async () => (await getPageSlugs()).map((slug) => ({ slug })))
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params

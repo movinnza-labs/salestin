@@ -6,3 +6,9 @@ allowBuilds:
   sharp: true
   esbuild: true
   unrs-resolver: true
+
+# Patched versions of vulnerable transitive dependencies (pnpm audit).
+overrides:
+  dompurify: ^3.4.17
+  happy-dom: ^21.0.4
+  '@esbuild-kit/core-utils>esbuild': ^0.25.0

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn'
-import type { MarqueeBlock } from '@/content/types'
+import type { MarqueeBlock } from '@/payload-types'
 
 const tones = {
   dark: 'bg-plum-950 text-white',

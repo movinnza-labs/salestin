@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react'
 import { CMSImage } from '@/components/ui/CMSImage'
 import { Icon } from '@/components/ui/Icon'
 import { Section } from '@/components/ui/Section'
-import type { PillarIndexBlock } from '@/content/types'
+import type { PillarIndexBlock } from '@/payload-types'
 
 /** Editorial numbered index; each entry expands (native <details>, no JS). */
 export function PillarIndex({ eyebrow, heading, headingAccent, intro, items, image, background }: PillarIndexBlock) {
