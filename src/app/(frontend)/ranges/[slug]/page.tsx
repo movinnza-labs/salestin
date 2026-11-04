@@ -10,7 +10,8 @@ import { audienceLabel } from '@/fields/productOptions'
 import { getProducts, getRangeBySlug, getRanges, safeParams } from '@/lib/payload'
 import { buildMetadata } from '@/lib/seo'
 
-export const revalidate = 3600
+// publishing refreshes pages at once (src/hooks/revalidate.ts); this is only a daily safety net
+export const revalidate = 86400
 
 type Props = { params: Promise<{ slug: string }> }
 

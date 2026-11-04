@@ -22,14 +22,26 @@ const FAILED =
 
 // Per-instance limiter. Good enough for a single Node server; behind several
 // instances/serverless, put a shared limiter (e.g. at the CDN/WAF) in front.
+// Bounded: expired entries are pruned, and the map never holds more than MAX_TRACKED IPs.
 const hits = new Map<string, number[]>()
+const MAX_TRACKED = 2_000
 
 const rateLimited = (key: string) => {
   const now = Date.now()
+  if (hits.size >= MAX_TRACKED) {
+    for (const [ip, times] of hits) {
+      if (now - times[times.length - 1] >= RATE_LIMIT.windowMs) hits.delete(ip)
+    }
+    // still full of active IPs (e.g. a flood): drop the oldest entries
+    for (const ip of hits.keys()) {
+      if (hits.size < MAX_TRACKED) break
+      hits.delete(ip)
+    }
+  }
   const recent = (hits.get(key) ?? []).filter((t) => now - t < RATE_LIMIT.windowMs)
   recent.push(now)
+  hits.delete(key) // re-insert so Map order stays oldest-first
   hits.set(key, recent)
-  if (hits.size > 5_000) hits.clear()
   return recent.length > RATE_LIMIT.max
 }
 

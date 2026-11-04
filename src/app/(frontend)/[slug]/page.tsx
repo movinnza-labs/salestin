@@ -1,7 +1,8 @@
 import { pageMetadata, PageView } from '@/components/PageView'
 import { getPageSlugs, safeParams } from '@/lib/payload'
 
-export const revalidate = 3600
+// publishing refreshes pages at once (src/hooks/revalidate.ts); this is only a daily safety net
+export const revalidate = 86400
 
 type Props = { params: Promise<{ slug: string }> }
 

@@ -3,7 +3,8 @@ import type { MetadataRoute } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import { siteUrl } from '@/lib/seo'
 
-export const revalidate = 3600
+// publishing refreshes pages at once (src/hooks/revalidate.ts); this is only a daily safety net
+export const revalidate = 86400
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {

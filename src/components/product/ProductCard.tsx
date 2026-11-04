@@ -5,9 +5,12 @@ import { buttonClass } from '@/components/ui/CMSLink'
 import { CMSImage } from '@/components/ui/CMSImage'
 import type { Product } from '@/payload-types'
 
-const rangeTitle = (product: Product) => (typeof product.range === 'object' ? product.range?.title : null)
+/** The fields a card shows; a full Product works too. */
+export type ProductCardData = Pick<Product, 'slug' | 'title' | 'image' | 'range' | 'professionalOnly' | 'size' | 'summary'>
 
-export function ProductCard({ product, headingLevel = 'h3' }: { product: Product; headingLevel?: 'h2' | 'h3' }) {
+const rangeTitle = (product: ProductCardData) => (typeof product.range === 'object' ? product.range?.title : null)
+
+export function ProductCard({ product, headingLevel = 'h3' }: { product: ProductCardData; headingLevel?: 'h2' | 'h3' }) {
   const Heading = headingLevel
   const href = `/products/${product.slug}`
 

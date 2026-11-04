@@ -101,9 +101,6 @@ type ProductQuery = {
   featured?: boolean
   ids?: number[]
   excludeId?: number
-  audience?: string
-  concern?: string
-  search?: string
   limit?: number
 }
 
@@ -114,9 +111,6 @@ export const getProducts = cache(
     featured,
     ids,
     excludeId,
-    audience,
-    concern,
-    search,
     limit = 100,
   }: ProductQuery = {}): Promise<Product[]> => {
     const payload = await getPayloadClient()
@@ -127,11 +121,6 @@ export const getProducts = cache(
       ...(featured ? [{ featured: { equals: true } }] : []),
       ...(ids ? [{ id: { in: ids } }] : []),
       ...(excludeId ? [{ id: { not_equals: excludeId } }] : []),
-      ...(audience ? [{ audience: { in: [audience] } }] : []),
-      ...(concern ? [{ concerns: { in: [concern] } }] : []),
-      ...(search
-        ? [{ or: [{ title: { like: search } }, { summary: { like: search } }, { tagline: { like: search } }] }]
-        : []),
     ]
     const { docs } = await payload.find({
       collection: 'products',

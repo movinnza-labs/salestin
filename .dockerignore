@@ -1,0 +1,27 @@
+# Keep secrets, local data and build output out of the Docker build context.
+
+# secrets — set these as Railway variables instead
+.env
+.env.*
+!.env.example
+
+# local data
+.pgdata
+media
+images
+
+# dependencies and build output (rebuilt inside the image)
+node_modules
+.next
+out
+dist
+*.tsbuildinfo
+
+# tooling and docs
+.git
+.vscode
+.idea
+*.log
+README.md
+AGENTS.md
+docker-compose.yml

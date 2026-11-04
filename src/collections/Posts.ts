@@ -4,7 +4,8 @@ import { authenticated, authenticatedOrPublished } from '../access'
 import { slugField } from '../fields/slug'
 import { revalidateCollection } from '../hooks/revalidate'
 
-const revalidate = revalidateCollection((doc) => ['/blog', `/blog/${String(doc.slug)}`])
+// 'layout' also refreshes /blog/page/2, /blog/page/3… and every post
+const revalidate = revalidateCollection(() => ['/blog'], 'layout')
 
 export const Posts: CollectionConfig = {
   slug: 'posts',

@@ -17,7 +17,6 @@ import { Products } from './collections/Products'
 import { Ranges } from './collections/Ranges'
 import { Users } from './collections/Users'
 import { globals } from './globals'
-import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -67,12 +66,14 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
       connectionTimeoutMillis: 10_000,
+      // a small site needs few connections; each one holds memory on both sides
+      max: 5,
+      idleTimeoutMillis: 30_000,
     },
     migrationDir: path.resolve(dirname, 'migrations'),
     // Schema is changed only through committed migrations, never auto-pushed.
+    // They run once per deploy, before the build (see Dockerfile), not at server start.
     push: false,
-    // Pending migrations run automatically when the production server starts.
-    prodMigrations: migrations,
   }),
   sharp,
   plugins: [

@@ -1,16 +1,19 @@
 'use client'
 
 import { Search, X } from 'lucide-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { type FormEvent, useRef } from 'react'
+import { type FormEvent, useState } from 'react'
 
 import { cn } from '@/lib/cn'
 
 type Option = { value: string; label: string }
 
+export type ShopFilterValues = { q: string; range: string; category: string; concern: string; audience: string }
+
+export const emptyFilters: ShopFilterValues = { q: '', range: '', category: '', concern: '', audience: '' }
+
 type Props = {
-  values: { q: string; range: string; category: string; concern: string; audience: string }
+  values: ShopFilterValues
+  onChange: (values: ShopFilterValues) => void
   ranges: Option[]
   categories: Option[]
   concerns: Option[]
@@ -20,24 +23,17 @@ type Props = {
 const selectClass =
   'block w-full rounded-full border border-line bg-white px-4 py-2.5 text-sm text-ink focus:border-plum-600 focus:ring-2 focus:ring-plum-600/20 focus:outline-none'
 
-/** A plain GET form (works without JavaScript); with it, filters apply as soon as a select changes. */
-export function ShopFilters({ values, ranges, categories, concerns, audiences }: Props) {
-  const formRef = useRef<HTMLFormElement>(null)
-  const router = useRouter()
-  const submit = () => formRef.current?.requestSubmit()
-
-  // with JavaScript, leave empty filters out of the URL: /shop?range=x instead of /shop?q=&range=x&…
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const params = new URLSearchParams()
-    for (const [key, value] of new FormData(e.currentTarget)) {
-      if (typeof value === 'string' && value.trim()) params.set(key, value.trim())
-    }
-    router.push(params.size ? `/shop?${params}` : '/shop', { scroll: false })
-  }
+/** Search box and filter selects; selects apply at once, the search on submit. */
+export function ShopFilters({ values, onChange, ranges, categories, concerns, audiences }: Props) {
+  const [query, setQuery] = useState(values.q)
   const active = Object.values(values).some(Boolean)
 
-  const select = (name: keyof Props['values'], label: string, options: Option[]) => (
+  const onSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    onChange({ ...values, q: query.trim() })
+  }
+
+  const select = (name: Exclude<keyof ShopFilterValues, 'q'>, label: string, options: Option[]) => (
     <div>
       <label
         htmlFor={`f-${name}`}
@@ -47,9 +43,8 @@ export function ShopFilters({ values, ranges, categories, concerns, audiences }:
       </label>
       <select
         id={`f-${name}`}
-        name={name}
-        defaultValue={values[name]}
-        onChange={submit}
+        value={values[name]}
+        onChange={(e) => onChange({ ...values, [name]: e.target.value })}
         className={selectClass}
       >
         <option value="">All</option>
@@ -63,18 +58,8 @@ export function ShopFilters({ values, ranges, categories, concerns, audiences }:
   )
 
   return (
-    <form
-      // remount when the URL changes so the selects show the current filters
-      key={JSON.stringify(values)}
-      ref={formRef}
-      action="/shop"
-      method="get"
-      onSubmit={onSubmit}
-      role="search"
-      aria-label="Filter products"
-      className="space-y-5"
-    >
-      <div className="relative">
+    <div className="space-y-5">
+      <form role="search" aria-label="Search products" onSubmit={onSearch} className="relative">
         <label htmlFor="f-q" className="sr-only">
           Search products
         </label>
@@ -84,9 +69,13 @@ export function ShopFilters({ values, ranges, categories, concerns, audiences }:
         />
         <input
           id="f-q"
-          name="q"
           type="search"
-          defaultValue={values.q}
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            // clearing the box (✕ or backspace) shows everything again
+            if (!e.target.value && values.q) onChange({ ...values, q: '' })
+          }}
           placeholder="Search products, e.g. keratin, serum, wax"
           className={cn(selectClass, 'py-3 pr-28 pl-11')}
         />
@@ -96,7 +85,7 @@ export function ShopFilters({ values, ranges, categories, concerns, audiences }:
         >
           Search
         </button>
-      </div>
+      </form>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {select('range', 'Range', ranges)}
@@ -105,21 +94,19 @@ export function ShopFilters({ values, ranges, categories, concerns, audiences }:
         {select('audience', 'For', audiences)}
       </div>
 
-      <noscript>
-        <button type="submit" className="rounded-full bg-ink px-5 py-2 text-sm text-white">
-          Apply filters
-        </button>
-      </noscript>
-
       {active && (
-        <Link
-          href="/shop"
+        <button
+          type="button"
+          onClick={() => {
+            setQuery('')
+            onChange(emptyFilters)
+          }}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-plum-600 hover:underline"
         >
           <X className="size-4" aria-hidden />
           Clear all filters
-        </Link>
+        </button>
       )}
-    </form>
+    </div>
   )
 }

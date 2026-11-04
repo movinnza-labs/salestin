@@ -96,7 +96,9 @@ editorial blocks used by homepage v2 and the studio blocks used by homepage v3 (
 Statement · Call-to-action band). Several blocks have a *style / layout / card style* option that switches them to
 the v3 look, and sections can use the *Light grey* or *Gold* background.
 
-**Shop** (`/shop`) is built from the products: search, and filters by range, category, concern and audience.
+**Shop** (`/shop`) is built from the products: search, and filters by range, category, concern and audience. The
+page is static; filtering runs in the browser and is kept in the URL (`/shop?range=keratin-shine-bond`), so filtered
+views can be shared.
 Concern options are defined in code (`src/fields/productOptions.ts`) — ask a developer to add one.
 
 **WhatsApp:** once **Site settings → WhatsApp number** is filled in, every product page gets a *WhatsApp enquiry*
@@ -119,7 +121,7 @@ To make one the live homepage: change **Home**'s slug to `home-v1` and tick *Hid
 the chosen page's slug to `home` and untick it. Publish both.
 
 **Publishing:** saving or publishing in the admin refreshes the affected pages immediately. Pages also refresh
-hourly as a safety net.
+once a day as a safety net.
 
 **Re-running the seed** (`pnpm seed`) restores the brochure content and **overwrites edits** to seeded pages,
 products, ranges, categories, banners and globals (policy pages are only created, never overwritten) — only use it
@@ -127,34 +129,73 @@ on a fresh database or to reset.
 
 ---
 
-## 4. Deployment on Railway
+## 4. Deployment on Railway (kept cheap)
 
-The repo includes `railway.json` (build: `pnpm migrate && pnpm build`, start: `pnpm start`).
+Railway bills for memory and CPU per minute, outgoing traffic and storage. The project is set up to keep memory low
+and flat (see *Reducing Railway Billing*, Movinnza, Oct 2026):
 
-1. Create a Railway project with a **PostgreSQL** service and a service from this GitHub repo.
-2. On the web service set the variables:
-   - `DATABASE_URL` = `${{Postgres.DATABASE_PUBLIC_URL}}` — the **public** URL, because Railway's private network
-     is not available during builds and the build pre-renders pages from the database.
+| Where | What | Why |
+|---|---|---|
+| `Dockerfile` | `node:22-slim` (not Alpine), multi-stage, final image = Next.js **standalone** server only, non-root user | Alpine + sharp keeps growing; small image |
+| `Dockerfile` | `MALLOC_ARENA_MAX=2` | stops native memory growth from sharp |
+| `.dockerignore` | `.env`, `.pgdata`, `media`, `node_modules`, `.next`, `images` excluded | no secrets or local data in the image |
+| `next.config.ts` | `output: 'standalone'`, WebP only, images cached 1 year, no 2048/3840 sizes, `experimental.cpus: 4` | fewer image variants to generate |
+| `payload.config.ts` | database pool `max: 5`; no migration run at server start | fewer connections, lighter start |
+| Pages | static + cached (ISR, daily safety net); publishing refreshes pages at once; **shop filters in the browser**; blog pages at `/blog/page/2` | almost no server work per visit |
+| Media | uploaded files sent with `Cache-Control: public, max-age=1 year, immutable` (errors are never cached) | a CDN can serve them |
+| `railway.json` | Dockerfile builder, 1 replica, healthcheck `/robots.txt`, sleep off | failed deploys never replace the live one |
+
+### First deployment
+
+1. Create a Railway project with a **PostgreSQL** service and a service from this GitHub repo, **in the same region**.
+2. Web service → **Variables**:
+   - `DATABASE_URL` = `${{Postgres.DATABASE_URL}}` — the **private** URL. The public URL is billed as traffic.
+   - `BUILD_DATABASE_URL` = `${{Postgres.DATABASE_PUBLIC_URL}}` — used **only during the build** (the private
+     network is not available while building; the build runs migrations, then pre-renders pages).
    - `PAYLOAD_SECRET` = a new random string (never reuse the local one).
    - `NEXT_PUBLIC_SERVER_URL` = `https://selestinprofessional.com` (or the Railway URL until the domain is connected).
    - `SMTP_*` for enquiry alerts.
-3. **Add a volume mounted at `/app/media`.** Uploaded images are stored on disk; without a volume they are lost on
-   every redeploy.
-4. Deploy. Migrations run in the build step (and again, harmlessly, when the server starts).
-5. Load the brochure content once, **inside the Railway service** so the images land on the volume:
-   `railway ssh` → `pnpm seed`.
-6. Open `/admin`, create the first user, add the team's logins, fill in WhatsApp / GA4 / Search Console in
+   - `MALLOC_ARENA_MAX` is already `2` in the image; nothing to add.
+3. **Add a volume mounted at `/app/media`** (uploaded images and videos). Without it, uploads are lost on every deploy.
+4. Deploy. The build runs `pnpm migrate` and then `pnpm build`; the container starts with `node server.js`.
+5. Load the brochure content **once**, inside the service so the images land on the volume:
+   `railway ssh` → `node seed/seed.mjs` (a bundled copy of `pnpm seed`; it overwrites seeded pages, so only run it
+   on an empty database).
+6. Open `/admin`, create the first user and the team's logins, fill in WhatsApp / GA4 / Search Console in
    **Site settings**, and publish the policy pages.
-7. Connect `selestinprofessional.com` under the service's **Networking → Custom domain** (Railway issues SSL).
-   Then submit `https://selestinprofessional.com/sitemap.xml` in Search Console.
+7. Connect `selestinprofessional.com` under **Networking → Custom domain**, then submit
+   `https://selestinprofessional.com/sitemap.xml` in Search Console.
 
-Keeping it light for the $5 plan: one web service + one Postgres; pages are pre-rendered and cached for an hour;
-images are resized by Next.js on demand.
+### Railway settings checklist
+
+- **One replica**; app and database in the **same region**.
+- **Healthcheck path** `/robots.txt` (in `railway.json`), so a failed deploy never replaces the running version.
+- **Resource limits** per service where the plan allows, with headroom (start around 512 MB for the web service and
+  watch the Metrics tab).
+- **Usage alert** just above a normal month. Do **not** set a low hard limit: it stops every service until the next
+  billing cycle.
+- **Sleep mode off** for the public site (crawlers keep waking it up).
+- **PR environments** off or auto-deleted; delete unused services and old projects.
+- After each deploy, check **Metrics → Memory** for a day or two: a flat line is normal; a line that keeps climbing and
+  then drops is a leak.
+
+### Cloudflare (recommended, free plan)
+
+- Put the domain behind Cloudflare. It caches images, fonts, CSS and JS by file extension, and `/api/media/file/*` and
+  `/_next/static/*` already send long cache headers — so most bytes are served by Cloudflare, not Railway.
+- **Never cache** `/admin*`, `/api/*` (except `/api/media/file/*`), or form posts. HTML is not cached by default.
+- Handle `www` → apex (or the reverse) with a Cloudflare redirect rule, not in the app.
+- Turn on **Bot Fight Mode** if traffic is far above real visitors.
+
+### Every later deployment
+
+Push to the deployed branch. New migrations (`src/migrations/`) run automatically at the start of the build; a failed
+build or healthcheck leaves the previous version running.
 
 > The build and dev scripts use webpack (`--webpack`) because Next 16's Turbopack currently fails to resolve
-> `next/font/google` in this project. pnpm uses a flat (`nodeLinker: hoisted`) `node_modules`, and
-> `pnpm-workspace.yaml` overrides a few vulnerable transitive dependencies; `pnpm audit` should show no high or
-> critical issues.
+> `next/font/google` in this project. pnpm uses a flat (`nodeLinker: hoisted`) `node_modules` and is pinned with
+> `packageManager`; `pnpm-workspace.yaml` overrides a few vulnerable transitive dependencies; `pnpm audit` should
+> show no high or critical issues.
 
 ---
 
