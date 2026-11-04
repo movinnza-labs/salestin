@@ -60,7 +60,9 @@ export function EditorialHero(block: EditorialHeroBlock) {
                 <CMSImage media={detailImage} fill sizes="160px" />
               </div>
               {detailCaption && (
-                <figcaption className="mt-3 text-center font-display text-base text-ink italic sm:text-lg">{detailCaption}</figcaption>
+                <figcaption className="relative left-1/2 mt-3 w-max -translate-x-1/2 rounded-full bg-cream/90 px-3 py-0.5 text-center whitespace-nowrap font-display text-base text-ink italic backdrop-blur-sm sm:text-lg">
+                  {detailCaption}
+                </figcaption>
               )}
             </figure>
           )}

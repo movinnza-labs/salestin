@@ -485,7 +485,7 @@ async function main() {
         heading: 'Luxury in Every Strand.',
         headingAccent: 'Inspiration in Every Innovation.',
         text: 'Where Luxury Meets Science. Where Beauty Begins.',
-        image: img['smoothing-mask-model'],
+        image: img['glossy-hair'],
         detailImage: img['argan-serum'],
         detailCaption: 'Morocco Argan Serum',
         sideLabel: 'Professional Hair Care',
