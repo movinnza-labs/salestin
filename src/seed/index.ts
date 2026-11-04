@@ -13,11 +13,13 @@ import {
   catalogue,
   categories,
   media,
+  mediaExtension,
   mediaFocal,
   type MediaKey,
   partnerBenefits,
   pillars,
   products,
+  proLissShowcase,
   qualityPromise,
   ranges,
   settings,
@@ -36,7 +38,7 @@ const custom = (label: string, url: string) => ({ type: 'custom' as const, label
 async function seedMedia(payload: Payload) {
   const ids = {} as Record<MediaKey, number>
   for (const [key, alt] of Object.entries(media) as [MediaKey, string][]) {
-    const filename = `${key}.jpg`
+    const filename = `${key}.${mediaExtension[key] ?? 'jpg'}`
     const existing = await payload.find({ collection: 'media', where: { filename: { equals: filename } }, limit: 1 })
     if (existing.docs[0]) {
       ids[key] = existing.docs[0].id
@@ -135,6 +137,18 @@ async function main() {
 
   const productRef = (slug: string): Ref => ({ relationTo: 'products', value: prod[slug] })
   const rangeRef = (slug: string): Ref => ({ relationTo: 'ranges', value: range[slug] })
+
+  const proLiss = (style: 'studio' | 'editorial', background: string, media: number, videoPoster?: number) => ({
+    blockType: 'productShowcase',
+    ...proLissShowcase,
+    primaryCta: internal('Enquire as a salon partner', partnerRef),
+    secondaryCta: custom('Shop the range', '/shop'),
+    media,
+    videoPoster,
+    mediaPosition: 'left',
+    style,
+    background,
+  })
 
   const treatmentCards = (style: 'studio' | 'editorial', background: string) => ({
     blockType: 'treatmentCards',
@@ -503,10 +517,11 @@ async function main() {
         heading: 'Where Luxury',
         headingAccent: 'Meets Science.',
         items: pillars.filter((p) => p.title !== 'Luxury'),
-        image: img['brand-portrait'],
+        image: img['brand-portrait-bw-logo'],
         background: 'cream',
       },
       treatmentCards('editorial', 'dark'),
+      proLiss('editorial', 'white', img['pro-liss-poster']),
       {
         blockType: 'productCarousel',
         eyebrow: 'Complete Care. Visible Results.',
@@ -588,10 +603,11 @@ async function main() {
         heading: 'Where Luxury Meets Science.',
         intro: 'A thoughtful approach to performance, craft, and professional beauty.',
         items: pillars.filter((p) => p.title !== 'Luxury'),
-        image: img['salon-styling'],
+        image: img['blonde-silky-hair'],
         background: 'lavender',
       },
       treatmentCards('studio', 'gold'),
+      proLiss('studio', 'white', img['pro-liss-video'], img['pro-liss-poster']),
       {
         blockType: 'productGrid',
         cardStyle: 'minimal',

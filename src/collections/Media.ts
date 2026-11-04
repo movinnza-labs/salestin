@@ -16,11 +16,12 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
-      admin: { description: 'Describe the image for screen readers and search engines.' },
+      admin: { description: 'Describe the image (or what the video shows) for screen readers and search engines.' },
     },
   ],
   upload: {
-    mimeTypes: ['image/*'],
+    // images, plus MP4 for short product videos (resized versions are only made for images)
+    mimeTypes: ['image/*', 'video/mp4'],
     focalPoint: true,
     imageSizes: [
       { name: 'thumbnail', width: 400 },

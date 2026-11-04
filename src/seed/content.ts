@@ -11,6 +11,13 @@ export const media = {
   'stylist-portrait': 'Hair stylist with long glossy dark hair holding scissors and a comb in a bright studio',
   'salon-styling': 'Professional stylist blow-drying a client’s long brown hair in a luxury salon',
   'glossy-hair': 'Close-up of a model with long, glossy, flowing brown hair',
+  // client-supplied imagery (Nov 2026)
+  'blonde-silky-hair': 'Close-up of sleek, glossy platinum blonde hair falling across a model’s face',
+  'brand-portrait-bw-logo': 'Black and white portrait of a model with long tousled hair and the SELESTIN Professional logo',
+  'pro-liss-poster':
+    'Brazilian Pro Liss Hair Treatment campaign: model with long, sleek straight brown hair beside the 1000 ml bottle',
+  'pro-liss-bottle': 'Brazilian Pro Liss Hair Treatment 1000 ml bottle',
+  'pro-liss-video': 'Brazilian Pro Liss Hair Treatment in the salon: before and after smoothing, then the product',
   'luxury-strands': 'Model with long, glossy brown straight hair',
   'brand-portrait': 'Black and white portrait of a model with long flowing hair',
   'range-nano-silk': 'SELESTIN Professional Nano-Silk Arginina salon range with Morocco Argan Serum',
@@ -41,6 +48,9 @@ export const media = {
 } as const
 
 export type MediaKey = keyof typeof media
+
+/** Files that are not .jpg */
+export const mediaExtension: Partial<Record<MediaKey, string>> = { 'pro-liss-video': 'mp4' }
 
 /** Focal points (percent) for images whose subject is not centred; default is 50/50. */
 export const mediaFocal: Partial<Record<MediaKey, { focalX: number; focalY: number }>> = {
@@ -650,14 +660,29 @@ export const treatmentsSection = {
   intro: 'Salon hair treatments, home care to keep the results, and premium wax for smooth, radiant skin.',
 }
 
+/** Brazilian Pro Liss launch section, worded from the client's poster and bottle. */
+export const proLissShowcase = {
+  eyebrow: 'New · Professional salon treatment',
+  heading: 'Brazilian Pro Liss',
+  headingAccent: 'Hair Treatment',
+  intro: 'Long-lasting frizz control & silky smooth hair. Smooth | Shine | Transform.',
+  benefits: [
+    { icon: 'sparkles', text: 'Controls frizz & dullness' },
+    { icon: 'waves', text: 'Smooth & shiny hair' },
+    { icon: 'shield', text: 'Reduces breakage' },
+    { icon: 'droplet', text: 'Nourished with Macadamia & Morocco Argan' },
+  ],
+  footnote: 'Amino Fusion Technology · Vegan · Professional use only · 1000 ml',
+}
+
 export const treatments: TreatmentSeed[] = [
   {
     title: 'Brazilian Pro Liss Hair Treatment',
     tag: 'Salon treatment',
     focus: 'Stronger smoothing and frizz reduction.',
     positioning: 'Sleeker, smoother and more polished hair.',
-    // the client's note "(subject to actual formulation)" is internal and not shown
-    keyIngredients: 'Vegan smoothing technology.',
+    // from the bottle: "Amino Fusion Technology", "With keratin, argan oil & macadamia", "Vegan"
+    keyIngredients: 'Amino Fusion Technology with keratin, argan oil and macadamia. Vegan.',
     idealFor: 'Very frizzy, voluminous and difficult-to-manage hair.',
   },
   {

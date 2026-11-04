@@ -175,6 +175,7 @@ export interface Page {
     | StatementBlock
     | CtaBandBlock
     | TreatmentCardsBlock
+    | ProductShowcaseBlock
   )[];
   meta?: {
     title?: string | null;
@@ -307,7 +308,7 @@ export interface HeroSliderBlock {
 export interface Media {
   id: number;
   /**
-   * Describe the image for screen readers and search engines.
+   * Describe the image (or what the video shows) for screen readers and search engines.
    */
   alt: string;
   updatedAt: string;
@@ -1692,6 +1693,126 @@ export interface TreatmentCardsBlock {
   blockType: 'treatmentCards';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductShowcaseBlock".
+ */
+export interface ProductShowcaseBlock {
+  /**
+   * Small label shown above the heading.
+   */
+  eyebrow?: string | null;
+  heading?: string | null;
+  /**
+   * Optional second line, shown in italic accent colour.
+   */
+  headingAccent?: string | null;
+  intro?: string | null;
+  benefits?:
+    | {
+        icon?:
+          | (
+              | 'leaf'
+              | 'star'
+              | 'flask'
+              | 'eye'
+              | 'heart'
+              | 'droplet'
+              | 'sparkles'
+              | 'shield'
+              | 'waves'
+              | 'atom'
+              | 'user'
+              | 'check'
+              | 'flower'
+              | 'hair'
+              | 'gem'
+              | 'ban'
+            )
+          | null;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Small print, e.g. "Vegan · Professional use only · 1000 ml".
+   */
+  footnote?: string | null;
+  primaryCta?: {
+    type?: ('internal' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'products';
+          value: number | Product;
+        } | null)
+      | ({
+          relationTo: 'product-categories';
+          value: number | ProductCategory;
+        } | null)
+      | ({
+          relationTo: 'ranges';
+          value: number | Range;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    /**
+     * Relative (/products) or absolute (https://…), tel: and mailto: are allowed.
+     */
+    url?: string | null;
+    label?: string | null;
+  };
+  secondaryCta?: {
+    type?: ('internal' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'products';
+          value: number | Product;
+        } | null)
+      | ({
+          relationTo: 'product-categories';
+          value: number | ProductCategory;
+        } | null)
+      | ({
+          relationTo: 'ranges';
+          value: number | Range;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    /**
+     * Relative (/products) or absolute (https://…), tel: and mailto: are allowed.
+     */
+    url?: string | null;
+    label?: string | null;
+  };
+  /**
+   * An image, or an MP4 video (plays muted on a loop, with controls).
+   */
+  media: number | Media;
+  /**
+   * For a video: the still shown before it starts playing.
+   */
+  videoPoster?: (number | null) | Media;
+  mediaPosition?: ('left' | 'right') | null;
+  style?: ('studio' | 'editorial') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'productShowcase';
+}
+/**
  * Home page hero slides and offers. A "Banners" block on a page shows the active banners of its placement.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1976,6 +2097,7 @@ export interface PagesSelect<T extends boolean = true> {
         statement?: T | StatementBlockSelect<T>;
         ctaBand?: T | CtaBandBlockSelect<T>;
         treatmentCards?: T | TreatmentCardsBlockSelect<T>;
+        productShowcase?: T | ProductShowcaseBlockSelect<T>;
       };
   meta?:
     | T
@@ -2570,6 +2692,49 @@ export interface TreatmentCardsBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  style?: T;
+  background?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductShowcaseBlock_select".
+ */
+export interface ProductShowcaseBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  headingAccent?: T;
+  intro?: T;
+  benefits?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+        id?: T;
+      };
+  footnote?: T;
+  primaryCta?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  secondaryCta?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  media?: T;
+  videoPoster?: T;
+  mediaPosition?: T;
   style?: T;
   background?: T;
   id?: T;

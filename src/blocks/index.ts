@@ -604,6 +604,63 @@ export const CtaBand: Block = {
   ],
 }
 
+export const ProductShowcase: Block = {
+  slug: 'productShowcase',
+  interfaceName: 'ProductShowcaseBlock',
+  labels: { singular: 'Product showcase', plural: 'Product showcases' },
+  fields: [
+    ...sectionIntro,
+    {
+      name: 'benefits',
+      type: 'array',
+      maxRows: 8,
+      fields: [iconField(), { name: 'text', type: 'text', required: true }],
+    },
+    { name: 'footnote', type: 'text', admin: { description: 'Small print, e.g. "Vegan · Professional use only · 1000 ml".' } },
+    linkField({ name: 'primaryCta', label: 'Primary button' }),
+    linkField({ name: 'secondaryCta', label: 'Secondary button' }),
+    {
+      name: 'media',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: { description: 'An image, or an MP4 video (plays muted on a loop, with controls).' },
+    },
+    {
+      name: 'videoPoster',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'For a video: the still shown before it starts playing.' },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'mediaPosition',
+          type: 'select',
+          defaultValue: 'left',
+          options: [
+            { label: 'Media left', value: 'left' },
+            { label: 'Media right', value: 'right' },
+          ],
+          admin: { width: '33%' },
+        },
+        {
+          name: 'style',
+          type: 'select',
+          defaultValue: 'studio',
+          options: [
+            { label: 'Studio (sans headings)', value: 'studio' },
+            { label: 'Editorial (serif headings)', value: 'editorial' },
+          ],
+          admin: { width: '33%' },
+        },
+        { ...background, admin: { width: '34%' } },
+      ],
+    },
+  ],
+}
+
 export const TreatmentCards: Block = {
   slug: 'treatmentCards',
   interfaceName: 'TreatmentCardsBlock',
@@ -676,4 +733,5 @@ export const pageBlocks: Block[] = [
   Statement,
   CtaBand,
   TreatmentCards,
+  ProductShowcase,
 ]

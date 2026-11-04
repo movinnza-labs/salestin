@@ -17,6 +17,7 @@ import { PillarIndex } from './PillarIndex'
 import { Pillars } from './Pillars'
 import { ProductCarousel } from './ProductCarousel'
 import { ProductGrid } from './ProductGrid'
+import { ProductShowcase } from './ProductShowcase'
 import { ProductSteps } from './ProductSteps'
 import { RangeGrid } from './RangeGrid'
 import { RichTextSection } from './RichTextSection'
@@ -56,6 +57,7 @@ const components: { [K in Block['blockType']]: React.ComponentType<Extract<Block
   statement: Statement,
   ctaBand: CtaBand,
   treatmentCards: TreatmentCards,
+  productShowcase: ProductShowcase,
 }
 
 export function RenderBlocks({ blocks }: { blocks: Block[] }) {
