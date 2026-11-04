@@ -174,6 +174,7 @@ export interface Page {
     | TaglineStripBlock
     | StatementBlock
     | CtaBandBlock
+    | TreatmentCardsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1626,6 +1627,71 @@ export interface CtaBandBlock {
   blockType: 'ctaBand';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentCardsBlock".
+ */
+export interface TreatmentCardsBlock {
+  /**
+   * Small label shown above the heading.
+   */
+  eyebrow?: string | null;
+  heading?: string | null;
+  /**
+   * Optional second line, shown in italic accent colour.
+   */
+  headingAccent?: string | null;
+  intro?: string | null;
+  /**
+   * Numbered 01, 02, 03… in this order.
+   */
+  items: {
+    title: string;
+    /**
+     * Small label, e.g. "Salon treatment" or "Home care".
+     */
+    tag?: string | null;
+    focus?: string | null;
+    positioning?: string | null;
+    keyIngredients?: string | null;
+    idealFor?: string | null;
+    link?: {
+      type?: ('internal' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'products';
+            value: number | Product;
+          } | null)
+        | ({
+            relationTo: 'product-categories';
+            value: number | ProductCategory;
+          } | null)
+        | ({
+            relationTo: 'ranges';
+            value: number | Range;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      /**
+       * Relative (/products) or absolute (https://…), tel: and mailto: are allowed.
+       */
+      url?: string | null;
+    };
+    id?: string | null;
+  }[];
+  style?: ('studio' | 'editorial') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'treatmentCards';
+}
+/**
  * Home page hero slides and offers. A "Banners" block on a page shows the active banners of its placement.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1909,6 +1975,7 @@ export interface PagesSelect<T extends boolean = true> {
         taglineStrip?: T | TaglineStripBlockSelect<T>;
         statement?: T | StatementBlockSelect<T>;
         ctaBand?: T | CtaBandBlockSelect<T>;
+        treatmentCards?: T | TreatmentCardsBlockSelect<T>;
       };
   meta?:
     | T
@@ -2471,6 +2538,39 @@ export interface CtaBandBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  background?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TreatmentCardsBlock_select".
+ */
+export interface TreatmentCardsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  headingAccent?: T;
+  intro?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        tag?: T;
+        focus?: T;
+        positioning?: T;
+        keyIngredients?: T;
+        idealFor?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  style?: T;
   background?: T;
   id?: T;
   blockName?: T;

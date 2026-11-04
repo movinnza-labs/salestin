@@ -25,6 +25,7 @@ import { Statement } from './Statement'
 import { SplitContent } from './SplitContent'
 import { StatementCta } from './StatementCta'
 import { TaglineStrip } from './TaglineStrip'
+import { TreatmentCards } from './TreatmentCards'
 
 type Block = Page['layout'][number]
 
@@ -54,6 +55,7 @@ const components: { [K in Block['blockType']]: React.ComponentType<Extract<Block
   taglineStrip: TaglineStrip,
   statement: Statement,
   ctaBand: CtaBand,
+  treatmentCards: TreatmentCards,
 }
 
 export function RenderBlocks({ blocks }: { blocks: Block[] }) {

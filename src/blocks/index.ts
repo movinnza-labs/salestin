@@ -604,6 +604,51 @@ export const CtaBand: Block = {
   ],
 }
 
+export const TreatmentCards: Block = {
+  slug: 'treatmentCards',
+  interfaceName: 'TreatmentCardsBlock',
+  labels: { singular: 'Treatment cards', plural: 'Treatment cards' },
+  fields: [
+    ...sectionIntro,
+    {
+      name: 'items',
+      type: 'array',
+      minRows: 1,
+      maxRows: 9,
+      required: true,
+      admin: { description: 'Numbered 01, 02, 03… in this order.' },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            { name: 'title', type: 'text', required: true, admin: { width: '60%' } },
+            {
+              name: 'tag',
+              type: 'text',
+              admin: { width: '40%', description: 'Small label, e.g. "Salon treatment" or "Home care".' },
+            },
+          ],
+        },
+        { name: 'focus', type: 'text' },
+        { name: 'positioning', type: 'text' },
+        { name: 'keyIngredients', label: 'Key ingredients', type: 'text' },
+        { name: 'idealFor', label: 'Ideal for', type: 'text' },
+        linkField({ name: 'link', label: 'Link (optional)', withLabel: false }),
+      ],
+    },
+    {
+      name: 'style',
+      type: 'select',
+      defaultValue: 'studio',
+      options: [
+        { label: 'Studio (sans headings, for homepage v3)', value: 'studio' },
+        { label: 'Editorial (serif headings, for homepage v2)', value: 'editorial' },
+      ],
+    },
+    { ...background, defaultValue: 'gold' },
+  ],
+}
+
 export const pageBlocks: Block[] = [
   BannersBlock,
   HeroSlider,
@@ -630,4 +675,5 @@ export const pageBlocks: Block[] = [
   TaglineStrip,
   Statement,
   CtaBand,
+  TreatmentCards,
 ]

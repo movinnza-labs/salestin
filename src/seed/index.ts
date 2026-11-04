@@ -21,6 +21,8 @@ import {
   qualityPromise,
   ranges,
   settings,
+  treatments,
+  treatmentsSection,
 } from './content'
 import { richText } from './lexical'
 
@@ -133,6 +135,23 @@ async function main() {
 
   const productRef = (slug: string): Ref => ({ relationTo: 'products', value: prod[slug] })
   const rangeRef = (slug: string): Ref => ({ relationTo: 'ranges', value: range[slug] })
+
+  const treatmentCards = (style: 'studio' | 'editorial', background: string) => ({
+    blockType: 'treatmentCards',
+    ...treatmentsSection,
+    style,
+    background,
+    items: treatments.map(({ link, ...t }) => ({
+      ...t,
+      link: link
+        ? {
+            type: 'internal',
+            reference:
+              link.relationTo === 'products' ? productRef(link.slug) : rangeRef(link.slug),
+          }
+        : undefined,
+    })),
+  })
 
   // Contact and Salon Partner first so other pages can link to them.
   const contactId = await upsert(payload, 'pages', 'contact', {
@@ -487,20 +506,7 @@ async function main() {
         image: img['brand-portrait'],
         background: 'cream',
       },
-      {
-        blockType: 'productSteps',
-        eyebrow: 'Professional hair care',
-        heading: 'Nano Silk Arginina',
-        products: [
-          prod['pre-clarifying-shampoo'],
-          prod['nano-silk-arginia-protein-treatment'],
-          prod['prolonger-shampoo'],
-          prod['prolonger-mask'],
-          prod['smoothing-mask'],
-        ],
-        image: img['range-nano-silk'],
-        background: 'dark',
-      },
+      treatmentCards('editorial', 'dark'),
       {
         blockType: 'productCarousel',
         eyebrow: 'Complete Care. Visible Results.',
@@ -585,21 +591,7 @@ async function main() {
         image: img['salon-styling'],
         background: 'lavender',
       },
-      {
-        blockType: 'productSteps',
-        style: 'cards',
-        eyebrow: 'Professional hair care',
-        heading: 'Nano Silk Arginina',
-        intro: 'A complete professional ritual, designed to treat, protect, and reveal exceptional shine.',
-        products: [
-          prod['pre-clarifying-shampoo'],
-          prod['nano-silk-arginia-protein-treatment'],
-          prod['prolonger-shampoo'],
-          prod['prolonger-mask'],
-          prod['smoothing-mask'],
-        ],
-        background: 'gold',
-      },
+      treatmentCards('studio', 'gold'),
       {
         blockType: 'productGrid',
         cardStyle: 'minimal',

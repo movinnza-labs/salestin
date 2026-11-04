@@ -631,3 +631,61 @@ export const qualityPromise = [
     text: 'Developed for salon results, with home-care products to maintain them.',
   },
 ]
+
+// ── Hair treatment overview (client copy, Nov 2026) ───────────────────────────
+
+type TreatmentSeed = {
+  title: string
+  tag: string
+  focus: string
+  positioning: string
+  keyIngredients: string
+  idealFor: string
+  link?: { relationTo: 'products' | 'ranges'; slug: string }
+}
+
+export const treatmentsSection = {
+  eyebrow: 'Professional hair care',
+  heading: 'Our Hair Treatments',
+  intro: 'Salon treatments for smooth, shiny hair — and home care to keep the results.',
+}
+
+export const treatments: TreatmentSeed[] = [
+  {
+    title: 'Brazilian Pro Liss Hair Treatment',
+    tag: 'Salon treatment',
+    focus: 'Stronger smoothing and frizz reduction.',
+    positioning: 'Sleeker, smoother and more polished hair.',
+    // the client's note "(subject to actual formulation)" is internal and not shown
+    keyIngredients: 'Vegan smoothing technology.',
+    idealFor: 'Very frizzy, voluminous and difficult-to-manage hair.',
+  },
+  {
+    title: 'Nano Silk Arginia Hair Treatment',
+    tag: 'Salon treatment',
+    focus: 'Frizz control, softness and shine.',
+    positioning: 'Silky, manageable and healthy-looking hair.',
+    keyIngredients: 'Arginine, silk technology, Argan oil and Macadamia.',
+    idealFor: 'Dry, dull, frizzy and unmanageable hair.',
+    link: { relationTo: 'products', slug: 'nano-silk-arginia-protein-treatment' },
+  },
+  {
+    title: 'Keratin Shine Bond Hair Treatment',
+    tag: 'Home care',
+    focus: 'Hair conditioning, smoothness and improved appearance of damaged hair.',
+    positioning: 'Stronger-looking, shinier and more manageable hair.',
+    keyIngredients: 'Hydrolysed keratin and bond-supporting care ingredients.',
+    idealFor: 'Chemically treated, weak, rough and damaged-looking hair.',
+    link: { relationTo: 'ranges', slug: 'keratin-shine-bond' },
+  },
+  {
+    // no client copy yet: written from the brochure's product text
+    title: 'Morocco Argan Serum',
+    tag: 'Home care',
+    focus: 'Hydration, frizz control and heat protection.',
+    positioning: 'Luminous, smooth hair with brilliant shine.',
+    keyIngredients: 'Moroccan Argan Oil.',
+    idealFor: 'All hair types.',
+    link: { relationTo: 'products', slug: 'morocco-argan-serum' },
+  },
+]
