@@ -660,6 +660,13 @@ export const treatmentsSection = {
   intro: 'Salon hair treatments, home care to keep the results, and premium wax for smooth, radiant skin.',
 }
 
+/** Hair-only wording, for pages that leave out the skin care (wax) cards. */
+export const hairTreatmentsSection = {
+  eyebrow: 'Professional hair care',
+  heading: 'Our Hair Treatments',
+  intro: 'Salon treatments for smooth, shiny hair — and home care to keep the results.',
+}
+
 /** Brazilian Pro Liss launch section, worded from the client's poster and bottle. */
 export const proLissShowcase = {
   eyebrow: 'New · Professional salon treatment',
