@@ -13,6 +13,7 @@ import {
   catalogue,
   categories,
   media,
+  mediaFocal,
   type MediaKey,
   partnerBenefits,
   pillars,
@@ -37,12 +38,12 @@ async function seedMedia(payload: Payload) {
     const existing = await payload.find({ collection: 'media', where: { filename: { equals: filename } }, limit: 1 })
     if (existing.docs[0]) {
       ids[key] = existing.docs[0].id
-      await payload.update({ collection: 'media', id: existing.docs[0].id, data: { alt }, context: ctx })
+      await payload.update({ collection: 'media', id: existing.docs[0].id, data: { alt, ...mediaFocal[key] }, context: ctx })
       continue
     }
     const doc = await payload.create({
       collection: 'media',
-      data: { alt },
+      data: { alt, ...mediaFocal[key] },
       filePath: path.resolve(dirname, 'images', filename),
       context: ctx,
     })
@@ -535,6 +536,112 @@ async function main() {
         image: img['hero-models'],
         primaryCta: internal('Become a partner', partnerRef),
         secondaryCta: internal('View the treatment', productRef('nano-silk-arginia-protein-treatment')),
+      },
+    ],
+  })
+
+  // Third design ("studio": clean sans headings, gold fills), for comparison. Hidden from search engines.
+  await upsert(payload, 'pages', 'home-v3', {
+    title: 'Home (version 3)',
+    _status: 'published',
+    hideFromSearch: true,
+    meta: { title: settings.defaultMetaTitle, description: settings.defaultMetaDescription, image: img['stylist-portrait'] },
+    layout: [
+      {
+        blockType: 'splitHero',
+        eyebrow: 'Professional Hair Care',
+        heading: 'Luxury in Every Strand. Inspiration in Every Innovation.',
+        text: 'Where Luxury Meets Science. Where Beauty Begins.',
+        primaryCta: custom('Explore products', '/shop'),
+        secondaryCta: internal('Partner with us', partnerRef),
+        points: [{ text: 'Premium formulas' }, { text: 'Professional care' }, { text: 'Visible results' }],
+        image: img['stylist-portrait'],
+        imageBadge: { eyebrow: 'SELESTIN', text: 'Professional performance, refined.' },
+        background: 'mist',
+      },
+      {
+        blockType: 'taglineStrip',
+        items: [
+          { text: 'Smoother. Shinier. Stronger.' },
+          { text: 'Nourish • Smooth • Shine' },
+          { text: 'Complete Care. Visible Results.' },
+        ],
+      },
+      {
+        blockType: 'statement',
+        eyebrow: 'Luxury',
+        heading: 'We believe true luxury lies in the details.',
+        text: 'SELESTIN Professional delivers exceptional care with refined textures, exquisite fragrances, and visible results.',
+        footnote: 'Experience the difference',
+        background: 'white',
+      },
+      {
+        blockType: 'pillarIndex',
+        layout: 'list',
+        eyebrow: 'SELESTIN Professional',
+        heading: 'Where Luxury Meets Science.',
+        intro: 'A thoughtful approach to performance, craft, and professional beauty.',
+        items: pillars.filter((p) => p.title !== 'Luxury'),
+        image: img['salon-styling'],
+        background: 'lavender',
+      },
+      {
+        blockType: 'productSteps',
+        style: 'cards',
+        eyebrow: 'Professional hair care',
+        heading: 'Nano Silk Arginina',
+        intro: 'A complete professional ritual, designed to treat, protect, and reveal exceptional shine.',
+        products: [
+          prod['pre-clarifying-shampoo'],
+          prod['nano-silk-arginia-protein-treatment'],
+          prod['prolonger-shampoo'],
+          prod['prolonger-mask'],
+          prod['smoothing-mask'],
+        ],
+        background: 'gold',
+      },
+      {
+        blockType: 'productGrid',
+        cardStyle: 'minimal',
+        eyebrow: 'Complete Care. Visible Results.',
+        heading: 'Best Care for Beautiful Hair',
+        source: 'manual',
+        products: [
+          prod['pre-clarifying-shampoo'],
+          prod['nano-silk-arginia-protein-treatment'],
+          prod['prolonger-shampoo'],
+          prod['morocco-argan-serum'],
+        ],
+        limit: 4,
+        cta: custom('View all products', '/shop'),
+        background: 'white',
+      },
+      {
+        blockType: 'ingredientSpotlight',
+        layout: 'split',
+        eyebrow: 'The goodness of',
+        heading: 'Key Ingredients',
+        items: [
+          ingredient('smoothing-mask', 'Macadamia'),
+          ingredient('smoothing-mask', 'Morocco Argan'),
+          ingredient('keratin-shine-bond-shampoo', 'Hydrolyzed Keratin'),
+          {
+            name: 'White Chocolate & Blueberry Extract',
+            foundIn: 'Luxury Smooth Wax',
+            text: 'Soothe and nourish the skin while protecting it from environmental stressors.',
+          },
+        ],
+        image: img['glossy-hair'],
+        imageBadge: { eyebrow: 'Focused care', text: 'Made to perform.' },
+        background: 'mist',
+      },
+      {
+        blockType: 'ctaBand',
+        eyebrow: 'Exclusively for professional salons',
+        heading: 'Partner with us to deliver expert hair transformations.',
+        text: 'Nano Silk Arginia Treatment — Professional Salon Solution. Trusted by Experts.',
+        cta: internal('Partner with us', partnerRef),
+        background: 'gold',
       },
     ],
   })

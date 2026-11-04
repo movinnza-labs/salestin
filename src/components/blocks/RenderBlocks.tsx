@@ -3,6 +3,7 @@ import type { Page } from '@/payload-types'
 import { Banners } from './Banners'
 import { CategoryGrid } from './CategoryGrid'
 import { CompanyDetails } from './CompanyDetails'
+import { CtaBand } from './CtaBand'
 import { ContactSection } from './ContactSection'
 import { CtaBanner } from './CtaBanner'
 import { EditorialHero } from './EditorialHero'
@@ -19,8 +20,11 @@ import { ProductGrid } from './ProductGrid'
 import { ProductSteps } from './ProductSteps'
 import { RangeGrid } from './RangeGrid'
 import { RichTextSection } from './RichTextSection'
+import { SplitHero } from './SplitHero'
+import { Statement } from './Statement'
 import { SplitContent } from './SplitContent'
 import { StatementCta } from './StatementCta'
+import { TaglineStrip } from './TaglineStrip'
 
 type Block = Page['layout'][number]
 
@@ -46,6 +50,10 @@ const components: { [K in Block['blockType']]: React.ComponentType<Extract<Block
   productCarousel: ProductCarousel,
   ingredientSpotlight: IngredientSpotlight,
   statementCta: StatementCta,
+  splitHero: SplitHero,
+  taglineStrip: TaglineStrip,
+  statement: Statement,
+  ctaBand: CtaBand,
 }
 
 export function RenderBlocks({ blocks }: { blocks: Block[] }) {

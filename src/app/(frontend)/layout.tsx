@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Playfair_Display, Poppins } from 'next/font/google'
+import { Cormorant_Garamond, Inter, Playfair_Display, Poppins } from 'next/font/google'
 import Script from 'next/script'
 import type { ReactNode } from 'react'
 
@@ -23,6 +23,12 @@ const cormorant = Cormorant_Garamond({
   weight: ['300', '400', '500', '600'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -70,7 +76,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     // browser extensions (e.g. QuillBot) add attributes to <html> before React hydrates
     <html
       lang="en"
-      className={`${playfair.variable} ${cormorant.variable} ${poppins.variable}`}
+      className={`${playfair.variable} ${cormorant.variable} ${inter.variable} ${poppins.variable}`}
       suppressHydrationWarning
     >
       <body className="flex min-h-svh flex-col">

@@ -3,7 +3,11 @@ import { Section } from '@/components/ui/Section'
 import { cn } from '@/lib/cn'
 import type { IngredientSpotlightBlock } from '@/payload-types'
 
-export function IngredientSpotlight({ eyebrow, heading, headingAccent, intro, items, image, background }: IngredientSpotlightBlock) {
+import { studioEyebrow, studioHeading } from './studio'
+
+export function IngredientSpotlight(block: IngredientSpotlightBlock) {
+  if (block.layout === 'split') return <IngredientSplit {...block} />
+  const { eyebrow, heading, headingAccent, intro, items, image, background } = block
   return (
     <Section background={background}>
       <div className="container-x">
@@ -13,7 +17,9 @@ export function IngredientSpotlight({ eyebrow, heading, headingAccent, intro, it
             {heading && (
               <h2 className="mt-4 font-display text-5xl leading-[0.95] font-light sm:text-6xl">
                 {heading}
-                {headingAccent && <em className="block font-normal text-plum-600">{headingAccent}</em>}
+                {headingAccent && (
+                  <em className="block font-normal text-plum-600">{headingAccent}</em>
+                )}
               </h2>
             )}
             {intro && <p className="mt-6 max-w-lg text-muted">{intro}</p>}
@@ -28,10 +34,18 @@ export function IngredientSpotlight({ eyebrow, heading, headingAccent, intro, it
                     {i + 1}
                   </span>
                   <dt>
-                    <span className="block font-display text-3xl leading-none font-normal">{item.name}</span>
-                    {item.foundIn && <span className="mt-2 block text-[11px] tracking-[0.18em] text-plum-600 uppercase">{item.foundIn}</span>}
+                    <span className="block font-display text-3xl leading-none font-normal">
+                      {item.name}
+                    </span>
+                    {item.foundIn && (
+                      <span className="mt-2 block text-[11px] tracking-[0.18em] text-plum-600 uppercase">
+                        {item.foundIn}
+                      </span>
+                    )}
                   </dt>
-                  {item.text && <dd className="mt-3 text-sm leading-relaxed text-ink-soft">{item.text}</dd>}
+                  {item.text && (
+                    <dd className="mt-3 text-sm leading-relaxed text-ink-soft">{item.text}</dd>
+                  )}
                 </div>
               ))}
             </dl>
@@ -44,6 +58,72 @@ export function IngredientSpotlight({ eyebrow, heading, headingAccent, intro, it
               </div>
             </div>
           )}
+        </div>
+      </div>
+    </Section>
+  )
+}
+
+/** Studio variant: tall image (with optional label) beside a two-column ingredient list. */
+function IngredientSplit({
+  eyebrow,
+  heading,
+  headingAccent,
+  intro,
+  items,
+  image,
+  imageBadge,
+  background,
+}: IngredientSpotlightBlock) {
+  return (
+    <Section background={background}>
+      <div className="container-x grid gap-10 lg:grid-cols-2 lg:items-center">
+        {image && (
+          <div className="relative">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-xl shadow-md">
+              <CMSImage media={image} fill sizes="(min-width: 1024px) 45vw, 100vw" />
+            </div>
+            {(imageBadge?.eyebrow || imageBadge?.text) && (
+              <div className="absolute bottom-5 left-5 rounded-lg bg-lavender-50 px-5 py-4 shadow-md">
+                {imageBadge.eyebrow && (
+                  <p className={cn(studioEyebrow, 'tracking-[0.16em] text-gold-600')}>
+                    {imageBadge.eyebrow}
+                  </p>
+                )}
+                {imageBadge.text && (
+                  <p className="mt-1 font-modern text-lg font-semibold">{imageBadge.text}</p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+        <div>
+          {eyebrow && <p className={cn(studioEyebrow, 'text-muted')}>{eyebrow}</p>}
+          {heading && (
+            <h2 className={cn(studioHeading, 'mt-4 text-4xl sm:text-5xl')}>
+              {heading} {headingAccent}
+            </h2>
+          )}
+          {intro && <p className="mt-5 max-w-lg text-muted">{intro}</p>}
+          <dl className="mt-9 grid gap-8 sm:grid-cols-2">
+            {items.map((item) => (
+              <div key={item.id ?? item.name} className="border-t border-gold-500/60 pt-4">
+                <dt>
+                  <span className="block font-modern text-lg font-semibold text-balance">
+                    {item.name}
+                  </span>
+                  {item.foundIn && (
+                    <span className="mt-1 block text-xs font-semibold tracking-wider text-muted uppercase">
+                      {item.foundIn}
+                    </span>
+                  )}
+                </dt>
+                {item.text && (
+                  <dd className="mt-3 text-sm leading-relaxed text-muted">{item.text}</dd>
+                )}
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </Section>

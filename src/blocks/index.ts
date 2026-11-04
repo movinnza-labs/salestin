@@ -28,6 +28,24 @@ const background: Field = {
     { label: 'Cream', value: 'cream' },
     { label: 'Lavender', value: 'lavender' },
     { label: 'Dark', value: 'dark' },
+    { label: 'Light grey', value: 'mist' },
+    { label: 'Gold', value: 'gold' },
+  ],
+}
+
+/** Small label card laid over an image corner. */
+const imageBadge: Field = {
+  name: 'imageBadge',
+  type: 'group',
+  admin: { description: 'Optional label card over the image.' },
+  fields: [
+    {
+      type: 'row',
+      fields: [
+        { name: 'eyebrow', type: 'text', admin: { width: '50%' } },
+        { name: 'text', type: 'text', admin: { width: '50%' } },
+      ],
+    },
   ],
 }
 
@@ -184,6 +202,15 @@ export const ProductSteps: Block = {
       admin: { description: 'Shown in this order as 01, 02, 03…' },
     },
     { name: 'image', type: 'upload', relationTo: 'media' },
+    {
+      name: 'style',
+      type: 'select',
+      defaultValue: 'list',
+      options: [
+        { label: 'Numbered list (with image)', value: 'list' },
+        { label: 'Numbered cards', value: 'cards' },
+      ],
+    },
     background,
   ],
 }
@@ -222,6 +249,15 @@ export const ProductGrid: Block = {
     },
     { name: 'limit', type: 'number', defaultValue: 8, min: 1, max: 48 },
     linkField({ name: 'cta', label: '"See all" link' }),
+    {
+      name: 'cardStyle',
+      type: 'select',
+      defaultValue: 'standard',
+      options: [
+        { label: 'Standard (with Enquire button)', value: 'standard' },
+        { label: 'Minimal (image, range and size)', value: 'minimal' },
+      ],
+    },
     background,
   ],
 }
@@ -444,6 +480,15 @@ export const PillarIndex: Block = {
       fields: [iconField(), { name: 'title', type: 'text', required: true }, { name: 'text', type: 'textarea' }],
     },
     { name: 'image', type: 'upload', relationTo: 'media' },
+    {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'accordion',
+      options: [
+        { label: 'Expandable list (arched image)', value: 'accordion' },
+        { label: 'Open numbered list (sticky image)', value: 'list' },
+      ],
+    },
     background,
   ],
 }
@@ -473,6 +518,16 @@ export const IngredientSpotlight: Block = {
       ],
     },
     { name: 'image', type: 'upload', relationTo: 'media' },
+    {
+      name: 'layout',
+      type: 'select',
+      defaultValue: 'oval',
+      options: [
+        { label: 'Text left, oval image right', value: 'oval' },
+        { label: 'Image left, list right', value: 'split' },
+      ],
+    },
+    { ...imageBadge, admin: { ...imageBadge.admin, condition: (_, s) => s?.layout === 'split' } },
     background,
   ],
 }
@@ -486,6 +541,66 @@ export const StatementCta: Block = {
     { name: 'image', type: 'upload', relationTo: 'media', required: true },
     linkField({ name: 'primaryCta', label: 'Primary button' }),
     linkField({ name: 'secondaryCta', label: 'Secondary button' }),
+  ],
+}
+
+// ── Studio (homepage v3) blocks ──────────────────────────────────────────────
+
+export const SplitHero: Block = {
+  slug: 'splitHero',
+  interfaceName: 'SplitHeroBlock',
+  labels: { singular: 'Split hero', plural: 'Split heroes' },
+  fields: [
+    { name: 'eyebrow', type: 'text' },
+    { name: 'heading', type: 'text', required: true },
+    { name: 'text', type: 'textarea' },
+    linkField({ name: 'primaryCta', label: 'Primary button' }),
+    linkField({ name: 'secondaryCta', label: 'Secondary button' }),
+    {
+      name: 'points',
+      type: 'array',
+      maxRows: 4,
+      admin: { description: 'Short numbered points under the buttons (01, 02, 03…).' },
+      fields: [{ name: 'text', type: 'text', required: true }],
+    },
+    { name: 'image', type: 'upload', relationTo: 'media', required: true },
+    imageBadge,
+    { ...background, defaultValue: 'mist' },
+  ],
+}
+
+export const TaglineStrip: Block = {
+  slug: 'taglineStrip',
+  interfaceName: 'TaglineStripBlock',
+  labels: { singular: 'Tagline strip', plural: 'Tagline strips' },
+  fields: [
+    { name: 'items', type: 'array', minRows: 1, maxRows: 4, required: true, fields: [{ name: 'text', type: 'text', required: true }] },
+  ],
+}
+
+export const Statement: Block = {
+  slug: 'statement',
+  interfaceName: 'StatementBlock',
+  labels: { singular: 'Statement', plural: 'Statements' },
+  fields: [
+    { name: 'eyebrow', type: 'text' },
+    { name: 'heading', type: 'text', required: true },
+    { name: 'text', type: 'textarea' },
+    { name: 'footnote', type: 'text' },
+    background,
+  ],
+}
+
+export const CtaBand: Block = {
+  slug: 'ctaBand',
+  interfaceName: 'CtaBandBlock',
+  labels: { singular: 'Call-to-action band', plural: 'Call-to-action bands' },
+  fields: [
+    { name: 'eyebrow', type: 'text' },
+    { name: 'heading', type: 'text', required: true },
+    { name: 'text', type: 'textarea' },
+    linkField({ name: 'cta', label: 'Button' }),
+    { ...background, defaultValue: 'gold' },
   ],
 }
 
@@ -511,4 +626,8 @@ export const pageBlocks: Block[] = [
   ProductCarousel,
   IngredientSpotlight,
   StatementCta,
+  SplitHero,
+  TaglineStrip,
+  Statement,
+  CtaBand,
 ]

@@ -2,13 +2,15 @@ import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/cn'
 
-export type Background = 'white' | 'cream' | 'lavender' | 'dark' | null | undefined
+export type Background = 'white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold' | null | undefined
 
 const backgrounds: Record<NonNullable<Background>, string> = {
   white: 'bg-white',
   cream: 'bg-cream',
   lavender: 'bg-lavender-50',
   dark: 'on-dark bg-plum-950 text-white',
+  mist: 'bg-mist',
+  gold: 'on-gold bg-gold-500 text-ink',
 }
 
 export function Section({

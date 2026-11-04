@@ -7,6 +7,10 @@ import { richText } from './lexical'
 
 export const media = {
   'hero-models': 'Three models with straight, curly and wavy hair against a warm beige background',
+  // homepage v3 (studio design) imagery
+  'stylist-portrait': 'Hair stylist with long glossy dark hair holding scissors and a comb in a bright studio',
+  'salon-styling': 'Professional stylist blow-drying a client’s long brown hair in a luxury salon',
+  'glossy-hair': 'Close-up of a model with long, glossy, flowing brown hair',
   'luxury-strands': 'Model with long, glossy brown straight hair',
   'brand-portrait': 'Black and white portrait of a model with long flowing hair',
   'range-nano-silk': 'SELESTIN Professional Nano-Silk Arginina salon range with Morocco Argan Serum',
@@ -37,6 +41,13 @@ export const media = {
 } as const
 
 export type MediaKey = keyof typeof media
+
+/** Focal points (percent) for images whose subject is not centred; default is 50/50. */
+export const mediaFocal: Partial<Record<MediaKey, { focalX: number; focalY: number }>> = {
+  'stylist-portrait': { focalX: 66, focalY: 28 },
+  'salon-styling': { focalX: 55, focalY: 30 },
+  'glossy-hair': { focalX: 50, focalY: 25 },
+}
 
 export const settings = {
   siteName: 'SELESTIN Professional',

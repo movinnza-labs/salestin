@@ -170,6 +170,10 @@ export interface Page {
     | ProductCarouselBlock
     | IngredientSpotlightBlock
     | StatementCtaBlock
+    | SplitHeroBlock
+    | TaglineStripBlock
+    | StatementBlock
+    | CtaBandBlock
   )[];
   meta?: {
     title?: string | null;
@@ -692,7 +696,7 @@ export interface RangeGridBlock {
    * Leave empty to show all ranges.
    */
   ranges?: (number | Range)[] | null;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'rangeGrid';
@@ -717,7 +721,7 @@ export interface CategoryGridBlock {
    */
   categories?: (number | ProductCategory)[] | null;
   style?: ('cards' | 'arches') | null;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'categoryGrid';
@@ -759,7 +763,7 @@ export interface SplitContentBlock {
     | null;
   image: number | Media;
   imagePosition?: ('left' | 'right') | null;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   cta?: {
     type?: ('internal' | 'custom') | null;
     newTab?: boolean | null;
@@ -838,7 +842,7 @@ export interface PillarsBlock {
       }[]
     | null;
   footnote?: string | null;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'pillars';
@@ -863,7 +867,8 @@ export interface ProductStepsBlock {
    */
   products: (number | Product)[];
   image?: (number | null) | Media;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  style?: ('list' | 'cards') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'productSteps';
@@ -918,7 +923,8 @@ export interface ProductGridBlock {
     url?: string | null;
     label?: string | null;
   };
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  cardStyle?: ('standard' | 'minimal') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'productGrid';
@@ -1025,7 +1031,7 @@ export interface CtaBannerBlock {
     label?: string | null;
   };
   image?: (number | null) | Media;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'ctaBanner';
@@ -1114,7 +1120,7 @@ export interface CompanyDetailsBlock {
     };
     [k: string]: unknown;
   } | null;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'companyDetails';
@@ -1234,7 +1240,7 @@ export interface ManifestoBlock {
     id?: string | null;
   }[];
   footnote?: string | null;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'manifesto';
@@ -1280,7 +1286,8 @@ export interface PillarIndexBlock {
     id?: string | null;
   }[];
   image?: (number | null) | Media;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  layout?: ('accordion' | 'list') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'pillarIndex';
@@ -1335,7 +1342,7 @@ export interface ProductCarouselBlock {
     url?: string | null;
     label?: string | null;
   };
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'productCarousel';
@@ -1365,7 +1372,15 @@ export interface IngredientSpotlightBlock {
     id?: string | null;
   }[];
   image?: (number | null) | Media;
-  background?: ('white' | 'cream' | 'lavender' | 'dark') | null;
+  layout?: ('oval' | 'split') | null;
+  /**
+   * Optional label card over the image.
+   */
+  imageBadge?: {
+    eyebrow?: string | null;
+    text?: string | null;
+  };
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'ingredientSpotlight';
@@ -1449,6 +1464,166 @@ export interface StatementCtaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'statementCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SplitHeroBlock".
+ */
+export interface SplitHeroBlock {
+  eyebrow?: string | null;
+  heading: string;
+  text?: string | null;
+  primaryCta?: {
+    type?: ('internal' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'products';
+          value: number | Product;
+        } | null)
+      | ({
+          relationTo: 'product-categories';
+          value: number | ProductCategory;
+        } | null)
+      | ({
+          relationTo: 'ranges';
+          value: number | Range;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    /**
+     * Relative (/products) or absolute (https://…), tel: and mailto: are allowed.
+     */
+    url?: string | null;
+    label?: string | null;
+  };
+  secondaryCta?: {
+    type?: ('internal' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'products';
+          value: number | Product;
+        } | null)
+      | ({
+          relationTo: 'product-categories';
+          value: number | ProductCategory;
+        } | null)
+      | ({
+          relationTo: 'ranges';
+          value: number | Range;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    /**
+     * Relative (/products) or absolute (https://…), tel: and mailto: are allowed.
+     */
+    url?: string | null;
+    label?: string | null;
+  };
+  /**
+   * Short numbered points under the buttons (01, 02, 03…).
+   */
+  points?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  image: number | Media;
+  /**
+   * Optional label card over the image.
+   */
+  imageBadge?: {
+    eyebrow?: string | null;
+    text?: string | null;
+  };
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'splitHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaglineStripBlock".
+ */
+export interface TaglineStripBlock {
+  items: {
+    text: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'taglineStrip';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatementBlock".
+ */
+export interface StatementBlock {
+  eyebrow?: string | null;
+  heading: string;
+  text?: string | null;
+  footnote?: string | null;
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statement';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBandBlock".
+ */
+export interface CtaBandBlock {
+  eyebrow?: string | null;
+  heading: string;
+  text?: string | null;
+  cta?: {
+    type?: ('internal' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'products';
+          value: number | Product;
+        } | null)
+      | ({
+          relationTo: 'product-categories';
+          value: number | ProductCategory;
+        } | null)
+      | ({
+          relationTo: 'ranges';
+          value: number | Range;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    /**
+     * Relative (/products) or absolute (https://…), tel: and mailto: are allowed.
+     */
+    url?: string | null;
+    label?: string | null;
+  };
+  background?: ('white' | 'cream' | 'lavender' | 'dark' | 'mist' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBand';
 }
 /**
  * Home page hero slides and offers. A "Banners" block on a page shows the active banners of its placement.
@@ -1730,6 +1905,10 @@ export interface PagesSelect<T extends boolean = true> {
         productCarousel?: T | ProductCarouselBlockSelect<T>;
         ingredientSpotlight?: T | IngredientSpotlightBlockSelect<T>;
         statementCta?: T | StatementCtaBlockSelect<T>;
+        splitHero?: T | SplitHeroBlockSelect<T>;
+        taglineStrip?: T | TaglineStripBlockSelect<T>;
+        statement?: T | StatementBlockSelect<T>;
+        ctaBand?: T | CtaBandBlockSelect<T>;
       };
   meta?:
     | T
@@ -1916,6 +2095,7 @@ export interface ProductStepsBlockSelect<T extends boolean = true> {
   intro?: T;
   products?: T;
   image?: T;
+  style?: T;
   background?: T;
   id?: T;
   blockName?: T;
@@ -1943,6 +2123,7 @@ export interface ProductGridBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  cardStyle?: T;
   background?: T;
   id?: T;
   blockName?: T;
@@ -2111,6 +2292,7 @@ export interface PillarIndexBlockSelect<T extends boolean = true> {
         id?: T;
       };
   image?: T;
+  layout?: T;
   background?: T;
   id?: T;
   blockName?: T;
@@ -2160,6 +2342,13 @@ export interface IngredientSpotlightBlockSelect<T extends boolean = true> {
         id?: T;
       };
   image?: T;
+  layout?: T;
+  imageBadge?:
+    | T
+    | {
+        eyebrow?: T;
+        text?: T;
+      };
   background?: T;
   id?: T;
   blockName?: T;
@@ -2192,6 +2381,97 @@ export interface StatementCtaBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SplitHeroBlock_select".
+ */
+export interface SplitHeroBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  text?: T;
+  primaryCta?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  secondaryCta?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  points?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  image?: T;
+  imageBadge?:
+    | T
+    | {
+        eyebrow?: T;
+        text?: T;
+      };
+  background?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaglineStripBlock_select".
+ */
+export interface TaglineStripBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatementBlock_select".
+ */
+export interface StatementBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  text?: T;
+  footnote?: T;
+  background?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBandBlock_select".
+ */
+export interface CtaBandBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  text?: T;
+  cta?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
+  background?: T;
   id?: T;
   blockName?: T;
 }

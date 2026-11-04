@@ -92,7 +92,9 @@ Split such changes into an "add" migration and a later "drop" migration to avoid
 **Page blocks:** Banners · Hero slider · Page header · Feature strip · Range grid · Category grid · Image + text ·
 Icon columns · Numbered product system · Product grid (best sellers / range / category / hand-picked / all) ·
 Call to action · Contact details + form (customer or partner form, optional map) · Text · Company details — plus the
-editorial blocks used by homepage v2.
+editorial blocks used by homepage v2 and the studio blocks used by homepage v3 (Split hero · Tagline strip ·
+Statement · Call-to-action band). Several blocks have a *style / layout / card style* option that switches them to
+the v3 look, and sections can use the *Light grey* or *Gold* background.
 
 **Shop** (`/shop`) is built from the products: search, and filters by range, category, concern and audience.
 Concern options are defined in code (`src/fields/productOptions.ts`) — ask a developer to add one.
@@ -104,11 +106,17 @@ button with the product name pre-filled, and the contact block and footer show t
 **Pages → Privacy Policy / Terms and Conditions** and publish; the footer “Legal” links appear automatically once
 the pages are published.
 
-### Homepage version 2
+### Alternative homepage designs
 
-An alternative, editorial homepage design lives at **`/home-v2`** (noindex, not linked). To make it the live
-homepage: change **Home**'s slug to `home-v1` and tick *Hide from search engines*; change **Home (version 2)**'s
-slug to `home` and untick it. Publish both.
+Two alternative homepages exist for comparison (noindex, not linked):
+
+- **`/home-v2`** — editorial design (serif display type, arches, scrolling ribbon).
+- **`/home-v3`** — studio design (clean Inter headings, gold fills, split hero). Its three model photos
+  (`stylist-portrait`, `salon-styling`, `glossy-hair`) are AI-generated stand-ins from the design mock-up;
+  replace them with real photography before launch.
+
+To make one the live homepage: change **Home**'s slug to `home-v1` and tick *Hide from search engines*; change
+the chosen page's slug to `home` and untick it. Publish both.
 
 **Publishing:** saving or publishing in the admin refreshes the affected pages immediately. Pages also refresh
 hourly as a safety net.

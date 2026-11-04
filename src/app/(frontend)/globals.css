@@ -26,9 +26,12 @@
 
   --color-cream: #f8f4ee;
   --color-cream-200: #efe6da;
+  --color-mist: #f3f3f4;
 
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  /* clean sans headings used by the studio (homepage v3) blocks */
+  --font-modern: var(--font-inter), var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   /* editorial display face (homepage v2) */
   --font-display: var(--font-cormorant), var(--font-playfair), ui-serif, Georgia, serif;
 
@@ -96,6 +99,10 @@
 
   .on-dark .eyebrow {
     @apply text-gold-300;
+  }
+
+  .on-gold .eyebrow {
+    @apply text-ink;
   }
 
   .prose-brand {
