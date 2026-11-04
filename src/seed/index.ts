@@ -23,6 +23,7 @@ import {
   qualityPromise,
   ranges,
   settings,
+  hairTreatmentsSection,
   treatments,
   treatmentsSection,
 } from './content'
@@ -150,12 +151,13 @@ async function main() {
     background,
   })
 
-  const treatmentCards = (style: 'studio' | 'editorial', background: string) => ({
+  // hairOnly: leave out the skin care (wax) cards, with hair-only section copy
+  const treatmentCards = (style: 'studio' | 'editorial', background: string, hairOnly = false) => ({
     blockType: 'treatmentCards',
-    ...treatmentsSection,
+    ...(hairOnly ? hairTreatmentsSection : treatmentsSection),
     style,
     background,
-    items: treatments.map(({ link, ...t }) => ({
+    items: treatments.filter((t) => !hairOnly || t.tag !== 'Skin care').map(({ link, ...t }) => ({
       ...t,
       link: link
         ? {
@@ -520,7 +522,7 @@ async function main() {
         image: img['brand-portrait-bw-logo'],
         background: 'cream',
       },
-      treatmentCards('editorial', 'dark'),
+      treatmentCards('editorial', 'dark', true),
       proLiss('editorial', 'white', img['pro-liss-poster']),
       {
         blockType: 'productCarousel',
