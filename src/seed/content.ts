@@ -645,9 +645,9 @@ type TreatmentSeed = {
 }
 
 export const treatmentsSection = {
-  eyebrow: 'Professional hair care',
-  heading: 'Our Hair Treatments',
-  intro: 'Salon treatments for smooth, shiny hair — and home care to keep the results.',
+  eyebrow: 'Professional care',
+  heading: 'Our Treatments',
+  intro: 'Salon hair treatments, home care to keep the results, and premium wax for smooth, radiant skin.',
 }
 
 export const treatments: TreatmentSeed[] = [
@@ -687,5 +687,25 @@ export const treatments: TreatmentSeed[] = [
     keyIngredients: 'Moroccan Argan Oil.',
     idealFor: 'All hair types.',
     link: { relationTo: 'products', slug: 'morocco-argan-serum' },
+  },
+  // skin care: written from the brochure's wax pages
+  {
+    title: 'White Chocolate Liposoluable Wax',
+    tag: 'Skin care',
+    focus: 'Gentle, effective hair removal with minimal irritation.',
+    positioning: 'Softer, smoother and brighter-looking skin, with a delightful white chocolate fragrance.',
+    // the brochure also names "Vegetables Oil", but the full ingredient list has mineral oil instead
+    keyIngredients: 'White chocolate, natural beeswax and titanium dioxide.',
+    idealFor: 'All skin types — when a gentle, nourishing wax is wanted.',
+    link: { relationTo: 'products', slug: 'white-chocolate-liposoluable-wax' },
+  },
+  {
+    title: 'Korean Glass Blueberry Gel Wax',
+    tag: 'Skin care',
+    focus: 'Efficient hair removal from the root for longer-lasting smoothness.',
+    positioning: 'Touchably soft, refreshed, salon-smooth skin with a polished, radiant look.',
+    keyIngredients: 'Blueberry extract, natural beeswax, mineral oil and titanium dioxide.',
+    idealFor: 'All skin types — for a clean finish and longer-lasting smooth results.',
+    link: { relationTo: 'products', slug: 'korean-glass-blueberry-liposoluable-gel-wax' },
   },
 ]
