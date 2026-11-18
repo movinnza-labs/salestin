@@ -387,7 +387,7 @@ export interface Product {
   /**
    * Shown as "… free" badges.
    */
-  freeFrom?: ('sulfate' | 'paraben' | 'formaldehyde' | 'colophony')[] | null;
+  freeFrom?: ('sulfate' | 'paraben' | 'formaldehyde' | 'colophony' | 'chloride' | 'phthalates' | 'dea-tea')[] | null;
   /**
    * Other short label claims, e.g. "For All Types of Skin".
    */
@@ -474,7 +474,7 @@ export interface Product {
   /**
    * Hair or skin concerns, used by the shop filter.
    */
-  concerns?: ('smoothing' | 'repair' | 'shine' | 'cleansing' | 'skin-glow' | 'hair-removal')[] | null;
+  concerns?: ('smoothing' | 'repair' | 'shine' | 'cleansing' | 'lightening' | 'skin-glow' | 'hair-removal')[] | null;
   /**
    * Show in "Best sellers" product grids.
    */

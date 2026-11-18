@@ -10,6 +10,7 @@ export const concernOptions = [
   { label: 'Damage repair & strength', value: 'repair' },
   { label: 'Shine & nourishment', value: 'shine' },
   { label: 'Deep cleansing', value: 'cleansing' },
+  { label: 'Lightening & blonding', value: 'lightening' },
   { label: 'Skin hydration & glow', value: 'skin-glow' },
   { label: 'Hair removal & smooth skin', value: 'hair-removal' },
 ] as const
@@ -19,6 +20,9 @@ export const freeFromOptions = [
   { label: 'Paraben free', value: 'paraben' },
   { label: 'Formaldehyde free', value: 'formaldehyde' },
   { label: 'Colophony free', value: 'colophony' },
+  { label: 'Chloride free', value: 'chloride' },
+  { label: 'Phthalate free', value: 'phthalates' },
+  { label: 'DEA & TEA free', value: 'dea-tea' },
 ] as const
 
 export type Audience = (typeof audienceOptions)[number]['value']

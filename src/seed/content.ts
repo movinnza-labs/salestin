@@ -18,6 +18,12 @@ export const media = {
     'Brazilian Pro Liss Hair Treatment campaign: model with long, sleek straight brown hair beside the 1000 ml bottle',
   'pro-liss-bottle': 'Brazilian Pro Liss Hair Treatment 1000 ml bottle',
   'pro-liss-video': 'Brazilian Pro Liss Hair Treatment in the salon: before and after smoothing, then the product',
+  'pro-liss-treatment': 'Brazilian Pro Liss Hair Treatment 1000 ml bottle with pump',
+  'pro-liss-shampoo': 'Brazilian Pro Liss Shampoo 300 ml bottle',
+  'pro-liss-shampoo-claims':
+    'Brazilian Pro Liss Shampoo: 0% sulfates, parabens, chloride, phthalates, DEA or TEA; balances hair natural oil and pH',
+  'blonde-elevation': 'Blonde Elevation 9+ Levels of Lift premium violet lightening powder, 500 g tub, with violet powder',
+  'blonde-elevation-lifestyle': 'Blonde Elevation 9+ Levels of Lift lightening powder tub photographed outdoors',
   'luxury-strands': 'Model with long, glossy brown straight hair',
   'brand-portrait': 'Black and white portrait of a model with long flowing hair',
   'range-nano-silk': 'SELESTIN Professional Nano-Silk Arginina salon range with Morocco Argan Serum',
@@ -432,6 +438,89 @@ export const products: ProductSeed[] = [
     fullIngredients:
       'Hydrogenated Polycyclopentadiene, Ethylene/VA Copolymer, Paraffinum Liquidum (Mineral Oil), Cera Alba (Beeswax), Titanium Dioxide, Glyceryl Rosinate, Parfum (Fragrance), CI 60725.',
   },
+  // ── Brazilian Pro Liss & Blonde Elevation (from the packaging and campaign poster, Nov 2026) ──
+  {
+    title: 'Brazilian Pro Liss Hair Treatment',
+    slug: 'brazilian-pro-liss-hair-treatment',
+    category: 'hair-care',
+    sortOrder: 12,
+    size: '1000 ml',
+    tagline: 'Smooth | Shine | Transform',
+    summary:
+      'Professional smoothing treatment for long-lasting frizz control and smoothness, with keratin, argan oil and macadamia.',
+    description: richText('Long lasting frizz control & silky smooth hair. Smooth | Shine | Transform.', {
+      list: [
+        'Amino Fusion Technology',
+        'Tanino Plastia',
+        'With keratin, argan oil & macadamia',
+        'Vegan',
+        'Professional salon treatment for all hair types',
+      ],
+    }),
+    image: 'pro-liss-treatment',
+    gallery: [{ image: 'pro-liss-poster', caption: 'Brazilian Pro Liss — long lasting frizz control & silky smooth hair' }],
+    highlights: [
+      { icon: 'sparkles', title: 'Controls frizz & dullness' },
+      { icon: 'waves', title: 'Smooth & shiny hair' },
+      { icon: 'shield', title: 'Reduces breakage' },
+      { icon: 'droplet', title: 'Nourished with Macadamia & Morocco Argan' },
+    ],
+    keyIngredients: [
+      { name: 'Keratin' },
+      { name: 'Argan Oil', text: 'Rich in antioxidants and vitamin E, it tames frizz, repairs damage and leaves hair silky smooth.' },
+      { name: 'Macadamia', text: 'Deeply nourishes, locks in moisture and adds intense shine to dull, dry hair.' },
+    ],
+  },
+  {
+    title: 'Brazilian Pro Liss Shampoo',
+    slug: 'brazilian-pro-liss-shampoo',
+    category: 'hair-care',
+    sortOrder: 13,
+    size: '300 ml',
+    tagline: 'Smooth | Shine | Transform',
+    summary:
+      'Gentle shampoo from the Brazilian Pro Liss system, free from sulfates and parabens, for long-lasting frizz control and smoothness.',
+    description: richText('Long lasting frizz control & smoothness. Smooth | Shine | Transform.', {
+      list: [
+        '0% sulfates, parabens, chloride, phthalates, DEA or TEA',
+        'No harsh chemicals',
+        'Balances the hair’s natural oil & pH level',
+        'With keratin, argan oil & macadamia',
+        'Vegan · Tanino Plastia',
+      ],
+    }),
+    image: 'pro-liss-shampoo',
+    gallery: [{ image: 'pro-liss-shampoo-claims', caption: '0% sulfates, parabens, chloride, phthalates, DEA or TEA' }],
+    highlights: [
+      { icon: 'ban', title: 'No harsh chemicals' },
+      { icon: 'droplet', title: 'Balances natural oil & pH level' },
+      { icon: 'waves', title: 'Long-lasting frizz control & smoothness' },
+    ],
+    keyIngredients: [
+      { name: 'Keratin' },
+      { name: 'Argan Oil', text: 'Rich in antioxidants and vitamin E, it tames frizz, repairs damage and leaves hair silky smooth.' },
+      { name: 'Macadamia', text: 'Deeply nourishes, locks in moisture and adds intense shine to dull, dry hair.' },
+    ],
+  },
+  {
+    title: 'Blonde Elevation Premium Violet Lightening Powder',
+    slug: 'blonde-elevation-lightening-powder',
+    category: 'hair-care',
+    sortOrder: 14,
+    size: '500 g / 17.64 oz',
+    tagline: '9+ Levels of Lift — with Bond Builder',
+    summary: 'Premium violet lightening powder with bond builder, for 9+ levels of lift.',
+    description: richText('Blonde Elevation — premium violet lightening powder with bond builder.', {
+      list: ['9+ levels of lift', 'With bond builder', 'Violet lightening powder'],
+    }),
+    image: 'blonde-elevation',
+    gallery: [{ image: 'blonde-elevation-lifestyle', caption: 'Blonde Elevation 500 g tub' }],
+    highlights: [
+      { icon: 'star', title: '9+ levels of lift' },
+      { icon: 'shield', title: 'With bond builder' },
+      { icon: 'sparkles', title: 'Premium violet lightening powder' },
+    ],
+  },
 ]
 
 export const pillars = [
@@ -528,6 +617,31 @@ export const ranges = [
       'Choose White Chocolate for minimal irritation, or Korean Glass Blueberry gel wax, which removes hair from the root for longer-lasting smoothness.',
     ],
   },
+  {
+    slug: 'brazilian-pro-liss',
+    title: 'Brazilian Pro Liss',
+    sortOrder: 6,
+    tagline: 'Smooth | Shine | Transform',
+    audience: ['salon'],
+    // wide photo without printed text: the range header is a wide crop
+    image: 'luxury-strands',
+    summary:
+      'Professional smoothing system for long-lasting frizz control and silky, smooth hair. Vegan, with keratin, argan oil and macadamia.',
+    story: [
+      'Brazilian Pro Liss is a professional smoothing system for long-lasting frizz control and silky, smooth hair: smooth, shine, transform.',
+      'The Hair Treatment, with Amino Fusion Technology and Tanino Plastia, is a professional salon treatment for all hair types. The Shampoo is free from sulfates, parabens, chloride, phthalates, DEA and TEA, and balances the hair’s natural oil and pH level. Both are vegan, with keratin, argan oil and macadamia.',
+    ],
+  },
+  {
+    slug: 'blonde-elevation',
+    title: 'Blonde Elevation',
+    sortOrder: 7,
+    tagline: '9+ levels of lift',
+    audience: ['salon'],
+    image: 'blonde-elevation',
+    summary: 'Premium violet lightening powder with bond builder, for 9+ levels of lift.',
+    story: ['Blonde Elevation is SELESTIN Professional’s premium violet lightening powder with bond builder, for 9+ levels of lift.'],
+  },
 ] as const
 
 export type RangeSlug = (typeof ranges)[number]['slug']
@@ -598,6 +712,27 @@ export const catalogue: Record<string, CatalogueFacts> = {
     concerns: ['hair-removal'],
     freeFrom: ['colophony'],
     badges: ['For All Types of Skin', 'Natural Professional Formulation'],
+  },
+  'brazilian-pro-liss-hair-treatment': {
+    range: 'brazilian-pro-liss',
+    audience: ['salon'],
+    concerns: ['smoothing', 'shine'],
+    professionalOnly: true,
+    badges: ['Vegan', 'Tanino Plastia', 'Amino Fusion Technology'],
+  },
+  'brazilian-pro-liss-shampoo': {
+    range: 'brazilian-pro-liss',
+    audience: ['salon'],
+    concerns: ['smoothing', 'cleansing'],
+    freeFrom: ['sulfate', 'paraben', 'chloride', 'phthalates', 'dea-tea'],
+    professionalOnly: true,
+    badges: ['Vegan', 'Tanino Plastia'],
+  },
+  'blonde-elevation-lightening-powder': {
+    range: 'blonde-elevation',
+    audience: ['salon'],
+    concerns: ['lightening'],
+    badges: ['With Bond Builder', '9+ Levels of Lift'],
   },
 }
 
@@ -691,6 +826,7 @@ export const treatments: TreatmentSeed[] = [
     // from the bottle: "Amino Fusion Technology", "With keratin, argan oil & macadamia", "Vegan"
     keyIngredients: 'Amino Fusion Technology with keratin, argan oil and macadamia. Vegan.',
     idealFor: 'Very frizzy, voluminous and difficult-to-manage hair.',
+    link: { relationTo: 'products', slug: 'brazilian-pro-liss-hair-treatment' },
   },
   {
     title: 'Nano Silk Arginia Hair Treatment',
